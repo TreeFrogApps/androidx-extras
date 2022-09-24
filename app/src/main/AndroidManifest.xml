@@ -9,7 +9,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ComposeResponsiveUI">
         <activity
-            android:name="com.treefrogapps.compose.responsiveui.MainActivity"
+            android:name=".example.MainActivity"
             android:exported="true"
             android:theme="@style/Theme.ComposeResponsiveUI">
             <intent-filter>

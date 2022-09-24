@@ -65,8 +65,12 @@ class ParallaxPagerState internal constructor(
             .visibleItemsInfo
             .find { info -> info.index == page }
 
-    internal fun parallaxOffsetForPage(page: Int, effect: ParallaxEffect): State<Int> = derivedStateOf {
-        ((pageInfoForPage(page = page)?.offset ?: 0) * effect.amount).toInt()
+    internal fun parallaxOffsetForPage(
+        page: Int,
+        effect: ParallaxEffect,
+        multiplier : Int = 1
+    ): State<Int> = derivedStateOf {
+        ((pageInfoForPage(page = page)?.offset ?: 0) * effect.amount * multiplier).toInt()
     }
 
     override val isScrollInProgress: Boolean =

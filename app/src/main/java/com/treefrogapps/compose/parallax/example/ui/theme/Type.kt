@@ -1,4 +1,4 @@
-package com.treefrogapps.compose.responsiveui.ui.theme
+package com.treefrogapps.compose.parallax.example.ui.theme
 
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf

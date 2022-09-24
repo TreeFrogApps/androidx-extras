@@ -1,10 +1,10 @@
-package com.treefrogapps.compose.responsiveui.ui.theme
+package com.treefrogapps.compose.parallax.example.ui.theme
 
 import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import com.treefrogapps.compose.responsiveui.ui.theme.WindowSize.Companion.isMedium
-import com.treefrogapps.compose.responsiveui.ui.theme.WindowSize.Companion.isSmall
+import com.treefrogapps.compose.parallax.example.ui.theme.WindowSize.Companion.isMedium
+import com.treefrogapps.compose.parallax.example.ui.theme.WindowSize.Companion.isSmall
 
 data class Dimens internal constructor(
     val zero: Dp = 0.dp,
@@ -12,7 +12,8 @@ data class Dimens internal constructor(
     val one: Dp = 1.dp,
     val elevation: Elevation = Elevation(),
     val spacing: Spacing = Spacing(),
-    val icon: Icon = Icon())
+    val icon: Icon = Icon()
+)
 
 data class Elevation internal constructor(
     val normal: Dp = 2.dp,
@@ -52,7 +53,8 @@ private val mediumDimens: Dimens = Dimens(
         big = 36.dp,
         massive = 54.dp,
         gigantic = 72.dp,
-        enormous = 148.dp))
+        enormous = 148.dp)
+)
 private val largeDimens: Dimens = Dimens(
     spacing = Spacing(
         tiny = 8.dp,
@@ -62,7 +64,8 @@ private val largeDimens: Dimens = Dimens(
         big = 40.dp,
         massive = 60.dp,
         gigantic = 80.dp,
-        enormous = 160.dp))
+        enormous = 160.dp)
+)
 
 internal val LocalAppDimens = staticCompositionLocalOf { smallDimens }
 

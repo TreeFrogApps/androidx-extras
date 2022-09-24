@@ -10,7 +10,7 @@ android {
     buildToolsVersion = "33.0.0"
 
     defaultConfig {
-        applicationId = "com.treefrogapps.compose.parallax"
+        applicationId = "com.treefrogapps.compose.parallax.example"
         minSdk = 28
         targetSdk = 33
         versionCode = 1

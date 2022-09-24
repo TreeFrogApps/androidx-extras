@@ -1,4 +1,4 @@
-package com.treefrogapps.compose.responsiveui.ui.theme
+package com.treefrogapps.compose.parallax.example.ui.theme
 
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Shapes

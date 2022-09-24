@@ -1,4 +1,4 @@
-package com.treefrogapps.compose.responsiveui.ui.theme
+package com.treefrogapps.compose.parallax.example.ui.theme
 
 import androidx.compose.material.Colors
 import androidx.compose.material.darkColors
@@ -58,13 +58,15 @@ private val LightColorPalette: Colors =
         primary = AppColors.Light.BlueGray,
         primaryVariant = AppColors.Light.BlueGrayDark,
         secondary = AppColors.Light.Blue,
-        secondaryVariant = AppColors.Light.BlueDark)
+        secondaryVariant = AppColors.Light.BlueDark
+    )
 
 private val DarkColorPalette: Colors =
     darkColors(
         primary = AppColors.Dark.BlueGray,
         primaryVariant = AppColors.Dark.BlueGrayDark,
         secondary = AppColors.Dark.Blue,
-        secondaryVariant = AppColors.Dark.BlueDark)
+        secondaryVariant = AppColors.Dark.BlueDark
+    )
 
 internal fun provideDefaultColors(darkMode: Boolean): Colors = if (darkMode) DarkColorPalette else LightColorPalette

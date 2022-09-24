@@ -1,4 +1,4 @@
-package com.treefrogapps.compose.responsiveui.ui.theme
+package com.treefrogapps.compose.parallax.example.ui.theme
 
 import android.content.res.Configuration
 import androidx.compose.foundation.*
