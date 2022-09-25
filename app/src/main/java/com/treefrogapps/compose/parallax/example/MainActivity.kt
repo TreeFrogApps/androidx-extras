@@ -16,9 +16,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Devices
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.treefrogapps.compose.parallax.example.ui.theme.AppThemedContent
-import com.treefrogapps.compose.parallax.example.ui.theme.WindowSize
-import com.treefrogapps.compose.parallax.example.ui.theme.rememberWindowSize
 import com.treefrogapps.compose.parallax.pager.HorizontalParallaxPager
 import com.treefrogapps.compose.parallax.pager.ParallaxPage
 import com.treefrogapps.compose.parallax.pager.rememberParallaxPagerState
@@ -27,12 +24,12 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            MainActivityContent(windowSize = rememberWindowSize())
+            MainActivityContent()
         }
     }
 
     @Composable
-    private fun MainActivityContent(windowSize: WindowSize) {
+    private fun MainActivityContent() {
         val pages = remember {
             val page = ParallaxPage {
                 Box(
@@ -65,11 +62,13 @@ class MainActivity : ComponentActivity() {
                 Text(
                     modifier = Modifier.offset(y = 200.dp),
                     text = "Page $page",
-                    style = MaterialTheme.typography.h5)
+                    style = MaterialTheme.typography.h5
+                )
             }
             listOf(page, page, page, page, page)
         }
-        AppThemedContent(windowSize = windowSize) {
+
+        MaterialTheme {
             val state = rememberParallaxPagerState()
             HorizontalParallaxPager(
                 state = state,
@@ -85,7 +84,7 @@ class MainActivity : ComponentActivity() {
         device = Devices.PIXEL_4
     )
     private fun MainActivityPreview() {
-        MainActivityContent(windowSize = WindowSize.SmallPortrait)
+        MainActivityContent()
     }
 }
 
