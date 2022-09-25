@@ -27,7 +27,7 @@ fun HorizontalParallaxPager(
     modifier: Modifier = Modifier,
     state: ParallaxPagerState = rememberParallaxPagerState(),
     contentPadding: PaddingValues = PaddingValues(all = 0.dp),
-    flingBehavior: FlingBehavior = ParallaxPagerDefaults.flingBehavior(),
+    flingBehavior: FlingBehavior = ParallaxPagerDefaults.flingBehavior(state = state),
     effect: ParallaxEffect = ParallaxPagerDefaults.effect(),
     userScrollEnabled: Boolean = true,
     pages: List<ParallaxPage>,
@@ -49,7 +49,7 @@ fun VerticalParallaxPager(
     modifier: Modifier = Modifier,
     state: ParallaxPagerState = rememberParallaxPagerState(),
     contentPadding: PaddingValues = PaddingValues(all = 0.dp),
-    flingBehavior: FlingBehavior = ParallaxPagerDefaults.flingBehavior(),
+    flingBehavior: FlingBehavior = ParallaxPagerDefaults.flingBehavior(state = state),
     effect: ParallaxEffect = ParallaxPagerDefaults.effect(),
     userScrollEnabled: Boolean = true,
     pages: List<ParallaxPage>
@@ -83,7 +83,7 @@ internal fun ParallaxPager(
     if (isVertical) {
         LazyColumn(
             modifier = modifier,
-            state = state.wrappedState,
+            state = state.listState,
             contentPadding = contentPadding,
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.Start,
@@ -100,7 +100,7 @@ internal fun ParallaxPager(
     } else {
         LazyRow(
             modifier = modifier,
-            state = state.wrappedState,
+            state = state.listState,
             contentPadding = contentPadding,
             horizontalArrangement = Arrangement.Center,
             verticalAlignment = Alignment.CenterVertically,

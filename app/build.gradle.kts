@@ -3,7 +3,7 @@ plugins {
     id("com.android.application")
 }
 
-val composeVersion : String = "1.3.1"
+val composeCompilerVersion : String by extra
 
 android {
     compileSdk = 33
@@ -40,7 +40,7 @@ android {
     }
 
     composeOptions {
-        kotlinCompilerExtensionVersion = "1.3.1"
+        kotlinCompilerExtensionVersion = composeCompilerVersion
     }
 
     packagingOptions {
@@ -62,7 +62,6 @@ dependencies {
     implementation("androidx.compose.ui:ui:1.2.1")
     implementation("androidx.compose.material:material:1.2.1")
     implementation("androidx.compose.ui:ui-tooling-preview:1.2.1")
-    implementation("androidx.window:window:1.0.0")
 
     testImplementation("junit:junit:4.13.2")
 

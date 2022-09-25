@@ -1,19 +1,25 @@
 package com.treefrogapps.compose.parallax.pager
 
-import androidx.compose.animation.rememberSplineBasedDecay
 import androidx.compose.foundation.gestures.FlingBehavior
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.remember
+import dev.chrisbanes.snapper.ExperimentalSnapperApi
+import dev.chrisbanes.snapper.rememberSnapperFlingBehavior
 
 object ParallaxPagerDefaults {
 
-    fun effect(): ParallaxEffect = ParallaxEffect.Subtle
+    fun effect(): ParallaxEffect = ParallaxEffect.Small
 
+    @OptIn(ExperimentalSnapperApi::class)
     @Composable
-    fun flingBehavior(): FlingBehavior {
-        val flingSpec = rememberSplineBasedDecay<Float>()
-        return remember(flingSpec) {
-            ParallaxFlingBehavior(flingSpec)
-        }
+    fun flingBehavior(state: ParallaxPagerState): FlingBehavior {
+        return rememberSnapperFlingBehavior(
+            lazyListState = state.listState,
+            snapIndex = { _, start, target ->
+                when {
+                    target > start -> start + 1
+                    target < start -> start - 1
+                    else           -> target
+                }
+            })
     }
 }
