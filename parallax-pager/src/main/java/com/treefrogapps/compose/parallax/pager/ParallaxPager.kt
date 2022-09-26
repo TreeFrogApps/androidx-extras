@@ -76,10 +76,9 @@ internal fun ParallaxPager(
     effect: ParallaxEffect,
     mode: ParallaxMode,
     userScrollEnabled: Boolean = true,
-    pages : List<ParallaxPage>,
+    pages: List<ParallaxPage>,
     isVertical: Boolean,
 ) {
-
     val pagerScope = remember(state) { ParallaxPagerScope(state) }
 
     if (isVertical) {
@@ -98,7 +97,8 @@ internal fun ParallaxPager(
                     mode = mode,
                     pagerScope = pagerScope,
                     pages = pages,
-                    isVertical = true)
+                    isVertical = true
+                )
             })
     } else {
         LazyRow(
@@ -116,7 +116,8 @@ internal fun ParallaxPager(
                     mode = mode,
                     pagerScope = pagerScope,
                     pages = pages,
-                    isVertical = false)
+                    isVertical = false
+                )
             })
     }
 }
@@ -129,25 +130,28 @@ private fun LazyListScope.parallaxItems(
     pages: List<ParallaxPage>,
     isVertical: Boolean
 ) {
-    when(mode) {
+    when (mode) {
         ParallaxMode.Overlay -> overlayParallaxItems(
             state = state,
             effect = effect,
             pagerScope = pagerScope,
             pages = pages,
-            isVertical = isVertical)
+            isVertical = isVertical
+        )
         ParallaxMode.Stacked -> stackedParallaxItems(
             state = state,
             effect = effect,
             pagerScope = pagerScope,
             pages = pages,
-            isVertical = isVertical)
+            isVertical = isVertical
+        )
         ParallaxMode.Aligned -> alignedParallaxItems(
             state = state,
             effect = effect,
             pagerScope = pagerScope,
             pages = pages,
-            isVertical = isVertical)
+            isVertical = isVertical
+        )
     }
 }
 
@@ -162,28 +166,34 @@ private fun LazyListScope.overlayParallaxItems(
         count = pages.size,
         key = { it },
         itemContent = { pageIdx ->
-            val page = pages[pageIdx]
-            Box(
+            Column(
                 modifier = Modifier.fillParentMaxSize(),
-                contentAlignment = Alignment.Center
+                verticalArrangement = Arrangement.Center,
+                horizontalAlignment = Alignment.CenterHorizontally
             ) {
-                page.background.invoke(pagerScope, pageIdx)
-                page.layers.forEachIndexed { layerIdx, layer ->
-                    val pageParallaxOffset by remember(pageIdx) {
-                        state.parallaxOffsetForPage(
-                            page = pageIdx,
-                            effect = effect,
-                            multiplier = layerIdx + 1)
-                    }
-                    Box(
-                        modifier = Modifier
-                            .fillParentMaxSize()
-                            .run { if(isVertical) offset(y = pageParallaxOffset.dp) else offset(x = pageParallaxOffset.dp) },
-                        contentAlignment = Alignment.Center
-                    ) {
-                        layer.invoke(pagerScope, pageIdx, layerIdx)
+                val page = pages[pageIdx]
+                page.header?.invoke(pagerScope, pageIdx)
+                Box(
+                    contentAlignment = Alignment.Center
+                ) {
+                    page.content.invoke(pagerScope, pageIdx)
+                    page.layers.forEachIndexed { layerIdx, layer ->
+                        val pageParallaxOffset by remember(pageIdx) {
+                            state.parallaxOffsetForPage(
+                                page = pageIdx,
+                                effect = effect,
+                                multiplier = layerIdx + 1
+                            )
+                        }
+                        Box(
+                            modifier = Modifier.parallaxOffset(isVertical = isVertical, pageParallaxOffset),
+                            contentAlignment = Alignment.Center
+                        ) {
+                            layer.invoke(pagerScope, pageIdx, layerIdx)
+                        }
                     }
                 }
+                page.footer?.invoke(pagerScope, pageIdx)
             }
         })
 }
@@ -199,29 +209,37 @@ private fun LazyListScope.stackedParallaxItems(
         count = pages.size,
         key = { it },
         itemContent = { pageIdx ->
-            val page = pages[pageIdx]
             Column(
                 modifier = Modifier.fillParentMaxSize(),
                 verticalArrangement = Arrangement.Center,
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
-                page.background.invoke(pagerScope, pageIdx)
-                page.layers.forEachIndexed { layerIdx, layer ->
-                    val pageParallaxOffset by remember(pageIdx) {
-                        state.parallaxOffsetForPage(
-                            page = pageIdx,
-                            effect = effect,
-                            multiplier = layerIdx + 1)
-                    }
-                    Box(
-                        modifier = Modifier
-                            .wrapContentSize()
-                            .run { if(isVertical) offset(y = pageParallaxOffset.dp) else offset(x = pageParallaxOffset.dp) },
-                        contentAlignment = Alignment.Center
-                    ) {
-                        layer.invoke(pagerScope, pageIdx, layerIdx)
+                val page = pages[pageIdx]
+                page.header?.invoke(pagerScope, pageIdx)
+                Column(
+                    verticalArrangement = Arrangement.Center,
+                    horizontalAlignment = Alignment.CenterHorizontally
+                ) {
+                    page.content.invoke(pagerScope, pageIdx)
+                    page.layers.forEachIndexed { layerIdx, layer ->
+                        val pageParallaxOffset by remember(pageIdx) {
+                            state.parallaxOffsetForPage(
+                                page = pageIdx,
+                                effect = effect,
+                                multiplier = layerIdx + 1
+                            )
+                        }
+                        Box(
+                            modifier = Modifier
+                                .wrapContentSize()
+                                .parallaxOffset(isVertical = isVertical, pageParallaxOffset),
+                            contentAlignment = Alignment.Center
+                        ) {
+                            layer.invoke(pagerScope, pageIdx, layerIdx)
+                        }
                     }
                 }
+                page.footer?.invoke(pagerScope, pageIdx)
             }
         })
 }
@@ -237,34 +255,42 @@ private fun LazyListScope.alignedParallaxItems(
         count = pages.size,
         key = { it },
         itemContent = { pageIdx ->
-            val page = pages[pageIdx]
-            Box(
+            Column(
                 modifier = Modifier.fillParentMaxSize(),
-                contentAlignment = Alignment.Center
+                verticalArrangement = Arrangement.Center,
+                horizontalAlignment = Alignment.CenterHorizontally
             ) {
-                Box(
-                    modifier = Modifier.wrapContentSize(),
-                    contentAlignment = Alignment.BottomCenter
-                ) {
-                    page.background.invoke(pagerScope, pageIdx)
-                    page.layers.forEachIndexed { layerIdx, layer ->
-                        val pageParallaxOffset by remember(pageIdx) {
-                            state.parallaxOffsetForPage(
-                                page = pageIdx,
-                                effect = effect,
-                                multiplier = layerIdx + 1)
-                        }
-                        Box(
-                            modifier = Modifier.run { if(isVertical) offset(y = pageParallaxOffset.dp) else offset(x = pageParallaxOffset.dp) },
-                            contentAlignment = Alignment.Center
-                        ) {
-                            layer.invoke(pagerScope, pageIdx, layerIdx)
+                val page = pages[pageIdx]
+                page.header?.invoke(pagerScope, pageIdx)
+                Box {
+                    Box(
+                        modifier = Modifier.wrapContentSize(),
+                        contentAlignment = Alignment.BottomCenter
+                    ) {
+                        page.content.invoke(pagerScope, pageIdx)
+                        page.layers.forEachIndexed { layerIdx, layer ->
+                            val pageParallaxOffset by remember(pageIdx) {
+                                state.parallaxOffsetForPage(
+                                    page = pageIdx,
+                                    effect = effect,
+                                    multiplier = layerIdx + 1
+                                )
+                            }
+                            Box(
+                                modifier = Modifier.parallaxOffset(isVertical = isVertical, pageParallaxOffset),
+                                contentAlignment = Alignment.Center
+                            ) {
+                                layer.invoke(pagerScope, pageIdx, layerIdx)
+                            }
                         }
                     }
                 }
-
+                page.footer?.invoke(pagerScope, pageIdx)
             }
         })
 }
+
+private fun Modifier.parallaxOffset(isVertical: Boolean, offset: Int): Modifier =
+    this.then(Modifier.run { if (isVertical) offset(y = offset.dp) else offset(x = offset.dp) })
 
 

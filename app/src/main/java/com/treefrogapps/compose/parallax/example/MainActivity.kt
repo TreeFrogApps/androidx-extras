@@ -5,6 +5,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
@@ -16,7 +17,6 @@ import androidx.compose.ui.tooling.preview.Devices
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.treefrogapps.compose.parallax.pager.HorizontalParallaxPager
-import com.treefrogapps.compose.parallax.pager.ParallaxMode
 import com.treefrogapps.compose.parallax.pager.ParallaxPage
 import com.treefrogapps.compose.parallax.pager.rememberParallaxPagerState
 
@@ -31,13 +31,28 @@ class MainActivity : ComponentActivity() {
     @Composable
     private fun MainActivityContent() {
         val pages = remember {
-            val page = ParallaxPage {
-                Box(
-                    modifier = Modifier
-                        .size(200.dp)
-                        .background(color = Color.Black)
-                )
-            }.addParallaxLayer { _, _ ->
+            val page = ParallaxPage(
+                header = { pageIdx ->
+                    Text(
+                        modifier = Modifier.padding(all = 12.dp),
+                        text = "Page $pageIdx",
+                        style = MaterialTheme.typography.h4
+                    )
+                },
+                footer = {
+                    Text(
+                        modifier = Modifier.padding(all = 12.dp),
+                        text = "Page Offset ${currentPageOffset().value}",
+                        style = MaterialTheme.typography.h6
+                    )
+                },
+                content = {
+                    Box(
+                        modifier = Modifier
+                            .size(200.dp)
+                            .background(color = Color.Black)
+                    )
+                }).addParallaxLayer { _, _ ->
                 Box(
                     modifier = Modifier
                         .size(150.dp)
@@ -55,13 +70,8 @@ class MainActivity : ComponentActivity() {
                         .size(50.dp)
                         .background(color = Color.Green)
                 )
-            }.addParallaxLayer { page, _ ->
-                Text(
-                    text = "Page $page",
-                    style = MaterialTheme.typography.h5
-                )
             }
-            listOf(page, page, page, page, page)
+            (0 until 10).map { page }
         }
 
         MaterialTheme {
@@ -69,7 +79,6 @@ class MainActivity : ComponentActivity() {
             HorizontalParallaxPager(
                 state = state,
                 pages = pages,
-                mode = ParallaxMode.Aligned
             )
         }
     }
