@@ -5,7 +5,6 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
@@ -17,6 +16,7 @@ import androidx.compose.ui.tooling.preview.Devices
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.treefrogapps.compose.parallax.pager.HorizontalParallaxPager
+import com.treefrogapps.compose.parallax.pager.ParallaxMode
 import com.treefrogapps.compose.parallax.pager.ParallaxPage
 import com.treefrogapps.compose.parallax.pager.rememberParallaxPagerState
 
@@ -41,26 +41,22 @@ class MainActivity : ComponentActivity() {
                 Box(
                     modifier = Modifier
                         .size(150.dp)
-                        .offset(y = 50.dp)
                         .background(color = Color.Blue)
                 )
             }.addParallaxLayer { _, _ ->
                 Box(
                     modifier = Modifier
                         .size(100.dp)
-                        .offset(y = 100.dp)
                         .background(color = Color.Red)
                 )
             }.addParallaxLayer { _, _ ->
                 Box(
                     modifier = Modifier
                         .size(50.dp)
-                        .offset(y = 150.dp)
                         .background(color = Color.Green)
                 )
             }.addParallaxLayer { page, _ ->
                 Text(
-                    modifier = Modifier.offset(y = 200.dp),
                     text = "Page $page",
                     style = MaterialTheme.typography.h5
                 )
@@ -72,7 +68,8 @@ class MainActivity : ComponentActivity() {
             val state = rememberParallaxPagerState()
             HorizontalParallaxPager(
                 state = state,
-                pages = pages
+                pages = pages,
+                mode = ParallaxMode.Aligned
             )
         }
     }
