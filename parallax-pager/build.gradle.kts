@@ -50,4 +50,6 @@ dependencies {
     implementation("androidx.compose.ui:ui-tooling-preview:1.2.1")
     implementation("androidx.compose.foundation:foundation:1.2.1")
     implementation("dev.chrisbanes.snapper:snapper:0.3.0")
+
+    debugImplementation("androidx.compose.ui:ui-tooling:1.2.1")
 }
