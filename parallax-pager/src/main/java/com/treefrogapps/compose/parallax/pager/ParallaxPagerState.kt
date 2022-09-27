@@ -50,19 +50,27 @@ class ParallaxPagerState internal constructor(
             .visibleItemsInfo
             .find { info -> info.index == page }
 
-    internal val currentPageOffset: State<Int> by lazy(NONE) {
-        derivedStateOf { currentPageLayoutInfo?.offset ?: 0 }
-    }
-
-    internal val currentPage: State<Int> by lazy(NONE) {
-        derivedStateOf { mostVisiblePageLayoutInfo.value?.index ?: 0 }
-    }
-
     internal fun parallaxOffsetForPage(
         page: Int,
         effect: ParallaxEffect,
         multiplier: Int = 1
     ): State<Int> = derivedStateOf {
         ((pageInfoForPage(page = page)?.offset ?: 0) * effect.amount * multiplier).toInt()
+    }
+
+    val currentPagePixelOffset: State<Int> by lazy(NONE) {
+        derivedStateOf { currentPageLayoutInfo?.offset ?: 0 }
+    }
+
+    val currentPageRatioOffset: State<Float> by lazy(NONE) {
+        derivedStateOf {
+            currentPageLayoutInfo?.let {
+                (-it.offset / (it.size).toFloat()).coerceIn(-0.5f, 0.5f)
+            } ?: 0f
+        }
+    }
+
+    val currentPage: State<Int> by lazy(NONE) {
+        derivedStateOf { mostVisiblePageLayoutInfo.value?.index ?: 0 }
     }
 }

@@ -5,5 +5,6 @@ import androidx.compose.runtime.State
 class ParallaxPagerScope internal constructor(
     private val state: ParallaxPagerState,
 ) {
-    fun currentPageOffset(): State<Int> = state.currentPageOffset
+    fun currentPagePixelOffset(): State<Int> = state.currentPagePixelOffset
+    fun currentPageRatioOffset(): State<Float> = state.currentPageRatioOffset
 }

@@ -75,7 +75,7 @@ internal fun ParallaxPager(
     flingBehavior: FlingBehavior,
     effect: ParallaxEffect,
     mode: ParallaxMode,
-    userScrollEnabled: Boolean = true,
+    userScrollEnabled: Boolean,
     pages: List<ParallaxPage>,
     isVertical: Boolean,
 ) {

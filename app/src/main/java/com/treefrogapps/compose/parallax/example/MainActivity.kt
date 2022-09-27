@@ -9,8 +9,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.remember
+import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Devices
@@ -19,6 +18,11 @@ import androidx.compose.ui.unit.dp
 import com.treefrogapps.compose.parallax.pager.HorizontalParallaxPager
 import com.treefrogapps.compose.parallax.pager.ParallaxPage
 import com.treefrogapps.compose.parallax.pager.rememberParallaxPagerState
+import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
+import kotlin.math.abs
+import kotlin.math.max
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -42,7 +46,7 @@ class MainActivity : ComponentActivity() {
                 footer = {
                     Text(
                         modifier = Modifier.padding(all = 12.dp),
-                        text = "Page Offset ${currentPageOffset().value}",
+                        text = "Page Offset ${currentPagePixelOffset().value}",
                         style = MaterialTheme.typography.h6
                     )
                 },
@@ -75,11 +79,33 @@ class MainActivity : ComponentActivity() {
         }
 
         MaterialTheme {
-            val state = rememberParallaxPagerState()
-            HorizontalParallaxPager(
-                state = state,
-                pages = pages,
-            )
+            Box {
+                val state = rememberParallaxPagerState()
+                var color by remember(state) { mutableStateOf(Color.Yellow.copy(alpha = 0.5F)) }
+                HorizontalParallaxPager(
+                    modifier = Modifier.background(color = color),
+                    state = state,
+                    pages = pages
+                )
+
+                LaunchedEffect(key1 = state) {
+                    combine(
+                        snapshotFlow { state.currentPage.value },
+                        snapshotFlow { state.currentPagePixelOffset.value },
+                        snapshotFlow { state.currentPageRatioOffset.value },
+                        ::Triple
+                    ).onEach { (page, _, rtOffset) ->
+                        color = when (page) {
+                            0 -> Color.Yellow
+                            1 -> Color.Red
+                            2 -> Color.Cyan
+                            3 -> Color.Magenta
+                            4 -> Color.Blue
+                            else -> Color.Yellow
+                        }.copy(alpha = max(a = 0.0F, b = 0.25F - abs(rtOffset) / 2))
+                    }.launchIn(scope = this)
+                }
+            }
         }
     }
 
