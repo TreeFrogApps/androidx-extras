@@ -11,6 +11,7 @@ import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.drawscope.Fill
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 
 @Composable
@@ -19,16 +20,19 @@ fun HorizontalParallaxPageIndicator(
     state: ParallaxPagerState,
     pageCount: Int,
     pageIndicatorColor: Color,
-    activePageIndicatorColor: Color
+    pageIndicatorSize: Dp = 14.dp,
+    activePageIndicatorColor: Color,
+    activePageIndicatorSize: Dp = 16.dp
 ) {
     ParallaxPagerIndicator(
         modifier = modifier,
         state = state,
         pageCount = pageCount,
         pageIndicatorColor = pageIndicatorColor,
+        pageIndicatorSize = pageIndicatorSize,
         activePageIndicatorColor = activePageIndicatorColor,
-        isVertical = false
-    )
+        activePageIndicatorSize = activePageIndicatorSize,
+        isVertical = false)
 }
 
 @Composable
@@ -37,16 +41,19 @@ fun VerticalParallaxPageIndicator(
     state: ParallaxPagerState,
     pageCount: Int,
     pageIndicatorColor: Color,
-    activePageIndicatorColor: Color
+    pageIndicatorSize: Dp = 14.dp,
+    activePageIndicatorColor: Color,
+    activePageIndicatorSize: Dp = 16.dp
 ) {
     ParallaxPagerIndicator(
         modifier = modifier,
         state = state,
         pageCount = pageCount,
         pageIndicatorColor = pageIndicatorColor,
+        pageIndicatorSize = pageIndicatorSize,
         activePageIndicatorColor = activePageIndicatorColor,
-        isVertical = true
-    )
+        activePageIndicatorSize = activePageIndicatorSize,
+        isVertical = true)
 }
 
 
@@ -56,7 +63,9 @@ private fun ParallaxPagerIndicator(
     state: ParallaxPagerState,
     pageCount: Int,
     pageIndicatorColor: Color,
+    pageIndicatorSize: Dp,
     activePageIndicatorColor: Color,
+    activePageIndicatorSize: Dp,
     isVertical: Boolean
 ) {
     Box(modifier = modifier) {
@@ -74,8 +83,9 @@ private fun ParallaxPagerIndicator(
                         pageIdx = pageIdx,
                         activePageIdx = activePageIdx,
                         pageIndicatorColor = pageIndicatorColor,
-                        activePageIndicatorColor = activePageIndicatorColor
-                    )
+                        pageIndicatorSize = pageIndicatorSize,
+                        activePageIndicatorColor = activePageIndicatorColor,
+                        activePageIndicatorSize = activePageIndicatorSize)
                 }
             }
         } else {
@@ -92,8 +102,9 @@ private fun ParallaxPagerIndicator(
                         pageIdx = pageIdx,
                         activePageIdx = activePageIdx,
                         pageIndicatorColor = pageIndicatorColor,
-                        activePageIndicatorColor = activePageIndicatorColor
-                    )
+                        pageIndicatorSize = pageIndicatorSize,
+                        activePageIndicatorColor = activePageIndicatorColor,
+                        activePageIndicatorSize = activePageIndicatorSize)
                 }
             }
         }
@@ -105,11 +116,13 @@ private fun PageIndicator(
     pageIdx: Int,
     activePageIdx: Int,
     pageIndicatorColor: Color,
-    activePageIndicatorColor: Color
+    pageIndicatorSize: Dp,
+    activePageIndicatorColor: Color,
+    activePageIndicatorSize: Dp
 ) {
     Canvas(
         modifier = Modifier
-            .size(size = if (pageIdx == activePageIdx) 16.dp else 14.dp)
+            .size(size = if (pageIdx == activePageIdx) activePageIndicatorSize else pageIndicatorSize)
             .padding(all = 4.dp)
     ) {
         drawCircle(
