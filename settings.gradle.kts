@@ -16,3 +16,4 @@ rootProject.name = "compose-extras"
 
 include(":app")
 include(":parallax-pager")
+include(":gestures-swipeable")
