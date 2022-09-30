@@ -1,6 +1,6 @@
-# Compose Parallax
+# Compose Extras
 
-Collection of Android Jetpack Compose libraries dealing with parallax scrolling
+Collection of Android Jetpack Compose libraries
 
 ## Applications
 

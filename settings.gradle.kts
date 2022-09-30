@@ -12,7 +12,7 @@ dependencyResolutionManagement {
         mavenCentral()
     }
 }
-rootProject.name = "compose-parallax"
+rootProject.name = "compose-extras"
 
 include(":app")
 include(":parallax-pager")

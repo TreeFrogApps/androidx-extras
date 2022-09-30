@@ -52,14 +52,14 @@ class MainActivity : ComponentActivity() {
                     )
                 },
                 content = {
-                    ParallaxContent(size = 200.dp, color = Color.Blue.copy(alpha = 0.1F))
+                    ParallaxContent(size = 25.dp, color = Color.Blue)
                 })
                 .addParallaxLayer { _, _ ->
-                    ParallaxContent(size = 150.dp, color = Color.Blue.copy(alpha = 0.2F))
+                    ParallaxContent(size = 25.dp, color = Color.Blue.copy(alpha = 0.8F))
                 }.addParallaxLayer { _, _ ->
-                    ParallaxContent(size = 100.dp, color = Color.Blue.copy(alpha = 0.3F))
+                    ParallaxContent(size = 25.dp, color = Color.Blue.copy(alpha = 0.7F))
                 }.addParallaxLayer { _, _ ->
-                    ParallaxContent(size = 50.dp, color = Color.Blue.copy(alpha = 0.4F))
+                    ParallaxContent(size = 25.dp, color = Color.Blue.copy(alpha = 0.6F))
                 }.addParallaxLayer { _, _ ->
                     ParallaxContent(size = 25.dp, color = Color.Blue.copy(alpha = 0.5F))
                 }
@@ -77,6 +77,7 @@ class MainActivity : ComponentActivity() {
                     HorizontalParallaxPager(
                         modifier = Modifier.background(color = color),
                         state = state,
+                        mode = ParallaxMode.Stacked,
                         effect = ParallaxEffect.Medium,
                         pages = pages
                     )
@@ -115,6 +116,7 @@ class MainActivity : ComponentActivity() {
                     VerticalParallaxPager(
                         modifier = Modifier.background(color = color),
                         state = state,
+                        mode = ParallaxMode.Stacked,
                         effect = ParallaxEffect.Medium,
                         pages = pages
                     )
