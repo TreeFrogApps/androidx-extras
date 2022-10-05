@@ -1,4 +1,4 @@
-package com.treefrogapps.compose.parallax.example
+package com.treefrogapps.compose.example.parallax
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -25,48 +25,63 @@ import kotlinx.coroutines.flow.onEach
 import kotlin.math.abs
 import kotlin.math.max
 
-class MainActivity : ComponentActivity() {
+class ParallaxActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
-            MainActivityContent()
+            ParallaxContent()
         }
     }
 
     @Composable
-    private fun MainActivityContent() {
-        val pages = remember {
-            val page = ParallaxPage(
-                header = { pageIdx ->
-                    Text(
-                        modifier = Modifier.padding(all = 12.dp),
-                        text = "Page $pageIdx",
-                        style = MaterialTheme.typography.h5
-                    )
-                },
-                footer = {
-                    Text(
-                        modifier = Modifier.padding(all = 12.dp),
-                        text = "Page Offset ${currentPagePixelOffset().value}",
-                        style = MaterialTheme.typography.body1
-                    )
-                },
-                content = {
-                    ParallaxContent(size = 25.dp, color = Color.Blue)
-                })
-                .addParallaxLayer { _, _ ->
-                    ParallaxContent(size = 25.dp, color = Color.Blue.copy(alpha = 0.8F))
-                }.addParallaxLayer { _, _ ->
-                    ParallaxContent(size = 25.dp, color = Color.Blue.copy(alpha = 0.7F))
-                }.addParallaxLayer { _, _ ->
-                    ParallaxContent(size = 25.dp, color = Color.Blue.copy(alpha = 0.6F))
-                }.addParallaxLayer { _, _ ->
-                    ParallaxContent(size = 25.dp, color = Color.Blue.copy(alpha = 0.5F))
-                }
-            (0 until 10).map { page }
-        }
-
+    private fun ParallaxContent() {
         MaterialTheme {
+            val pages = remember {
+                val page = ParallaxPage(
+                    header = { pageIdx ->
+                        Text(
+                            modifier = Modifier.padding(all = 12.dp),
+                            text = "Page $pageIdx",
+                            style = MaterialTheme.typography.h5
+                        )
+                    },
+                    footer = {
+                        Text(
+                            modifier = Modifier.padding(all = 12.dp),
+                            text = "Page Offset ${currentPagePixelOffset().value}",
+                            style = MaterialTheme.typography.body1
+                        )
+                    },
+                    content = {
+                        ParallaxLayerContent(
+                            size = 25.dp,
+                            color = Color.Blue
+                        )
+                    })
+                    .addParallaxLayer { _, _ ->
+                        ParallaxLayerContent(
+                            size = 25.dp,
+                            color = Color.Blue.copy(alpha = 0.8F)
+                        )
+                    }.addParallaxLayer { _, _ ->
+                        ParallaxLayerContent(
+                            size = 25.dp,
+                            color = Color.Blue.copy(alpha = 0.7F)
+                        )
+                    }.addParallaxLayer { _, _ ->
+                        ParallaxLayerContent(
+                            size = 25.dp,
+                            color = Color.Blue.copy(alpha = 0.6F)
+                        )
+                    }.addParallaxLayer { _, _ ->
+                        ParallaxLayerContent(
+                            size = 25.dp,
+                            color = Color.Blue.copy(alpha = 0.5F)
+                        )
+                    }
+                (0 until 10).map { page }
+            }
+
             Column {
                 Box(
                     modifier = Modifier.weight(weight = 0.5F),
@@ -97,11 +112,11 @@ class MainActivity : ComponentActivity() {
                             ::Triple
                         ).onEach { (page, _, rtOffset) ->
                             color = when (page) {
-                                0 -> Color.Yellow
-                                1 -> Color.Red
-                                2 -> Color.Cyan
-                                3 -> Color.Magenta
-                                4 -> Color.Blue
+                                0    -> Color.Yellow
+                                1    -> Color.Red
+                                2    -> Color.Cyan
+                                3    -> Color.Magenta
+                                4    -> Color.Blue
                                 else -> Color.Yellow
                             }.copy(alpha = max(a = 0.0F, b = 0.25F - abs(rtOffset) / 2))
                         }.launchIn(scope = this)
@@ -136,11 +151,11 @@ class MainActivity : ComponentActivity() {
                             ::Triple
                         ).onEach { (page, _, rtOffset) ->
                             color = when (page) {
-                                0 -> Color.Yellow
-                                1 -> Color.Red
-                                2 -> Color.Cyan
-                                3 -> Color.Magenta
-                                4 -> Color.Blue
+                                0    -> Color.Yellow
+                                1    -> Color.Red
+                                2    -> Color.Cyan
+                                3    -> Color.Magenta
+                                4    -> Color.Blue
                                 else -> Color.Yellow
                             }.copy(alpha = max(a = 0.0F, b = 0.25F - abs(rtOffset) / 2))
                         }.launchIn(scope = this)
@@ -151,7 +166,7 @@ class MainActivity : ComponentActivity() {
     }
 
     @Composable
-    private fun ParallaxContent(size: Dp, color: Color) {
+    private fun ParallaxLayerContent(size: Dp, color: Color) {
         Box(
             modifier = Modifier
                 .size(size = size)
@@ -165,8 +180,8 @@ class MainActivity : ComponentActivity() {
         showBackground = true,
         device = Devices.PIXEL_4
     )
-    private fun MainActivityPreview() {
-        MainActivityContent()
+    private fun ParallaxActivityPreview() {
+        ParallaxContent()
     }
 }
 

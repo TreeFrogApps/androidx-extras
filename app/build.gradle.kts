@@ -10,7 +10,7 @@ android {
     buildToolsVersion = "33.0.0"
 
     defaultConfig {
-        applicationId = "com.treefrogapps.compose.parallax.example"
+        applicationId = "com.treefrogapps.compose.example"
         minSdk = 28
         targetSdk = 33
         versionCode = 1
@@ -54,6 +54,7 @@ android {
 dependencies {
 
     implementation(project(":parallax-pager"))
+    implementation(project(":gestures-swipeable"))
 
     implementation("androidx.core:core-ktx:1.9.0")
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.5.1")
