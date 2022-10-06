@@ -14,12 +14,11 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.Dp
-import androidx.compose.ui.unit.IntOffset
-import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.*
 import kotlinx.coroutines.flow.drop
 import kotlinx.coroutines.flow.filter
 import kotlinx.coroutines.flow.launchIn
@@ -33,15 +32,22 @@ fun ConfirmationSwipeable(
     toggleColor: Color = MaterialTheme.colors.primary,
     onConfirmed: suspend () -> Unit = {}
 ) {
-    val height = 42.dp
-    val width = 236.dp
-    val sliderWidth = 62.dp
+    val density: Density = LocalDensity.current
+    val minWidth: Dp = 200.dp
+    val height: Dp = 42.dp
+    var width: Dp by remember { mutableStateOf(minWidth) }
+    val sliderWidth: Dp = 62.dp
     val shape = RoundedCornerShape(percent = 50)
 
     Box(
-        modifier = Modifier.padding(all = 4.dp)
+        modifier = Modifier
+            .padding(all = 4.dp)
+            .fillMaxWidth()
+            .onGloballyPositioned { coords ->
+                width = with(density) { max(coords.size.width.toDp(), minWidth) }
+            }
     ) {
-        SliderConfirmationBadge(
+        SliderBackground(
             swipeableState = swipeableState,
             toggleColor = toggleColor,
             width = width,
@@ -66,7 +72,7 @@ fun ConfirmationSwipeable(
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
-private fun SliderConfirmationBadge(
+private fun SliderBackground(
     swipeableState: SwipeableState<ConfirmationState>,
     toggleColor: Color,
     width: Dp,
