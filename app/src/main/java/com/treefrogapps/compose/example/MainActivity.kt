@@ -10,15 +10,16 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Button
-import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
-import com.treefrogapps.compose.example.gestures.GesturesActivity
+import com.treefrogapps.compose.example.swipeable.SwipeableActivity
 import com.treefrogapps.compose.example.parallax.ParallaxActivity
+import com.treefrogapps.compose.material.theme.MaterialThemeExtended
+import com.treefrogapps.compose.material.theme.rememberWindowSize
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -30,7 +31,7 @@ class MainActivity : ComponentActivity() {
 
     @Composable
     private fun MainActivityContent() {
-        MaterialTheme {
+        MaterialThemeExtended(windowSize = rememberWindowSize()) {
             Surface(
                 modifier = Modifier
                     .fillMaxSize()
@@ -40,7 +41,7 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxWidth()
                 ) {
                     ExampleButton<ParallaxActivity>(text = "Parallax Example")
-                    ExampleButton<GesturesActivity>(text = "Gestures Example")
+                    ExampleButton<SwipeableActivity>(text = "Swipeable Example")
                 }
             }
         }

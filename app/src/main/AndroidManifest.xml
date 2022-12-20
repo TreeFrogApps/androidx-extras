@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.treefrogapps.compose.example">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
 
     <application
         android:allowBackup="true"
@@ -26,7 +25,7 @@
             android:launchMode="singleTop" />
 
         <activity
-            android:name="com.treefrogapps.compose.example.gestures.GesturesActivity"
+            android:name="com.treefrogapps.compose.example.swipeable.SwipeableActivity"
             android:exported="false"
             android:launchMode="singleTop" />
 
