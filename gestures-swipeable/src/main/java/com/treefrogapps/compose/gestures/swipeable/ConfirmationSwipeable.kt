@@ -1,5 +1,6 @@
 package com.treefrogapps.compose.gestures.swipeable
 
+import android.content.res.Configuration.UI_MODE_NIGHT_YES
 import androidx.compose.animation.Animatable
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.tween
@@ -19,7 +20,6 @@ import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.*
-import kotlinx.coroutines.flow.drop
 import kotlinx.coroutines.flow.filter
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
@@ -29,22 +29,25 @@ import kotlin.math.roundToInt
 @Composable
 fun ConfirmationSwipeable(
     swipeableState: SwipeableState<ConfirmationState> = rememberSwipeableState(initialValue = ConfirmationState.Swipeable),
-    toggleColor: Color = MaterialTheme.colors.primary,
-    onConfirmed: suspend () -> Unit = {}
+    enabled: Boolean = true,
+    toggleColor: Color = if (enabled) MaterialTheme.colors.secondary else Color.LightGray,
+    onConfirmed: () -> Unit = {},
 ) {
     val density: Density = LocalDensity.current
-    val minWidth: Dp = 200.dp
-    val height: Dp = 42.dp
-    var width: Dp by remember { mutableStateOf(minWidth) }
-    val sliderWidth: Dp = 62.dp
+    val minWidth = 200.dp
+    val height = 42.dp
+    val sliderWidth = 62.dp
     val shape = RoundedCornerShape(percent = 50)
+    var width by remember { mutableStateOf(minWidth) }
 
     Box(
         modifier = Modifier
             .padding(all = 4.dp)
             .fillMaxWidth()
-            .onGloballyPositioned { coords ->
-                width = with(density) { max(coords.size.width.toDp(), minWidth) }
+            .onGloballyPositioned { layout ->
+                with(density) {
+                    width = max(layout.size.width.toDp(), minWidth)
+                }
             }
     ) {
         SliderBackground(
@@ -52,22 +55,20 @@ fun ConfirmationSwipeable(
             toggleColor = toggleColor,
             width = width,
             height = height,
-            shape = shape
-        )
+            shape = shape)
         SliderTarget(
             swipeableState = swipeableState,
             toggleColor = toggleColor,
+            enabled = enabled,
             width = width,
             height = height,
             sliderWidth = sliderWidth,
-            shape = shape
-        )
+            shape = shape)
     }
 
     SwipeableConfirmedLaunchedEffect(
         swipeableState = swipeableState,
-        block = onConfirmed
-    )
+        block = onConfirmed)
 }
 
 @OptIn(ExperimentalMaterialApi::class)
@@ -77,23 +78,24 @@ private fun SliderBackground(
     toggleColor: Color,
     width: Dp,
     height: Dp,
-    shape: RoundedCornerShape
+    shape: RoundedCornerShape,
 ) {
 
     val swipeableBackgroundColor = Color.LightGray.copy(alpha = 0.2F)
-    val swipedBackgroundColor = toggleColor.copy(alpha = 0.1F)
-    val backgroundTintColor = remember(key1 = swipeableState) {
-        Animatable(if (swipeableState.currentValue === ConfirmationState.Swiped) swipedBackgroundColor else swipeableBackgroundColor)
+    val swipedBackgroundColor = toggleColor.copy(alpha = 0.15F)
+    val backgroundTintColor = remember(key1 = swipeableState.currentValue) {
+        Animatable(
+            if (swipeableState.currentValue === ConfirmationState.Swiped) {
+                swipedBackgroundColor
+            } else swipeableBackgroundColor)
     }
-
     Box(
         modifier = Modifier
             .size(width, height)
             .padding(all = 8.dp)
             .background(
                 color = backgroundTintColor.value,
-                shape = shape
-            ),
+                shape = shape),
         contentAlignment = Alignment.CenterStart
     ) {
         AnimatedVisibility(
@@ -105,16 +107,14 @@ private fun SliderBackground(
                 modifier = Modifier.padding(start = 2.dp),
                 painter = painterResource(id = R.drawable.ic_confirmation_badge),
                 contentDescription = null,
-                tint = toggleColor
-            )
+                tint = toggleColor)
         }
     }
 
     SwipeableConfirmedLaunchedEffect(swipeableState = swipeableState) {
         backgroundTintColor.animateTo(
             targetValue = swipedBackgroundColor,
-            animationSpec = tween(durationMillis = 250)
-        )
+            animationSpec = tween(durationMillis = 250))
     }
 }
 
@@ -123,12 +123,13 @@ private fun SliderBackground(
 private fun SliderTarget(
     swipeableState: SwipeableState<ConfirmationState>,
     toggleColor: Color,
+    enabled: Boolean,
     width: Dp,
     height: Dp,
     sliderWidth: Dp,
-    shape: RoundedCornerShape
+    shape: RoundedCornerShape,
 ) {
-    val enabled by remember { derivedStateOf { swipeableState.currentValue === ConfirmationState.Swipeable } }
+    val sliderEnabled by remember(enabled) { derivedStateOf { swipeableState.currentValue === ConfirmationState.Swipeable && enabled } }
     val startState = 0f to ConfirmationState.Swipeable
     val endState = with(LocalDensity.current) { width.toPx() - sliderWidth.toPx() } to ConfirmationState.Swiped
     val anchorStates: Map<Float, ConfirmationState> = mapOf(startState, endState)
@@ -141,12 +142,11 @@ private fun SliderTarget(
             modifier = Modifier
                 .swipeable(
                     state = swipeableState,
-                    enabled = enabled,
+                    enabled = sliderEnabled,
                     anchors = anchorStates,
                     thresholds = { _, _ -> FixedThreshold(offset = endState.first.dp) },
                     orientation = Orientation.Horizontal,
-                    velocityThreshold = Dp.Infinity
-                )
+                    velocityThreshold = Dp.Infinity)
         ) {
             Card(
                 modifier = Modifier
@@ -160,8 +160,7 @@ private fun SliderTarget(
             ) {
                 SliderTargetContent(
                     height = height,
-                    shape = shape
-                )
+                    shape = shape)
             }
         }
     }
@@ -170,7 +169,7 @@ private fun SliderTarget(
 @Composable
 private fun SliderTargetContent(
     height: Dp,
-    shape: RoundedCornerShape
+    shape: RoundedCornerShape,
 ) {
     Box(contentAlignment = Alignment.Center) {
         Row(
@@ -182,8 +181,7 @@ private fun SliderTargetContent(
                     modifier = Modifier
                         .background(
                             shape = shape,
-                            color = Color.White.copy(alpha = 0.8F)
-                        )
+                            color = MaterialTheme.colors.surface.copy(alpha = 0.9F))
                         .width(width = 3.dp)
                         .height(height = height / 3)
                 )
@@ -196,30 +194,80 @@ private fun SliderTargetContent(
 @Composable
 private fun SwipeableConfirmedLaunchedEffect(
     swipeableState: SwipeableState<ConfirmationState>,
-    block: suspend () -> Unit
+    block: suspend () -> Unit,
 ) {
-    LaunchedEffect(key1 = swipeableState) {
+    LaunchedEffect(key1 = swipeableState, key2 = block) {
         snapshotFlow { swipeableState.currentValue }
-            .drop(count = 1)
             .filter(ConfirmationState.Swiped::equals)
             .onEach { block() }
             .launchIn(scope = this)
     }
 }
 
-
 @OptIn(ExperimentalMaterialApi::class)
 @Preview(showBackground = true)
 @Composable
 private fun ConfirmationSwipeablePreview() {
-    ConfirmationSwipeable()
+    MaterialTheme {
+        Surface {
+            ConfirmationSwipeable()
+        }
+    }
 }
 
 @OptIn(ExperimentalMaterialApi::class)
 @Preview(showBackground = true)
 @Composable
 private fun ConfirmationSwipeableSwipedPreview() {
-    ConfirmationSwipeable(
-        swipeableState = rememberSwipeableState(initialValue = ConfirmationState.Swiped)
-    )
+    MaterialTheme {
+        Surface {
+            ConfirmationSwipeable(
+                swipeableState = rememberSwipeableState(initialValue = ConfirmationState.Swiped))
+        }
+    }
+}
+
+@OptIn(ExperimentalMaterialApi::class)
+@Preview(showBackground = true)
+@Composable
+private fun ConfirmationDisabledSwipeablePreview() {
+    MaterialTheme {
+        Surface {
+            ConfirmationSwipeable(enabled = false)
+        }
+    }
+}
+
+@OptIn(ExperimentalMaterialApi::class)
+@Preview(showBackground = true, uiMode = UI_MODE_NIGHT_YES)
+@Composable
+private fun ConfirmationSwipeableDarkPreview() {
+    MaterialTheme {
+        Surface {
+            ConfirmationSwipeable()
+        }
+    }
+}
+
+@OptIn(ExperimentalMaterialApi::class)
+@Preview(showBackground = true, uiMode = UI_MODE_NIGHT_YES)
+@Composable
+private fun ConfirmationSwipeableSwipedDarkPreview() {
+    MaterialTheme {
+        Surface {
+            ConfirmationSwipeable(
+                swipeableState = rememberSwipeableState(initialValue = ConfirmationState.Swiped))
+        }
+    }
+}
+
+@OptIn(ExperimentalMaterialApi::class)
+@Preview(showBackground = true, uiMode = UI_MODE_NIGHT_YES)
+@Composable
+private fun ConfirmationSwipeableDisabledDarkPreview() {
+    MaterialTheme {
+        Surface {
+            ConfirmationSwipeable(enabled = false)
+        }
+    }
 }
