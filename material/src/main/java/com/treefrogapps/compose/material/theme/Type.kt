@@ -80,7 +80,6 @@ class ExtendedTypographyColors internal constructor(
 }
 
 internal val DefaultExtendedTypography = ExtendedTypography()
-
 internal val LocalExtendedTypography = staticCompositionLocalOf { DefaultExtendedTypography }
 internal val LocalExtendedTypographyColors = staticCompositionLocalOf { lightExtendedTypographyColors() }
 

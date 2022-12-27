@@ -13,7 +13,9 @@ import androidx.compose.ui.unit.dp
 import androidx.window.layout.WindowMetrics
 import androidx.window.layout.WindowMetricsCalculator
 
-
+/**
+ * Window size class for use in compose for determining the screen bucket size
+ */
 enum class WindowSize {
     SmallPortrait,
     SmallLandscape,

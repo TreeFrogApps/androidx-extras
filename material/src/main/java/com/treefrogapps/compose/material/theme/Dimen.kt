@@ -6,6 +6,9 @@ import androidx.compose.ui.unit.dp
 import com.treefrogapps.compose.material.theme.WindowSize.Companion.isMedium
 import com.treefrogapps.compose.material.theme.WindowSize.Companion.isSmall
 
+/**
+ * Reusable Dimensions
+ */
 data class Dimens internal constructor(
     val zero: Dp = 0.dp,
     val hairline: Dp = 0.5.dp,
@@ -17,8 +20,7 @@ data class Dimens internal constructor(
 data class Elevation internal constructor(
     val normal: Dp = 2.dp,
     val high: Dp = 4.dp,
-    val highest: Dp = 8.dp
-)
+    val highest: Dp = 8.dp)
 
 data class Spacing internal constructor(
     val tiny: Dp = 4.dp,

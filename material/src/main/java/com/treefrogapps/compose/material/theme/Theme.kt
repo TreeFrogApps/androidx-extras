@@ -59,10 +59,12 @@ fun MaterialThemeExtended(
     isDarkMode: Boolean = isSystemInDarkTheme(),
     colors: Colors = provideDefaultColors(isDarkMode),
     typography: Typography = MaterialThemeExtended.typography,
-    shapes: Shapes = MaterialThemeExtended.shapes,
+    shapes: Shapes = DefaultShapes,
     content: @Composable () -> Unit
 ) {
-    MaterialThemeExtended(windowSize = windowSize) {
+    MaterialThemeExtended(
+        windowSize = windowSize
+    ) {
         MaterialTheme(
             colors = colors,
             typography = typography,
