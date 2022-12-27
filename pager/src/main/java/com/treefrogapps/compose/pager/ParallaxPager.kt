@@ -1,4 +1,4 @@
-package com.treefrogapps.compose.parallax.pager
+package com.treefrogapps.compose.pager
 
 import androidx.compose.foundation.gestures.FlingBehavior
 import androidx.compose.foundation.layout.*

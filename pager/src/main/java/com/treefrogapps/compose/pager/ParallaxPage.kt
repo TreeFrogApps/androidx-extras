@@ -1,7 +1,10 @@
-package com.treefrogapps.compose.parallax.pager
+package com.treefrogapps.compose.pager
 
 import androidx.compose.runtime.Composable
 
+/**
+ * Class to present a Parallax page, use this class to build pages
+ */
 class ParallaxPage(
     internal val header : (@Composable ParallaxPagerScope.(page : Int) -> Unit)? = null,
     internal val footer : (@Composable ParallaxPagerScope.(page : Int) -> Unit)? = null,

@@ -1,4 +1,4 @@
-package com.treefrogapps.compose.parallax.pager
+package com.treefrogapps.compose.pager
 
 import androidx.annotation.IntRange
 import androidx.compose.foundation.gestures.ScrollableState

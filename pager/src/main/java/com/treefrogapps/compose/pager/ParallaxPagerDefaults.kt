@@ -1,10 +1,13 @@
-package com.treefrogapps.compose.parallax.pager
+package com.treefrogapps.compose.pager
 
 import androidx.compose.foundation.gestures.FlingBehavior
 import androidx.compose.runtime.Composable
 import dev.chrisbanes.snapper.ExperimentalSnapperApi
 import dev.chrisbanes.snapper.rememberSnapperFlingBehavior
 
+/**
+ * Default parallax pager values for effect, mode and fling behaviour
+ */
 object ParallaxPagerDefaults {
 
     fun effect(): ParallaxEffect = ParallaxEffect.Small

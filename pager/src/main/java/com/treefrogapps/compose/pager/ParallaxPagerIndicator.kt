@@ -1,4 +1,4 @@
-package com.treefrogapps.compose.parallax.pager
+package com.treefrogapps.compose.pager
 
 import androidx.compose.foundation.Canvas
 import androidx.compose.foundation.layout.*

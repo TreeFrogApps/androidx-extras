@@ -18,6 +18,7 @@ import androidx.compose.ui.tooling.preview.Devices
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
+import com.treefrogapps.compose.pager.*
 import com.treefrogapps.compose.parallax.pager.*
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.launchIn
