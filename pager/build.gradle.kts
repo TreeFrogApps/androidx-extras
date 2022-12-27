@@ -1,9 +1,11 @@
 plugins {
     id("com.android.library")
     id("org.jetbrains.kotlin.android")
+    `maven-publish`
 }
 
 val composeCompilerVersion : String by extra
+val repositoryUri : String by extra
 
 android {
     namespace = "com.treefrogapps.compose.pager"
@@ -40,9 +42,40 @@ android {
     composeOptions {
         kotlinCompilerExtensionVersion = composeCompilerVersion
     }
+
+    publishing {
+        singleVariant(variantName = "release") {
+            withSourcesJar()
+            withJavadocJar()
+        }
+    }
 }
 
+publishing {
 
+    repositories {
+        maven {
+            name = "GitHubPackages"
+            url = uri(repositoryUri)
+            credentials {
+                username = project.findProperty("gpr_user") as String
+                password = project.findProperty("gpr_key") as String
+            }
+        }
+    }
+
+    publications {
+        register<MavenPublication>(name = "release") {
+            groupId = "com.treefrogapps.compose"
+            artifactId = "pager"
+            version = "1.0.0"
+
+            afterEvaluate {
+                from(components["release"])
+            }
+        }
+    }
+}
 
 dependencies {
 
