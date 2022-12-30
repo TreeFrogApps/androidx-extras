@@ -15,5 +15,6 @@ dependencyResolutionManagement {
 rootProject.name = "compose-extras"
 
 include(":app")
-include(":pager")
 include(":material")
+include(":navigation")
+include(":pager")
