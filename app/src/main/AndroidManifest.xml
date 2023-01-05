@@ -9,7 +9,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ComposeResponsiveUI">
         <activity
-            android:name="com.treefrogapps.compose.example.MainActivity"
+            android:name="com.treefrogapps.androidx.extras.example.MainActivity"
             android:exported="true"
             android:theme="@style/Theme.ComposeResponsiveUI">
             <intent-filter>
@@ -20,12 +20,12 @@
         </activity>
 
         <activity
-            android:name="com.treefrogapps.compose.example.parallax.ParallaxActivity"
+            android:name="com.treefrogapps.androidx.extras.example.parallax.ParallaxActivity"
             android:exported="false"
             android:launchMode="singleTop" />
 
         <activity
-            android:name="com.treefrogapps.compose.example.swipeable.SwipeableActivity"
+            android:name="com.treefrogapps.androidx.extras.example.swipeable.SwipeableActivity"
             android:exported="false"
             android:launchMode="singleTop" />
 
