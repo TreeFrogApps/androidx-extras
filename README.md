@@ -21,6 +21,10 @@ Simple library to abstract boilerplate and assist in jetpack compose navigation
 
 Horizontal and Vertical Parallax pager (based on, but doesn't depend on Accompanist Pager)
 
+##### compose-runtime
+
+Helper functions and classes to assist using `androidx.compose.runtime.*`
+
 ##### kwork
 
 Wrapper Library for abstracting interactions with `androidx.work.WorkManager`
