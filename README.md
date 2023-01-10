@@ -24,3 +24,7 @@ Horizontal and Vertical Parallax pager (based on, but doesn't depend on Accompan
 ##### kwork
 
 Wrapper Library for abstracting interactions with `androidx.work.WorkManager`
+
+##### paging
+
+Helper functions and classes to assist using `androidx.paging.*`

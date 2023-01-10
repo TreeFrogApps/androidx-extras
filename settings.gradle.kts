@@ -5,6 +5,7 @@ include(":compose-material")
 include(":compose-navigation")
 include(":compose-pager")
 include(":kwork")
+include(":paging")
 
 pluginManagement {
     repositories {
@@ -40,6 +41,7 @@ dependencyResolutionManagement {
             library("androidx-lifecycle-ktx", "androidx.lifecycle:lifecycle-runtime-ktx:2.5.1")
             library("androidx-workmanager-ktx", "androidx.work:work-runtime-ktx:2.7.1")
             library("androidx-window", "androidx.window:window:1.0.0")
+            library("androidx-paging-runtime", "androidx.paging:paging-runtime:3.1.1")
             library("androidx-activity-compose", "androidx.activity:activity-compose:1.6.1")
             library("androidx-navigation-compose", "androidx.navigation:navigation-compose:2.5.3")
             library("androidx-compose-material", "androidx.compose.material:material:1.3.1")
