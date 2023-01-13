@@ -43,7 +43,7 @@ abstract class NavigationDestination(
  * store and retrieve [NavArg].  This will mean on process death that
  * [NavArg] will NOT be restored.
  */
-abstract class NavigationWithArgumentDestination<NavArg>(
+abstract class NavigationDestinationWithArgument<NavArg>(
     route: String,
 ) : NavigationDestination(route), NavigateWithArgActions<NavArg> {
 
@@ -60,4 +60,8 @@ abstract class NavigationWithArgumentDestination<NavArg>(
         controller.navigate(route)
     }
 }
+
+fun navigationDestinationOf(route : String) : NavigationDestination = object : NavigationDestination(route) {}
+
+fun <NavArg> navigationDestinationWithArgumentOf(route : String) : NavigationDestinationWithArgument<NavArg> = object : NavigationDestinationWithArgument<NavArg>(route) {}
 
