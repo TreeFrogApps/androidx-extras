@@ -73,7 +73,7 @@ private fun DpSize.toWindowSize(): WindowSize =
     } else {
         when {
             width < 0.dp     -> throw IllegalArgumentException("Dp value cannot be negative")
-            width <= 860.dp  -> WindowSize.SmallLandscape
+            width <= 960.dp  -> WindowSize.SmallLandscape
             width <= 1024.dp -> WindowSize.MediumLandscape
             else             -> WindowSize.LargeLandscape
         }
