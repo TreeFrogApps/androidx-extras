@@ -14,6 +14,7 @@ import androidx.compose.ui.tooling.preview.Devices
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 
+typealias Theme = MaterialThemeExtended
 
 object MaterialThemeExtended {
 
@@ -58,7 +59,7 @@ fun MaterialThemeExtended(
     windowSize: WindowSize,
     isDarkMode: Boolean = isSystemInDarkTheme(),
     colors: Colors = provideDefaultColors(isDarkMode),
-    typography: Typography = MaterialThemeExtended.typography,
+    typography: Typography = Theme.typography,
     shapes: Shapes = DefaultShapes,
     content: @Composable () -> Unit
 ) {
@@ -77,7 +78,7 @@ fun MaterialThemeExtended(
 private fun MaterialThemeExtended(
     windowSize: WindowSize,
     isDarkMode: Boolean = isSystemInDarkTheme(),
-    appTypography: ExtendedTypography = MaterialThemeExtended.extendedTypography,
+    appTypography: ExtendedTypography = Theme.extendedTypography,
     extendedTypographyColors: ExtendedTypographyColors = provideDefaultTypographyColors(isDarkMode),
     content: @Composable () -> Unit
 ) {
@@ -126,197 +127,197 @@ fun PreviewContent() {
         Column(modifier = Modifier
             .weight(1.0F)
             .verticalScroll(rememberScrollState())
-            .padding(MaterialThemeExtended.dimens.spacing.large)) {
+            .padding(Theme.dimens.spacing.large)) {
 
-            Text("Window ${MaterialThemeExtended.windowSize.name}", color = MaterialThemeExtended.colors.onBackground)
-            Spacer(modifier = Modifier.height(MaterialThemeExtended.dimens.spacing.normal))
-            Text(text = "Dimen zero ${MaterialThemeExtended.dimens.zero}", color = MaterialThemeExtended.colors.onBackground)
-            Text(text = "Dimen hairline ${MaterialThemeExtended.dimens.hairline}", color = MaterialThemeExtended.colors.onBackground)
-            Text(text = "Dimen one ${MaterialThemeExtended.dimens.one}", color = MaterialThemeExtended.colors.onBackground)
-            Text(text = "Dimen elevation ${MaterialThemeExtended.dimens.elevation.normal}", color = MaterialThemeExtended.colors.onBackground)
-            Text(text = "Dimen elevation high ${MaterialThemeExtended.dimens.elevation.high}", color = MaterialThemeExtended.colors.onBackground)
-            Text(text = "Dimen elevation highest ${MaterialThemeExtended.dimens.elevation.highest}", color = MaterialThemeExtended.colors.onBackground)
-            Text(text = "Dimen spacing tiny ${MaterialThemeExtended.dimens.spacing.tiny}", color = MaterialThemeExtended.colors.onBackground)
-            Text(text = "Dimen spacing small ${MaterialThemeExtended.dimens.spacing.small}", color = MaterialThemeExtended.colors.onBackground)
-            Text(text = "Dimen spacing normal ${MaterialThemeExtended.dimens.spacing.normal}", color = MaterialThemeExtended.colors.onBackground)
-            Text(text = "Dimen spacing large ${MaterialThemeExtended.dimens.spacing.large}", color = MaterialThemeExtended.colors.onBackground)
-            Text(text = "Dimen spacing big ${MaterialThemeExtended.dimens.spacing.big}", color = MaterialThemeExtended.colors.onBackground)
-            Text(text = "Dimen spacing massive ${MaterialThemeExtended.dimens.spacing.massive}", color = MaterialThemeExtended.colors.onBackground)
-            Text(text = "Dimen spacing gigantic ${MaterialThemeExtended.dimens.spacing.gigantic}", color = MaterialThemeExtended.colors.onBackground)
-            Text(text = "Dimen spacing enormous ${MaterialThemeExtended.dimens.spacing.enormous}", color = MaterialThemeExtended.colors.onBackground)
-            Text(text = "Dimen icon minuscule ${MaterialThemeExtended.dimens.icon.minuscule}", color = MaterialThemeExtended.colors.onBackground)
-            Text(text = "Dimen icon small ${MaterialThemeExtended.dimens.icon.small}", color = MaterialThemeExtended.colors.onBackground)
-            Text(text = "Dimen icon notification ${MaterialThemeExtended.dimens.icon.notification}", color = MaterialThemeExtended.colors.onBackground)
-            Text(text = "Dimen icon normal ${MaterialThemeExtended.dimens.icon.normal}", color = MaterialThemeExtended.colors.onBackground)
-            Text(text = "Dimen icon large ${MaterialThemeExtended.dimens.icon.large}", color = MaterialThemeExtended.colors.onBackground)
-            Text(text = "Dimen icon big ${MaterialThemeExtended.dimens.icon.big}", color = MaterialThemeExtended.colors.onBackground)
-            Text(text = "Dimen icon massive ${MaterialThemeExtended.dimens.icon.massive}", color = MaterialThemeExtended.colors.onBackground)
-            Text(text = "Dimen icon enormous ${MaterialThemeExtended.dimens.icon.enormous}", color = MaterialThemeExtended.colors.onBackground)
-            Text(text = "Dimen icon thumbnail ${MaterialThemeExtended.dimens.icon.thumbnail}", color = MaterialThemeExtended.colors.onBackground)
+            Text("Window ${Theme.windowSize.name}", color = Theme.colors.onBackground)
+            Spacer(modifier = Modifier.height(Theme.dimens.spacing.normal))
+            Text(text = "Dimen zero ${Theme.dimens.zero}", color = Theme.colors.onBackground)
+            Text(text = "Dimen hairline ${Theme.dimens.hairline}", color = Theme.colors.onBackground)
+            Text(text = "Dimen one ${Theme.dimens.one}", color = Theme.colors.onBackground)
+            Text(text = "Dimen elevation ${Theme.dimens.elevation.normal}", color = Theme.colors.onBackground)
+            Text(text = "Dimen elevation high ${Theme.dimens.elevation.high}", color = Theme.colors.onBackground)
+            Text(text = "Dimen elevation highest ${Theme.dimens.elevation.highest}", color = Theme.colors.onBackground)
+            Text(text = "Dimen spacing tiny ${Theme.dimens.spacing.tiny}", color = Theme.colors.onBackground)
+            Text(text = "Dimen spacing small ${Theme.dimens.spacing.small}", color = Theme.colors.onBackground)
+            Text(text = "Dimen spacing normal ${Theme.dimens.spacing.normal}", color = Theme.colors.onBackground)
+            Text(text = "Dimen spacing large ${Theme.dimens.spacing.large}", color = Theme.colors.onBackground)
+            Text(text = "Dimen spacing big ${Theme.dimens.spacing.big}", color = Theme.colors.onBackground)
+            Text(text = "Dimen spacing massive ${Theme.dimens.spacing.massive}", color = Theme.colors.onBackground)
+            Text(text = "Dimen spacing gigantic ${Theme.dimens.spacing.gigantic}", color = Theme.colors.onBackground)
+            Text(text = "Dimen spacing enormous ${Theme.dimens.spacing.enormous}", color = Theme.colors.onBackground)
+            Text(text = "Dimen icon minuscule ${Theme.dimens.icon.minuscule}", color = Theme.colors.onBackground)
+            Text(text = "Dimen icon small ${Theme.dimens.icon.small}", color = Theme.colors.onBackground)
+            Text(text = "Dimen icon notification ${Theme.dimens.icon.notification}", color = Theme.colors.onBackground)
+            Text(text = "Dimen icon normal ${Theme.dimens.icon.normal}", color = Theme.colors.onBackground)
+            Text(text = "Dimen icon large ${Theme.dimens.icon.large}", color = Theme.colors.onBackground)
+            Text(text = "Dimen icon big ${Theme.dimens.icon.big}", color = Theme.colors.onBackground)
+            Text(text = "Dimen icon massive ${Theme.dimens.icon.massive}", color = Theme.colors.onBackground)
+            Text(text = "Dimen icon enormous ${Theme.dimens.icon.enormous}", color = Theme.colors.onBackground)
+            Text(text = "Dimen icon thumbnail ${Theme.dimens.icon.thumbnail}", color = Theme.colors.onBackground)
         }
 
         Column(modifier = Modifier
             .weight(1.0F)
             .verticalScroll(rememberScrollState())
-            .padding(MaterialThemeExtended.dimens.spacing.large)) {
+            .padding(Theme.dimens.spacing.large)) {
             Text(
                 text = "Small Text Primary",
-                style = MaterialThemeExtended.extendedTypography.small,
-                color = MaterialThemeExtended.extendedTypographyColors.primary)
+                style = Theme.extendedTypography.small,
+                color = Theme.extendedTypographyColors.primary)
 
             Text(
                 text = "Small Bold Text Primary",
-                style = MaterialThemeExtended.extendedTypography.smallBold,
-                color = MaterialThemeExtended.extendedTypographyColors.primary)
+                style = Theme.extendedTypography.smallBold,
+                color = Theme.extendedTypographyColors.primary)
 
             Text(
                 text = "Medium Text Primary",
-                style = MaterialThemeExtended.extendedTypography.medium,
-                color = MaterialThemeExtended.extendedTypographyColors.primary)
+                style = Theme.extendedTypography.medium,
+                color = Theme.extendedTypographyColors.primary)
 
             Text(
                 text = "Medium Bold Text Primary",
-                style = MaterialThemeExtended.extendedTypography.mediumBold,
-                color = MaterialThemeExtended.extendedTypographyColors.primary)
+                style = Theme.extendedTypography.mediumBold,
+                color = Theme.extendedTypographyColors.primary)
 
             Text(
                 text = "Large Text Primary",
-                style = MaterialThemeExtended.extendedTypography.large,
-                color = MaterialThemeExtended.extendedTypographyColors.primary)
+                style = Theme.extendedTypography.large,
+                color = Theme.extendedTypographyColors.primary)
 
             Text(
                 text = "Large Bold Text Primary",
-                style = MaterialThemeExtended.extendedTypography.largeBold,
-                color = MaterialThemeExtended.extendedTypographyColors.primary)
+                style = Theme.extendedTypography.largeBold,
+                color = Theme.extendedTypographyColors.primary)
 
             Column(modifier = Modifier
                 .wrapContentHeight()
-                .background(color = MaterialThemeExtended.colors.onBackground)) {
+                .background(color = Theme.colors.onBackground)) {
 
                 Text(
                     text = "Small Text Primary Inverse",
-                    style = MaterialThemeExtended.extendedTypography.small,
-                    color = MaterialThemeExtended.extendedTypographyColors.primaryInverse)
+                    style = Theme.extendedTypography.small,
+                    color = Theme.extendedTypographyColors.primaryInverse)
 
                 Text(
                     text = "Small Bold Text Primary Inverse",
-                    style = MaterialThemeExtended.extendedTypography.smallBold,
-                    color = MaterialThemeExtended.extendedTypographyColors.primaryInverse)
+                    style = Theme.extendedTypography.smallBold,
+                    color = Theme.extendedTypographyColors.primaryInverse)
 
                 Text(
                     text = "Medium Text Primary Inverse",
-                    style = MaterialThemeExtended.extendedTypography.medium,
-                    color = MaterialThemeExtended.extendedTypographyColors.primaryInverse)
+                    style = Theme.extendedTypography.medium,
+                    color = Theme.extendedTypographyColors.primaryInverse)
 
                 Text(
                     text = "Medium Bold Text Primary Inverse",
-                    style = MaterialThemeExtended.extendedTypography.mediumBold,
-                    color = MaterialThemeExtended.extendedTypographyColors.primaryInverse)
+                    style = Theme.extendedTypography.mediumBold,
+                    color = Theme.extendedTypographyColors.primaryInverse)
 
                 Text(
                     text = "Large Text Primary Inverse",
-                    style = MaterialThemeExtended.extendedTypography.large,
-                    color = MaterialThemeExtended.extendedTypographyColors.primaryInverse)
+                    style = Theme.extendedTypography.large,
+                    color = Theme.extendedTypographyColors.primaryInverse)
 
                 Text(
                     text = "Large Bold Text Primary Inverse",
-                    style = MaterialThemeExtended.extendedTypography.largeBold,
-                    color = MaterialThemeExtended.extendedTypographyColors.primaryInverse)
+                    style = Theme.extendedTypography.largeBold,
+                    color = Theme.extendedTypographyColors.primaryInverse)
             }
 
             Text(
                 text = "Small Text Primary Variant",
-                style = MaterialThemeExtended.extendedTypography.small,
-                color = MaterialThemeExtended.extendedTypographyColors.primaryVariant)
+                style = Theme.extendedTypography.small,
+                color = Theme.extendedTypographyColors.primaryVariant)
 
             Text(
                 text = "Small Bold Text Primary Variant",
-                style = MaterialThemeExtended.extendedTypography.smallBold,
-                color = MaterialThemeExtended.extendedTypographyColors.primaryVariant)
+                style = Theme.extendedTypography.smallBold,
+                color = Theme.extendedTypographyColors.primaryVariant)
 
             Text(
                 text = "Medium Text Primary Variant",
-                style = MaterialThemeExtended.extendedTypography.medium,
-                color = MaterialThemeExtended.extendedTypographyColors.primaryVariant)
+                style = Theme.extendedTypography.medium,
+                color = Theme.extendedTypographyColors.primaryVariant)
 
             Text(
                 text = "Medium Bold Text Primary Variant",
-                style = MaterialThemeExtended.extendedTypography.mediumBold,
-                color = MaterialThemeExtended.extendedTypographyColors.primaryVariant)
+                style = Theme.extendedTypography.mediumBold,
+                color = Theme.extendedTypographyColors.primaryVariant)
 
             Text(
                 text = "Large Text Primary Variant",
-                style = MaterialThemeExtended.extendedTypography.large,
-                color = MaterialThemeExtended.extendedTypographyColors.primaryVariant)
+                style = Theme.extendedTypography.large,
+                color = Theme.extendedTypographyColors.primaryVariant)
 
             Text(
                 text = "Large Bold Text Primary Variant",
-                style = MaterialThemeExtended.extendedTypography.largeBold,
-                color = MaterialThemeExtended.extendedTypographyColors.primaryVariant)
+                style = Theme.extendedTypography.largeBold,
+                color = Theme.extendedTypographyColors.primaryVariant)
 
             Text(
                 text = "Small Text Secondary",
-                style = MaterialThemeExtended.extendedTypography.small,
-                color = MaterialThemeExtended.extendedTypographyColors.secondary)
+                style = Theme.extendedTypography.small,
+                color = Theme.extendedTypographyColors.secondary)
 
             Text(
                 text = "Small Bold Text Secondary",
-                style = MaterialThemeExtended.extendedTypography.smallBold,
-                color = MaterialThemeExtended.extendedTypographyColors.secondary)
+                style = Theme.extendedTypography.smallBold,
+                color = Theme.extendedTypographyColors.secondary)
 
             Text(
                 text = "Medium Text Secondary",
-                style = MaterialThemeExtended.extendedTypography.medium,
-                color = MaterialThemeExtended.extendedTypographyColors.secondary)
+                style = Theme.extendedTypography.medium,
+                color = Theme.extendedTypographyColors.secondary)
 
             Text(
                 text = "Medium Bold Text Secondary",
-                style = MaterialThemeExtended.extendedTypography.mediumBold,
-                color = MaterialThemeExtended.extendedTypographyColors.secondary)
+                style = Theme.extendedTypography.mediumBold,
+                color = Theme.extendedTypographyColors.secondary)
 
             Text(
                 text = "Large Text Secondary",
-                style = MaterialThemeExtended.extendedTypography.large,
-                color = MaterialThemeExtended.extendedTypographyColors.secondary)
+                style = Theme.extendedTypography.large,
+                color = Theme.extendedTypographyColors.secondary)
 
             Text(
                 text = "Large Bold Text Secondary",
-                style = MaterialThemeExtended.extendedTypography.largeBold,
-                color = MaterialThemeExtended.extendedTypographyColors.secondary)
+                style = Theme.extendedTypography.largeBold,
+                color = Theme.extendedTypographyColors.secondary)
 
             Column(modifier = Modifier
                 .wrapContentHeight()
-                .background(color = MaterialThemeExtended.colors.onBackground)) {
+                .background(color = Theme.colors.onBackground)) {
 
                 Text(
                     text = "Small Text Secondary Inverse",
-                    style = MaterialThemeExtended.extendedTypography.small,
-                    color = MaterialThemeExtended.extendedTypographyColors.secondaryInverse)
+                    style = Theme.extendedTypography.small,
+                    color = Theme.extendedTypographyColors.secondaryInverse)
 
                 Text(
                     text = "Small Bold Text Secondary Inverse",
-                    style = MaterialThemeExtended.extendedTypography.smallBold,
-                    color = MaterialThemeExtended.extendedTypographyColors.secondaryInverse)
+                    style = Theme.extendedTypography.smallBold,
+                    color = Theme.extendedTypographyColors.secondaryInverse)
 
                 Text(
                     text = "Medium Text Primary Secondary Inverse",
-                    style = MaterialThemeExtended.extendedTypography.medium,
-                    color = MaterialThemeExtended.extendedTypographyColors.secondaryInverse)
+                    style = Theme.extendedTypography.medium,
+                    color = Theme.extendedTypographyColors.secondaryInverse)
 
                 Text(
                     text = "Medium Bold Text Secondary Inverse",
-                    style = MaterialThemeExtended.extendedTypography.mediumBold,
-                    color = MaterialThemeExtended.extendedTypographyColors.secondaryInverse)
+                    style = Theme.extendedTypography.mediumBold,
+                    color = Theme.extendedTypographyColors.secondaryInverse)
 
                 Text(
                     text = "Large Text Secondary Inverse",
-                    style = MaterialThemeExtended.extendedTypography.large,
-                    color = MaterialThemeExtended.extendedTypographyColors.secondaryInverse)
+                    style = Theme.extendedTypography.large,
+                    color = Theme.extendedTypographyColors.secondaryInverse)
 
                 Text(
                     text = "Large Bold Text Secondary Inverse",
-                    style = MaterialThemeExtended.extendedTypography.largeBold,
-                    color = MaterialThemeExtended.extendedTypographyColors.secondaryInverse)
+                    style = Theme.extendedTypography.largeBold,
+                    color = Theme.extendedTypographyColors.secondaryInverse)
             }
         }
 
@@ -324,72 +325,72 @@ fun PreviewContent() {
         Column(modifier = Modifier
             .weight(1.0F)
             .verticalScroll(rememberScrollState())
-            .padding(MaterialThemeExtended.dimens.spacing.large)) {
+            .padding(Theme.dimens.spacing.large)) {
 
             ColorSwatch(
-                baseColor = MaterialThemeExtended.colors.primary,
+                baseColor = Theme.colors.primary,
                 name = "Theme Color Primary",
-                textColor = MaterialThemeExtended.extendedTypographyColors.primaryInverse)
+                textColor = Theme.extendedTypographyColors.primaryInverse)
 
             ColorSwatch(
-                baseColor = MaterialThemeExtended.colors.primaryVariant,
+                baseColor = Theme.colors.primaryVariant,
                 name = "Theme Color PrimaryVariant",
-                textColor = MaterialThemeExtended.extendedTypographyColors.primaryInverse)
+                textColor = Theme.extendedTypographyColors.primaryInverse)
 
             ColorSwatch(
-                baseColor = MaterialThemeExtended.colors.secondary,
+                baseColor = Theme.colors.secondary,
                 name = "Theme Color Secondary",
-                textColor = MaterialThemeExtended.extendedTypographyColors.primaryInverse)
+                textColor = Theme.extendedTypographyColors.primaryInverse)
 
             ColorSwatch(
-                baseColor = MaterialThemeExtended.colors.secondaryVariant,
+                baseColor = Theme.colors.secondaryVariant,
                 name = "Theme Color SecondaryVariant",
-                textColor = MaterialThemeExtended.extendedTypographyColors.primaryInverse)
+                textColor = Theme.extendedTypographyColors.primaryInverse)
 
             ColorSwatch(
-                baseColor = MaterialThemeExtended.colors.background,
+                baseColor = Theme.colors.background,
                 name = "Theme Color Background",
-                textColor = MaterialThemeExtended.extendedTypographyColors.primary)
+                textColor = Theme.extendedTypographyColors.primary)
 
             ColorSwatch(
-                baseColor = MaterialThemeExtended.colors.surface,
+                baseColor = Theme.colors.surface,
                 name = "Theme Color surface",
-                textColor = MaterialThemeExtended.extendedTypographyColors.primary)
+                textColor = Theme.extendedTypographyColors.primary)
 
             ColorSwatch(
-                baseColor = MaterialThemeExtended.colors.error,
+                baseColor = Theme.colors.error,
                 name = "Theme Color Error",
-                textColor = MaterialThemeExtended.extendedTypographyColors.primaryInverse)
+                textColor = Theme.extendedTypographyColors.primaryInverse)
 
             ColorSwatch(
-                baseColor = MaterialThemeExtended.colors.primary,
-                overlayColor = MaterialThemeExtended.colors.onPrimary,
+                baseColor = Theme.colors.primary,
+                overlayColor = Theme.colors.onPrimary,
                 name = "Theme Color OnPrimary",
-                textColor = MaterialThemeExtended.extendedTypographyColors.primary)
+                textColor = Theme.extendedTypographyColors.primary)
 
             ColorSwatch(
-                baseColor = MaterialThemeExtended.colors.secondary,
-                overlayColor = MaterialThemeExtended.colors.onSecondary,
+                baseColor = Theme.colors.secondary,
+                overlayColor = Theme.colors.onSecondary,
                 name = "Theme Color OnSecondary",
-                textColor = MaterialThemeExtended.extendedTypographyColors.secondary)
+                textColor = Theme.extendedTypographyColors.secondary)
 
             ColorSwatch(
-                baseColor = MaterialThemeExtended.colors.background,
-                overlayColor = MaterialThemeExtended.colors.onBackground,
+                baseColor = Theme.colors.background,
+                overlayColor = Theme.colors.onBackground,
                 name = "Theme Color OnBackground",
-                textColor = MaterialThemeExtended.extendedTypographyColors.primaryInverse)
+                textColor = Theme.extendedTypographyColors.primaryInverse)
 
             ColorSwatch(
-                baseColor = MaterialThemeExtended.colors.surface,
-                overlayColor = MaterialThemeExtended.colors.onSurface,
+                baseColor = Theme.colors.surface,
+                overlayColor = Theme.colors.onSurface,
                 name = "Theme Color OnSurface",
-                textColor = MaterialThemeExtended.extendedTypographyColors.primaryInverse)
+                textColor = Theme.extendedTypographyColors.primaryInverse)
 
             ColorSwatch(
-                baseColor = MaterialThemeExtended.colors.error,
-                overlayColor = MaterialThemeExtended.colors.onError,
+                baseColor = Theme.colors.error,
+                overlayColor = Theme.colors.onError,
                 name = "Theme Color OnError",
-                textColor = MaterialThemeExtended.extendedTypographyColors.primary)
+                textColor = Theme.extendedTypographyColors.primary)
         }
     }
 }
@@ -400,13 +401,13 @@ private fun ColorSwatch(
     overlayColor: Color = baseColor,
     name: String,
     textColor: Color) {
-    Spacer(modifier = Modifier.height(MaterialThemeExtended.dimens.spacing.small))
+    Spacer(modifier = Modifier.height(Theme.dimens.spacing.small))
 
     Row(modifier = Modifier
-        .background(color = baseColor, shape = MaterialThemeExtended.shapes.small)
+        .background(color = baseColor, shape = Theme.shapes.small)
         .height(50.dp)
         .fillMaxWidth()
-        .border(width = MaterialThemeExtended.dimens.one, color = MaterialThemeExtended.colors.surface)
+        .border(width = Theme.dimens.one, color = Theme.colors.surface)
     ) {
 
         Surface(
@@ -416,9 +417,9 @@ private fun ColorSwatch(
             Text(
                 modifier = Modifier
                     .fillMaxSize()
-                    .padding(MaterialThemeExtended.dimens.spacing.small),
+                    .padding(Theme.dimens.spacing.small),
                 text = name,
-                style = MaterialThemeExtended.extendedTypography.small,
+                style = Theme.extendedTypography.small,
                 color = textColor)
         }
     }

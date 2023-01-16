@@ -8,6 +8,6 @@ import androidx.compose.runtime.ReadOnlyComposable
 internal val DefaultShapes
     @ReadOnlyComposable
     @Composable get() = Shapes(
-        small = RoundedCornerShape(MaterialThemeExtended.dimens.spacing.small),
-        medium = RoundedCornerShape(MaterialThemeExtended.dimens.spacing.normal),
-        large = RoundedCornerShape(MaterialThemeExtended.dimens.spacing.large))
+        small = RoundedCornerShape(Theme.dimens.spacing.small),
+        medium = RoundedCornerShape(Theme.dimens.spacing.normal),
+        large = RoundedCornerShape(Theme.dimens.spacing.large))
