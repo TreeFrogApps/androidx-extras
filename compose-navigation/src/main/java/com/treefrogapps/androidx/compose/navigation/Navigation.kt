@@ -10,6 +10,8 @@ interface NavigateActions {
     fun popTo(controller: NavHostController): Boolean
 
     fun navigateTo(controller: NavHostController)
+
+    fun navigateToPoppingBackStack(controller: NavHostController)
 }
 
 /**
@@ -20,6 +22,9 @@ interface NavigateWithArgActions<NavArg> : NavigateActions {
     fun navArg(): NavArg?
 
     fun navigateTo(navArg: NavArg, controller: NavHostController)
+
+    fun navigateToPoppingBackStack(navArg: NavArg, controller: NavHostController)
+
 }
 
 /**
@@ -34,6 +39,12 @@ abstract class NavigationDestination(
 
     override fun navigateTo(controller: NavHostController) =
         controller.navigate(route)
+
+    override fun navigateToPoppingBackStack(controller: NavHostController) {
+        navigatePoppingBackStack(
+            navController = controller,
+            destinationRoute = route)
+    }
 }
 
 /**
@@ -59,9 +70,26 @@ abstract class NavigationDestinationWithArgument<NavArg>(
         argumentStore[route] = navArg
         controller.navigate(route)
     }
+
+    override fun navigateToPoppingBackStack(navArg: NavArg, controller: NavHostController) {
+        argumentStore[route] = navArg
+        navigatePoppingBackStack(
+            navController = controller,
+            destinationRoute = route)
+    }
 }
 
-fun navigationDestinationOf(route : String) : NavigationDestination = object : NavigationDestination(route) {}
+fun navigationDestinationOf(route: String): NavigationDestination = object : NavigationDestination(route) {}
 
-fun <NavArg> navigationDestinationWithArgumentOf(route : String) : NavigationDestinationWithArgument<NavArg> = object : NavigationDestinationWithArgument<NavArg>(route) {}
+fun <NavArg> navigationDestinationWithArgumentOf(route: String): NavigationDestinationWithArgument<NavArg> = object : NavigationDestinationWithArgument<NavArg>(route) {}
+
+private fun navigatePoppingBackStack(
+    navController: NavHostController,
+    destinationRoute: String
+) {
+    val currRoute = navController.currentDestination?.route
+    navController.navigate(destinationRoute) {
+        currRoute?.run { popUpTo(this) { inclusive = true } }
+    }
+}
 
