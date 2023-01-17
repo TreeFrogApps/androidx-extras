@@ -45,6 +45,7 @@ class ExtendedTypographyColors internal constructor(
     primaryInverse: Color,
     primaryVariant: Color,
     secondary: Color,
+    secondaryVariant: Color,
     secondaryInverse: Color,
     error: Color
 ) {
@@ -56,6 +57,8 @@ class ExtendedTypographyColors internal constructor(
         private set
     var secondary by mutableStateOf(secondary)
         private set
+    var secondaryVariant by mutableStateOf(secondaryVariant)
+        private set
     var secondaryInverse by mutableStateOf(secondaryInverse)
         private set
     var error by mutableStateOf(error)
@@ -66,6 +69,7 @@ class ExtendedTypographyColors internal constructor(
         primaryInverse = this.primaryInverse,
         primaryVariant = this.primaryVariant,
         secondary = this.secondary,
+        secondaryVariant = this.secondaryVariant,
         secondaryInverse = this.secondaryInverse,
         error = this.error)
 
@@ -74,6 +78,7 @@ class ExtendedTypographyColors internal constructor(
         primaryInverse = other.primaryInverse
         primaryVariant = other.primaryVariant
         secondary = other.secondary
+        secondaryVariant = other.secondaryVariant
         secondaryInverse = other.secondaryInverse
         error = other.error
     }
@@ -91,6 +96,7 @@ private fun lightExtendedTypographyColors(): ExtendedTypographyColors =
         primaryInverse = Color.White,
         primaryVariant = Color.LightGray,
         secondary = Color.DarkGray,
+        secondaryVariant = Color.Gray,
         secondaryInverse = Color.LightGray,
         error = Color.Red)
 
@@ -100,5 +106,6 @@ private fun darkExtendedTypographyColors(): ExtendedTypographyColors =
         primaryInverse = Color.Black,
         primaryVariant = Color.DarkGray,
         secondary = Color.LightGray,
+        secondaryVariant = Color.Gray,
         secondaryInverse = Color.DarkGray,
         error = Color.Red)
