@@ -3,15 +3,13 @@ package com.treefrogapps.androidx.compose
 import android.annotation.SuppressLint
 import android.os.Parcel
 import android.os.Parcelable
-import androidx.compose.foundation.lazy.LazyItemScope
-import androidx.compose.foundation.lazy.LazyListScope
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.lazy.grid.LazyGridItemScope
 import androidx.compose.foundation.lazy.grid.LazyGridScope
+import androidx.compose.foundation.lazy.staggeredgrid.LazyStaggeredGridItemScope
+import androidx.compose.foundation.lazy.staggeredgrid.LazyStaggeredGridScope
 import androidx.compose.runtime.Composable
-import androidx.paging.PagingData
-import androidx.paging.PagingDataDiffer
 import androidx.paging.compose.LazyPagingItems
-import kotlinx.coroutines.flow.Flow
 
 
 fun <T : Any> LazyGridScope.items(
@@ -38,6 +36,48 @@ fun <T : Any> LazyGridScope.itemsIndexed(
     items: LazyPagingItems<T>,
     key: ((index: Int, item: T) -> Any)? = null,
     itemContent: @Composable LazyGridItemScope.(index: Int, value: T?) -> Unit
+) {
+    items(
+        count = items.itemCount,
+        key = if (key == null) null else { index ->
+            val item = items.peek(index)
+            if (item == null) {
+                PagingPlaceholderKey(index)
+            } else {
+                key(index, item)
+            }
+        }
+    ) { index ->
+        itemContent(index, items[index])
+    }
+}
+
+@OptIn(ExperimentalFoundationApi::class)
+fun <T : Any> LazyStaggeredGridScope.items(
+    items: LazyPagingItems<T>,
+    key: ((item: T) -> Any)? = null,
+    itemContent: @Composable LazyStaggeredGridItemScope.(value: T?) -> Unit
+) {
+    items(
+        count = items.itemCount,
+        key = if (key == null) null else { index ->
+            val item = items.peek(index)
+            if (item == null) {
+                PagingPlaceholderKey(index)
+            } else {
+                key(item)
+            }
+        }
+    ) { index ->
+        itemContent(items[index])
+    }
+}
+
+@OptIn(ExperimentalFoundationApi::class)
+fun <T : Any> LazyStaggeredGridScope.itemsIndexed(
+    items: LazyPagingItems<T>,
+    key: ((index: Int, item: T) -> Any)? = null,
+    itemContent: @Composable LazyStaggeredGridItemScope.(index: Int, value: T?) -> Unit
 ) {
     items(
         count = items.itemCount,
