@@ -3,24 +3,22 @@ package com.treefrogapps.androidx.paging
 import androidx.paging.PagingSource
 
 data class IndexedKey(
-    val offset : Int,
-    val requestedLoadSize : Int)
+    val page : Int,
+    val offset: Int)
 
-private fun  PagingSource.LoadParams<IndexedKey>.defaultNextAppendKey(loadedSize : Int) : () -> IndexedKey? = {
-    if(loadedSize > 0) {
+private fun PagingSource.LoadParams<IndexedKey>.defaultNextAppendKey(loadedSize: Int): () -> IndexedKey? = {
+    if (loadedSize == loadSize) {
         IndexedKey(
-            offset = loadedSize + (key?.offset ?: 0),
-            requestedLoadSize = loadSize)
+            page = key?.page?.let { p -> p + 1 } ?: 0,
+            offset = loadedSize + (key?.offset ?: 0))
     } else null
 }
 
-private fun  PagingSource.LoadParams<IndexedKey>.defaultNextPrependKey(loadedSize : Int) : () -> IndexedKey? = {
-    if(loadedSize > 0) {
-        val offset = loadedSize - (key?.offset ?: 0).coerceAtLeast(minimumValue = 0)
-        val requestedLoadSize = if(offset == 0) key?.offset ?: loadSize else loadedSize
+private fun PagingSource.LoadParams<IndexedKey>.defaultNextPrependKey(loadedSize: Int): () -> IndexedKey? = {
+    if (loadedSize == loadSize) {
         IndexedKey(
-            offset = offset,
-            requestedLoadSize = requestedLoadSize)
+            page = key?.page?.let { p -> p - 1 } ?: 0,
+            offset = (key?.offset ?: 0) - loadedSize)
     } else null
 }
 
@@ -29,27 +27,27 @@ private fun  PagingSource.LoadParams<IndexedKey>.defaultNextPrependKey(loadedSiz
  * into a [PagingSource.LoadResult]
  */
 fun <V : Any> PagingSource.LoadParams<IndexedKey>.toLoadResult(
-    loaded : List<V>,
-    nextKeyAppend : () -> IndexedKey? = defaultNextAppendKey(loadedSize = loaded.size),
-    nextKeyPrepend : () -> IndexedKey? = defaultNextPrependKey(loadedSize = loaded.size),
-) : PagingSource.LoadResult<IndexedKey, V> =
+    loaded: List<V>,
+    nextKeyAppend: () -> IndexedKey? = defaultNextAppendKey(loadedSize = loaded.size),
+    nextKeyPrepend: () -> IndexedKey? = defaultNextPrependKey(loadedSize = loaded.size),
+): PagingSource.LoadResult<IndexedKey, V> =
     when (this) {
-        is PagingSource.LoadParams.Refresh -> refresh(currentKey = key, loaded = loaded)
-        is PagingSource.LoadParams.Append  -> append(loaded = loaded, nextKey = nextKeyAppend)
-        is PagingSource.LoadParams.Prepend -> prepend(loaded = loaded, nextKey = nextKeyPrepend)
+        is PagingSource.LoadParams.Refresh -> refresh(nextKey = nextKeyAppend, loaded = loaded)
+        is PagingSource.LoadParams.Append  -> append(nextKey = nextKeyAppend, loaded = loaded)
+        is PagingSource.LoadParams.Prepend -> prepend(nextKey = nextKeyPrepend, loaded = loaded)
     }
 
 private fun <V : Any> refresh(
-    currentKey: IndexedKey?,
+    nextKey: () -> IndexedKey?,
     loaded: List<V>
 ): PagingSource.LoadResult<IndexedKey, V> =
     PagingSource.LoadResult.Page(
         data = loaded,
         prevKey = null,
-        nextKey = currentKey)
+        nextKey = nextKey())
 
 private fun <V : Any> append(
-    nextKey : () -> IndexedKey?,
+    nextKey: () -> IndexedKey?,
     loaded: List<V>
 ): PagingSource.LoadResult<IndexedKey, V> =
     PagingSource.LoadResult.Page(
@@ -58,7 +56,7 @@ private fun <V : Any> append(
         nextKey = nextKey())
 
 private fun <V : Any> prepend(
-    nextKey : () -> IndexedKey?,
+    nextKey: () -> IndexedKey?,
     loaded: List<V>
 ): PagingSource.LoadResult<IndexedKey, V> =
     PagingSource.LoadResult.Page(
