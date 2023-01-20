@@ -1,39 +1,43 @@
-package com.treefrogapps.androidx.compose
+package com.treefrogapps.androidx.compose.paging
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.lazy.LazyItemScope
-import androidx.compose.foundation.lazy.LazyListState
-import androidx.compose.foundation.lazy.LazyRow
-import androidx.compose.foundation.lazy.rememberLazyListState
+import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.LazyGridItemScope
+import androidx.compose.foundation.lazy.grid.LazyGridState
+import androidx.compose.foundation.lazy.grid.LazyHorizontalGrid
+import androidx.compose.foundation.lazy.grid.rememberLazyGridState
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.paging.compose.LazyPagingItems
 
 @Composable
-fun <T : Any> LazyPagingRow(
+fun <T : Any> LazyPagingHorizontalGrid(
     modifier: Modifier = Modifier,
-    state: LazyListState = rememberLazyListState(),
+    rows: GridCells,
+    state: LazyGridState = rememberLazyGridState(),
     lazyPagingItems: LazyPagingItems<T>,
     key: ((T) -> Any)? = null,
     refreshLoadingContent: @Composable () -> Unit = {},
     refreshErrorContent: @Composable () -> Unit = {},
-    prependLoadingContent: @Composable LazyItemScope.() -> Unit = {},
-    prependErrorContent: @Composable LazyItemScope.() -> Unit = {},
-    appendLoadingContent: @Composable LazyItemScope.() -> Unit = {},
-    appendErrorContent: @Composable LazyItemScope.() -> Unit = {},
-    loadedItemPlaceholderContent: @Composable LazyItemScope.() -> Unit = {},
-    loadedItemContent: @Composable LazyItemScope.(T) -> Unit
+    prependLoadingContent: @Composable LazyGridItemScope.() -> Unit = {},
+    prependErrorContent: @Composable LazyGridItemScope.() -> Unit = {},
+    appendLoadingContent: @Composable LazyGridItemScope.() -> Unit = {},
+    appendErrorContent: @Composable LazyGridItemScope.() -> Unit = {},
+    loadedItemPlaceholderContent: @Composable LazyGridItemScope.() -> Unit = {},
+    loadedItemContent: @Composable LazyGridItemScope.(T) -> Unit
 ) {
 
     Box(
         modifier = modifier.fillMaxSize(),
         contentAlignment = Alignment.Center
     ) {
-        LazyRow(
+
+        LazyHorizontalGrid(
+            modifier = modifier.fillMaxSize(),
             state = state,
-            modifier = modifier.fillMaxSize()
+            rows = rows
         ) {
             pagingPrependLoadStateContent(
                 lazyPagingItems = lazyPagingItems,
@@ -59,3 +63,4 @@ fun <T : Any> LazyPagingRow(
     }
 
 }
+

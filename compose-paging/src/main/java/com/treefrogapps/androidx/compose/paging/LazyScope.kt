@@ -1,4 +1,4 @@
-package com.treefrogapps.androidx.compose
+package com.treefrogapps.androidx.compose.paging
 
 import android.annotation.SuppressLint
 import android.os.Parcel

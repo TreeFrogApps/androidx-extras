@@ -1,4 +1,4 @@
-package com.treefrogapps.androidx.compose
+package com.treefrogapps.androidx.compose.paging
 
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.lazy.LazyItemScope

@@ -1,39 +1,45 @@
-package com.treefrogapps.androidx.compose
+package com.treefrogapps.androidx.compose.paging
 
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.LazyItemScope
-import androidx.compose.foundation.lazy.LazyListState
-import androidx.compose.foundation.lazy.rememberLazyListState
+import androidx.compose.foundation.lazy.staggeredgrid.LazyStaggeredGridItemScope
+import androidx.compose.foundation.lazy.staggeredgrid.LazyStaggeredGridState
+import androidx.compose.foundation.lazy.staggeredgrid.LazyVerticalStaggeredGrid
+import androidx.compose.foundation.lazy.staggeredgrid.StaggeredGridCells
+import androidx.compose.foundation.lazy.staggeredgrid.rememberLazyStaggeredGridState
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.paging.compose.LazyPagingItems
 
+@OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun <T : Any> LazyPagingColumn(
+fun <T : Any> LazyPagingVerticalStaggeredGrid(
     modifier: Modifier = Modifier,
-    state: LazyListState = rememberLazyListState(),
+    columns: StaggeredGridCells,
+    state: LazyStaggeredGridState = rememberLazyStaggeredGridState(),
     lazyPagingItems: LazyPagingItems<T>,
     key: ((T) -> Any)? = null,
     refreshLoadingContent: @Composable () -> Unit = {},
     refreshErrorContent: @Composable () -> Unit = {},
-    prependLoadingContent: @Composable LazyItemScope.() -> Unit = {},
-    prependErrorContent: @Composable LazyItemScope.() -> Unit = {},
-    appendLoadingContent: @Composable LazyItemScope.() -> Unit = {},
-    appendErrorContent: @Composable LazyItemScope.() -> Unit = {},
-    loadedItemPlaceholderContent: @Composable LazyItemScope.() -> Unit = {},
-    loadedItemContent: @Composable LazyItemScope.(T) -> Unit
+    prependLoadingContent: @Composable LazyStaggeredGridItemScope.() -> Unit = {},
+    prependErrorContent: @Composable LazyStaggeredGridItemScope.() -> Unit = {},
+    appendLoadingContent: @Composable LazyStaggeredGridItemScope.() -> Unit = {},
+    appendErrorContent: @Composable LazyStaggeredGridItemScope.() -> Unit = {},
+    loadedItemPlaceholderContent: @Composable LazyStaggeredGridItemScope.() -> Unit = {},
+    loadedItemContent: @Composable LazyStaggeredGridItemScope.(T) -> Unit
 ) {
 
     Box(
         modifier = modifier.fillMaxSize(),
         contentAlignment = Alignment.Center
     ) {
-        LazyColumn(
+
+        LazyVerticalStaggeredGrid(
+            modifier = modifier.fillMaxSize(),
             state = state,
-            modifier = modifier.fillMaxSize()
+            columns = columns
         ) {
             pagingPrependLoadStateContent(
                 lazyPagingItems = lazyPagingItems,
@@ -59,3 +65,4 @@ fun <T : Any> LazyPagingColumn(
     }
 
 }
+

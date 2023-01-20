@@ -1,6 +1,6 @@
 plugins {
-    kotlin("android")
     id("com.android.application")
+    kotlin("android")
 }
 
 android {
@@ -70,6 +70,7 @@ dependencies {
     implementation(libs.androidx.compose.foundation)
     implementation(libs.androidx.compose.material)
     implementation(libs.androidx.window)
+    implementation("androidx.core:core-ktx:+")
 
     debugImplementation(libs.androidx.compose.ui.tooling)
 }

@@ -1,11 +1,11 @@
-package com.treefrogapps.androidx.compose
+package com.treefrogapps.androidx.compose.paging
 
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.lazy.staggeredgrid.LazyHorizontalStaggeredGrid
 import androidx.compose.foundation.lazy.staggeredgrid.LazyStaggeredGridItemScope
 import androidx.compose.foundation.lazy.staggeredgrid.LazyStaggeredGridState
-import androidx.compose.foundation.lazy.staggeredgrid.LazyVerticalStaggeredGrid
 import androidx.compose.foundation.lazy.staggeredgrid.StaggeredGridCells
 import androidx.compose.foundation.lazy.staggeredgrid.rememberLazyStaggeredGridState
 import androidx.compose.runtime.Composable
@@ -15,9 +15,9 @@ import androidx.paging.compose.LazyPagingItems
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun <T : Any> LazyPagingVerticalStaggeredGrid(
+fun <T : Any> LazyPagingHorizontalStaggeredGrid(
     modifier: Modifier = Modifier,
-    columns: StaggeredGridCells,
+    rows: StaggeredGridCells,
     state: LazyStaggeredGridState = rememberLazyStaggeredGridState(),
     lazyPagingItems: LazyPagingItems<T>,
     key: ((T) -> Any)? = null,
@@ -36,10 +36,10 @@ fun <T : Any> LazyPagingVerticalStaggeredGrid(
         contentAlignment = Alignment.Center
     ) {
 
-        LazyVerticalStaggeredGrid(
+        LazyHorizontalStaggeredGrid(
             modifier = modifier.fillMaxSize(),
             state = state,
-            columns = columns
+            rows = rows
         ) {
             pagingPrependLoadStateContent(
                 lazyPagingItems = lazyPagingItems,
