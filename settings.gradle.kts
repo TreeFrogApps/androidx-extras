@@ -6,6 +6,7 @@ include(":compose-navigation")
 include(":compose-pager")
 include(":compose-paging")
 include(":compose-runtime")
+include(":compose-ui")
 include(":kwork")
 include(":paging")
 
