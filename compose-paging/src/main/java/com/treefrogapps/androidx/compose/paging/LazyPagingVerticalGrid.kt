@@ -1,6 +1,10 @@
 package com.treefrogapps.androidx.compose.paging
 
+import androidx.compose.foundation.gestures.FlingBehavior
+import androidx.compose.foundation.gestures.ScrollableDefaults
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyGridItemScope
@@ -10,6 +14,7 @@ import androidx.compose.foundation.lazy.grid.rememberLazyGridState
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
 import androidx.paging.compose.LazyPagingItems
 
 @Composable
@@ -19,6 +24,13 @@ fun <T : Any> LazyPagingVerticalGrid(
     state: LazyGridState = rememberLazyGridState(),
     lazyPagingItems: LazyPagingItems<T>,
     key: ((T) -> Any)? = null,
+    contentPadding: PaddingValues = PaddingValues(0.dp),
+    reverseLayout: Boolean = false,
+    verticalArrangement: Arrangement.Vertical =
+        if (!reverseLayout) Arrangement.Top else Arrangement.Bottom,
+    horizontalArrangement: Arrangement.Horizontal = Arrangement.Start,
+    flingBehavior: FlingBehavior = ScrollableDefaults.flingBehavior(),
+    userScrollEnabled: Boolean = true,
     refreshLoadingContent: @Composable () -> Unit = {},
     refreshErrorContent: @Composable () -> Unit = {},
     prependLoadingContent: @Composable LazyGridItemScope.() -> Unit = {},
@@ -37,7 +49,13 @@ fun <T : Any> LazyPagingVerticalGrid(
         LazyVerticalGrid(
             modifier = modifier.fillMaxSize(),
             state = state,
-            columns = columns
+            columns = columns,
+            contentPadding = contentPadding,
+            reverseLayout = reverseLayout,
+            horizontalArrangement = horizontalArrangement,
+            verticalArrangement = verticalArrangement,
+            flingBehavior = flingBehavior,
+            userScrollEnabled = userScrollEnabled
         ) {
             pagingPrependLoadStateContent(
                 lazyPagingItems = lazyPagingItems,
