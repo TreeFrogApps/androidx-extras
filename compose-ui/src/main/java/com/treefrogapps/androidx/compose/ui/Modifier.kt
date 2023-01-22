@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.lazy.LazyListState
+import androidx.compose.foundation.lazy.grid.LazyGridState
 import androidx.compose.foundation.relocation.BringIntoViewRequester
 import androidx.compose.foundation.relocation.bringIntoViewRequester
 import androidx.compose.runtime.derivedStateOf
@@ -74,14 +75,45 @@ fun Modifier.bringIntoViewWhenFocused(): Modifier = composed {
         .bringIntoViewRequester(bringIntoViewRequester))
 }
 
-fun Modifier.verticalScrollbar(
+fun Modifier.verticalListScrollbar(
     state: LazyListState,
     width: Dp = 8.dp,
     color: Color = Color.LightGray,
     xOffset: Dp = 8.dp
-): Modifier = composed {
-    val targetAlpha by remember { derivedStateOf { if (state.isScrollInProgress) 1f else 0f } }
-    val duration by remember { derivedStateOf { if (state.isScrollInProgress) 150 else 500 } }
+): Modifier = verticalScrollBar(
+    width = width,
+    color = color,
+    xOffset = xOffset,
+    isScrollInProgress = state.isScrollInProgress,
+    firstVisibleItemIndex = state.firstVisibleItemIndex,
+    totalItemsCount = state.layoutInfo.totalItemsCount,
+    visibleItemsSize = state.layoutInfo.visibleItemsInfo.size)
+
+fun Modifier.verticalGridScrollbar(
+    state: LazyGridState,
+    width: Dp = 8.dp,
+    color: Color = Color.LightGray,
+    xOffset: Dp = 8.dp
+): Modifier = verticalScrollBar(
+    width = width,
+    color = color,
+    xOffset = xOffset,
+    isScrollInProgress = state.isScrollInProgress,
+    firstVisibleItemIndex = state.firstVisibleItemIndex,
+    totalItemsCount = state.layoutInfo.totalItemsCount,
+    visibleItemsSize = state.layoutInfo.visibleItemsInfo.size)
+
+private fun Modifier.verticalScrollBar(
+    width: Dp,
+    color: Color,
+    xOffset: Dp,
+    isScrollInProgress: Boolean,
+    firstVisibleItemIndex: Int,
+    totalItemsCount: Int,
+    visibleItemsSize: Int
+) = composed {
+    val targetAlpha by remember { derivedStateOf { if (isScrollInProgress) 1f else 0f } }
+    val duration by remember { derivedStateOf { if (isScrollInProgress) 150 else 500 } }
     val alpha by animateFloatAsState(
         targetValue = targetAlpha,
         animationSpec = tween(durationMillis = duration))
@@ -89,12 +121,12 @@ fun Modifier.verticalScrollbar(
     then(drawWithContent {
         drawContent()
 
-        val firstVisibleIndex: Int by derivedStateOf { state.firstVisibleItemIndex }
-        val needDrawScrollbar by derivedStateOf { state.isScrollInProgress || alpha > 0.0f }
+        val firstVisibleIndex: Int by derivedStateOf { firstVisibleItemIndex }
+        val needDrawScrollbar by derivedStateOf { isScrollInProgress || alpha > 0.0f }
         if (needDrawScrollbar) {
-            val elementHeight = size.height / state.layoutInfo.totalItemsCount
+            val elementHeight = size.height / totalItemsCount
             val scrollbarOffsetY = (firstVisibleIndex * elementHeight)
-            val scrollbarHeight = state.layoutInfo.visibleItemsInfo.size * elementHeight
+            val scrollbarHeight = visibleItemsSize * elementHeight
             drawRoundRect(
                 color = color,
                 topLeft = Offset(x = size.width + xOffset.toPx(), y = scrollbarOffsetY),
