@@ -68,7 +68,9 @@ abstract class NavigationDestinationWithArgument<NavArg>(
 
     override fun navigateTo(navArg: NavArg, controller: NavHostController) {
         argumentStore[route] = navArg
-        controller.navigate(route)
+        controller.navigate(route) {
+            launchSingleTop
+        }
     }
 
     override fun navigateToPoppingBackStack(navArg: NavArg, controller: NavHostController) {
@@ -89,7 +91,14 @@ private fun navigatePoppingBackStack(
 ) {
     val currRoute = navController.currentDestination?.route
     navController.navigate(destinationRoute) {
-        currRoute?.run { popUpTo(this) { inclusive = true } }
+        currRoute?.run {
+            popUpTo(this) {
+                inclusive = true
+                saveState = true
+            }
+            launchSingleTop = true
+            restoreState = true
+        }
     }
 }
 
