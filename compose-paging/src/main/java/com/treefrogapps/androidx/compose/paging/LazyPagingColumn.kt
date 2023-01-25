@@ -3,7 +3,6 @@ package com.treefrogapps.androidx.compose.paging
 import androidx.compose.foundation.gestures.FlingBehavior
 import androidx.compose.foundation.gestures.ScrollableDefaults
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.lazy.LazyColumn
@@ -38,42 +37,35 @@ fun <T : Any> LazyPagingColumn(
     loadedItemPlaceholderContent: @Composable LazyItemScope.() -> Unit = {},
     loadedItemContent: @Composable LazyItemScope.(T) -> Unit
 ) {
-
-    Box(
-        modifier = modifier.fillMaxSize(),
-        contentAlignment = Alignment.Center
+    LazyColumn(
+        state = state,
+        modifier = modifier,
+        contentPadding = contentPadding,
+        reverseLayout = reverseLayout,
+        horizontalAlignment = horizontalAlignment,
+        verticalArrangement = verticalArrangement,
+        flingBehavior = flingBehavior,
+        userScrollEnabled = userScrollEnabled
     ) {
-        LazyColumn(
-            state = state,
-            modifier = modifier.fillMaxSize(),
-            contentPadding = contentPadding,
-            reverseLayout = reverseLayout,
-            horizontalAlignment = horizontalAlignment,
-            verticalArrangement = verticalArrangement,
-            flingBehavior = flingBehavior,
-            userScrollEnabled = userScrollEnabled
-        ) {
-            pagingPrependLoadStateContent(
-                lazyPagingItems = lazyPagingItems,
-                prependLoadingContent = prependLoadingContent,
-                prependErrorContent = prependErrorContent)
-
-            pagingItemsContent(
-                lazyPagingItems = lazyPagingItems,
-                key = key,
-                loadedItemContent = loadedItemContent,
-                loadedItemPlaceholderContent = loadedItemPlaceholderContent)
-
-            pagingAppendLoadStateContent(
-                lazyPagingItems = lazyPagingItems,
-                appendLoadingContent = appendLoadingContent,
-                appendErrorContent = appendErrorContent)
-        }
-
-        PagingRefreshLoadStateContent(
+        pagingPrependLoadStateContent(
             lazyPagingItems = lazyPagingItems,
-            loadingContent = refreshLoadingContent,
-            loadingErrorContent = refreshErrorContent)
+            prependLoadingContent = prependLoadingContent,
+            prependErrorContent = prependErrorContent)
+
+        pagingItemsContent(
+            lazyPagingItems = lazyPagingItems,
+            key = key,
+            loadedItemContent = loadedItemContent,
+            loadedItemPlaceholderContent = loadedItemPlaceholderContent)
+
+        pagingAppendLoadStateContent(
+            lazyPagingItems = lazyPagingItems,
+            appendLoadingContent = appendLoadingContent,
+            appendErrorContent = appendErrorContent)
     }
 
+    PagingRefreshLoadStateContent(
+        lazyPagingItems = lazyPagingItems,
+        loadingContent = refreshLoadingContent,
+        loadingErrorContent = refreshErrorContent)
 }
