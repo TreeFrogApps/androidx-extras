@@ -59,8 +59,6 @@ dependencies {
     implementation(libs.kotlinx.coroutines.core)
     implementation(libs.kotlin.stdlib)
     implementation(libs.kotlin.stdlib.common)
-    implementation(libs.kotlin.stdlib.jdk7)
-    implementation(libs.kotlin.stdlib.jdk8)
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.ktx)

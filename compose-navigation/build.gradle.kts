@@ -80,8 +80,6 @@ dependencies {
     implementation(libs.kotlinx.coroutines.core)
     implementation(libs.kotlin.stdlib)
     implementation(libs.kotlin.stdlib.common)
-    implementation(libs.kotlin.stdlib.jdk7)
-    implementation(libs.kotlin.stdlib.jdk8)
 
     implementation(libs.androidx.compose.ui)
     implementation(libs.androidx.compose.ui.tooling.preview)

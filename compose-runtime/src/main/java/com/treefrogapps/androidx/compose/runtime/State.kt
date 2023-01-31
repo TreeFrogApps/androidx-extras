@@ -1,9 +1,18 @@
 package com.treefrogapps.androidx.compose.runtime
 
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.SnapshotMutationPolicy
+import androidx.compose.runtime.State
+import androidx.compose.runtime.derivedStateOf
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.Saver
-import androidx.compose.runtime.saveable.SaverScope
 import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.snapshotFlow
+import androidx.compose.runtime.structuralEqualityPolicy
+import com.treefrogapps.androidx.compose.saveable.mutableStateSaver
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
@@ -128,9 +137,3 @@ fun <T> MutableState<T>.set(t: T) {
 fun MutableState<Boolean>.toggle() {
     value = !value
 }
-
-fun <T : Any> mutableStateSaver(): Saver<MutableState<T>, T> =
-    object : Saver<MutableState<T>, T> {
-        override fun restore(value: T): MutableState<T> = mutableStateOf(value)
-        override fun SaverScope.save(value: MutableState<T>): T = value.value
-    }
