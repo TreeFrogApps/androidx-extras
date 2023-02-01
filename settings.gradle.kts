@@ -1,6 +1,8 @@
 rootProject.name = "androidx-extras"
 
 include(":app")
+include(":activity")
+include(":compose-activity")
 include(":compose-material")
 include(":compose-navigation")
 include(":compose-pager")
@@ -38,6 +40,7 @@ dependencyResolutionManagement {
             library("kotlin-stdlib", "org.jetbrains.kotlin", "kotlin-stdlib").versionRef("kotlin")
             library("kotlin-stdlib-common", "org.jetbrains.kotlin", "kotlin-stdlib-common").versionRef("kotlin")
 
+            library("androidx-activity-ktx", "androidx.activity:activity-ktx:1.6.1")
             library("androidx-core-ktx", "androidx.core:core-ktx:1.9.0")
             library("androidx-lifecycle-ktx", "androidx.lifecycle:lifecycle-runtime-ktx:2.5.1")
             library("androidx-workmanager-ktx", "androidx.work:work-runtime-ktx:2.7.1")
