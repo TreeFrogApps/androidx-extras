@@ -4,7 +4,7 @@ Collection of Androidx Jetpack Extension Libraries
 
 ## Applications
 
-- `app` : Example Application testing each library features
+- `sample-app` : Sample Application testing some library features
 
 
 #### Libraries

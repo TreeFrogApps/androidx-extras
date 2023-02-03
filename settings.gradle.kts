@@ -1,6 +1,6 @@
 rootProject.name = "androidx-extras"
 
-include(":app")
+include(":sample-app")
 include(":activity")
 include(":compose-activity")
 include(":compose-material")
