@@ -97,7 +97,7 @@ fun TextInputField(
 }
 
 @Composable
-fun OutlineTextInputField(
+fun OutlinedTextInputField(
     modifier: Modifier = Modifier,
     text: String,
     onTextChanged: (String) -> Unit,
