@@ -60,7 +60,8 @@ fun TextInputField(
     labelText: String = "",
     enabled: Boolean = true,
     singleLine: Boolean = true,
-    maxLines: Int = 1
+    maxLines: Int = 1,
+    colors: TextFieldColors = TextFieldDefaults.textFieldColors()
 ) {
 
     val hasError = remember(text) { error != null }
@@ -90,7 +91,9 @@ fun TextInputField(
                         imageVector = Icons.Filled.Warning,
                         contentDescription = errorContentDescription,
                         tint = MaterialTheme.colors.error)
-                } else { trailingIcon?.invoke() }
+                } else {
+                    trailingIcon?.invoke()
+                }
             },
             singleLine = singleLine,
             maxLines = maxLines,
@@ -99,7 +102,8 @@ fun TextInputField(
             keyboardActions = keyboardActions,
             visualTransformation = visualTransformation,
             interactionSource = interactionSource,
-            shape = shape)
+            shape = shape,
+            colors = colors)
         ErrorText(
             error = error,
             hasError = hasError)
@@ -127,7 +131,8 @@ fun OutlinedTextInputField(
     labelText: String = "",
     enabled: Boolean = true,
     singleLine: Boolean = true,
-    maxLines: Int = 1
+    maxLines: Int = 1,
+    colors: TextFieldColors = TextFieldDefaults.outlinedTextFieldColors()
 ) {
 
     Column(
@@ -155,7 +160,9 @@ fun OutlinedTextInputField(
                         imageVector = Icons.Filled.Warning,
                         contentDescription = errorContentDescription,
                         tint = MaterialTheme.colors.error)
-                } else { trailingIcon?.invoke() }
+                } else {
+                    trailingIcon?.invoke()
+                }
             },
             singleLine = singleLine,
             maxLines = maxLines,
@@ -164,7 +171,8 @@ fun OutlinedTextInputField(
             keyboardActions = keyboardActions,
             visualTransformation = visualTransformation,
             interactionSource = interactionSource,
-            shape = shape)
+            shape = shape,
+            colors = colors)
         ErrorText(
             error = error,
             hasError = hasError)
@@ -188,7 +196,8 @@ fun OutlinedPasswordTextInputField(
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
     shape: Shape = MaterialTheme.shapes.small,
     labelText: String = "",
-    enabled: Boolean = true
+    enabled: Boolean = true,
+    colors: TextFieldColors = TextFieldDefaults.outlinedTextFieldColors()
 ) {
     var passwordVisible by rememberSaveable { mutableStateOf(false) }
 
@@ -226,7 +235,8 @@ fun OutlinedPasswordTextInputField(
             keyboardOptions = keyboardOptions,
             keyboardActions = keyboardActions,
             shape = shape,
-            interactionSource = interactionSource)
+            interactionSource = interactionSource,
+            colors = colors)
         ErrorText(
             error = error,
             hasError = hasError)
@@ -250,6 +260,7 @@ fun PasswordTextInputField(
     shape: Shape = MaterialTheme.shapes.small.copy(bottomEnd = ZeroCornerSize, bottomStart = ZeroCornerSize),
     labelText: String = "",
     enabled: Boolean = true,
+    colors: TextFieldColors = TextFieldDefaults.textFieldColors()
 ) {
     var passwordVisible by rememberSaveable { mutableStateOf(false) }
     val hasError = remember(password) { error != null }
@@ -288,7 +299,8 @@ fun PasswordTextInputField(
             keyboardOptions = keyboardOptions,
             keyboardActions = keyboardActions,
             interactionSource = interactionSource,
-            shape = shape)
+            shape = shape,
+            colors = colors)
         ErrorText(
             error = error,
             hasError = hasError)
