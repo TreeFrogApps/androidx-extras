@@ -2,13 +2,14 @@ package com.treefrogapps.androidx.compose.material
 
 import androidx.compose.animation.*
 import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.relocation.BringIntoViewRequester
 import androidx.compose.foundation.relocation.bringIntoViewRequester
-import androidx.compose.foundation.text.KeyboardActionScope
+import androidx.compose.foundation.shape.ZeroCornerSize
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.*
@@ -26,9 +27,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.composed
 import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.text.style.TextOverflow
@@ -46,10 +47,11 @@ fun TextInputField(
     error: String? = null,
     onErrorCleared: () -> Unit = {},
     errorContentDescription: String? = null,
+    visualTransformation: VisualTransformation = VisualTransformation.None,
     keyboardOptions: KeyboardOptions = KeyboardOptions.Default,
-    keyboardActionOnGo: KeyboardActionScope.() -> Unit = {},
-    keyboardActionOnSend: KeyboardActionScope.() -> Unit = {},
-    keyboardActionOnDone: KeyboardActionScope.() -> Unit = {},
+    keyboardActions: KeyboardActions = KeyboardActions.Default,
+    interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
+    shape: Shape = MaterialTheme.shapes.small.copy(bottomEnd = ZeroCornerSize, bottomStart = ZeroCornerSize),
     labelText: String = "",
     enabled: Boolean = true,
     singleLine: Boolean = true,
@@ -86,10 +88,10 @@ fun TextInputField(
             maxLines = maxLines,
             isError = hasError,
             keyboardOptions = keyboardOptions,
-            keyboardActions = KeyboardActions(
-                onGo = keyboardActionOnGo,
-                onDone = keyboardActionOnDone,
-                onSend = keyboardActionOnSend))
+            keyboardActions = keyboardActions,
+            visualTransformation = visualTransformation,
+            interactionSource = interactionSource,
+            shape = shape)
         ErrorText(
             error = error,
             hasError = hasError)
@@ -105,10 +107,11 @@ fun OutlinedTextInputField(
     hasError: Boolean = false,
     onErrorCleared: () -> Unit = {},
     errorContentDescription: String? = null,
+    visualTransformation: VisualTransformation = VisualTransformation.None,
     keyboardOptions: KeyboardOptions = KeyboardOptions.Default,
-    keyboardActionOnGo: KeyboardActionScope.() -> Unit = {},
-    keyboardActionOnSend: KeyboardActionScope.() -> Unit = {},
-    keyboardActionOnDone: KeyboardActionScope.() -> Unit = {},
+    keyboardActions: KeyboardActions = KeyboardActions.Default,
+    interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
+    shape: Shape = MaterialTheme.shapes.small,
     labelText: String = "",
     enabled: Boolean = true,
     singleLine: Boolean = true,
@@ -143,10 +146,10 @@ fun OutlinedTextInputField(
             maxLines = maxLines,
             isError = hasError,
             keyboardOptions = keyboardOptions,
-            keyboardActions = KeyboardActions(
-                onGo = keyboardActionOnGo,
-                onDone = keyboardActionOnDone,
-                onSend = keyboardActionOnSend))
+            keyboardActions = keyboardActions,
+            visualTransformation = visualTransformation,
+            interactionSource = interactionSource,
+            shape = shape)
         ErrorText(
             error = error,
             hasError = hasError)
@@ -162,10 +165,10 @@ fun OutlinedPasswordTextInputField(
     hasError: Boolean = false,
     onErrorCleared: () -> Unit = {},
     errorContentDescription: String? = null,
-    keyboardOptions: KeyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
-    keyboardActionOnGo: KeyboardActionScope.() -> Unit = {},
-    keyboardActionOnSend: KeyboardActionScope.() -> Unit = {},
-    keyboardActionOnDone: KeyboardActionScope.() -> Unit = {},
+    keyboardOptions: KeyboardOptions = KeyboardOptions.Default,
+    keyboardActions: KeyboardActions = KeyboardActions.Default,
+    interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
+    shape: Shape = MaterialTheme.shapes.small,
     labelText: String = "",
     enabled: Boolean = true
 ) {
@@ -200,10 +203,9 @@ fun OutlinedPasswordTextInputField(
             isError = hasError,
             visualTransformation = if (passwordVisible) VisualTransformation.None else PasswordVisualTransformation(),
             keyboardOptions = keyboardOptions,
-            keyboardActions = KeyboardActions(
-                onGo = keyboardActionOnGo,
-                onDone = keyboardActionOnDone,
-                onSend = keyboardActionOnSend))
+            keyboardActions = keyboardActions,
+            shape = shape,
+            interactionSource = interactionSource)
         ErrorText(
             error = error,
             hasError = hasError)
@@ -218,10 +220,10 @@ fun PasswordTextInputField(
     error: String? = null,
     onErrorCleared: () -> Unit = {},
     errorContentDescription: String? = null,
-    keyboardOptions: KeyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
-    keyboardActionOnGo: KeyboardActionScope.() -> Unit = {},
-    keyboardActionOnSend: KeyboardActionScope.() -> Unit = {},
-    keyboardActionOnDone: KeyboardActionScope.() -> Unit = {},
+    keyboardOptions: KeyboardOptions = KeyboardOptions.Default,
+    keyboardActions: KeyboardActions = KeyboardActions.Default,
+    interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
+    shape: Shape = MaterialTheme.shapes.small.copy(bottomEnd = ZeroCornerSize, bottomStart = ZeroCornerSize),
     labelText: String = "",
     enabled: Boolean = true,
 ) {
@@ -257,10 +259,9 @@ fun PasswordTextInputField(
             isError = hasError,
             visualTransformation = if (passwordVisible) VisualTransformation.None else PasswordVisualTransformation(),
             keyboardOptions = keyboardOptions,
-            keyboardActions = KeyboardActions(
-                onGo = keyboardActionOnGo,
-                onDone = keyboardActionOnDone,
-                onSend = keyboardActionOnSend))
+            keyboardActions = keyboardActions,
+            interactionSource = interactionSource,
+            shape = shape)
         ErrorText(
             error = error,
             hasError = hasError)
@@ -365,5 +366,6 @@ private fun Modifier.bringIntoViewWhenFocused(): Modifier = composed {
     this.then(Modifier
         .onFocusChanged { fs ->
             if (fs.isFocused) coroutineScope.launch { bringIntoViewRequester.bringIntoView() }
-        }.bringIntoViewRequester(bringIntoViewRequester))
+        }
+        .bringIntoViewRequester(bringIntoViewRequester))
 }
