@@ -30,6 +30,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.text.style.TextOverflow
@@ -43,10 +44,14 @@ import kotlinx.coroutines.launch
 fun TextInputField(
     modifier: Modifier = Modifier,
     text: String,
+    textStyle: TextStyle = LocalTextStyle.current,
     onTextChanged: (String) -> Unit,
     error: String? = null,
     onErrorCleared: () -> Unit = {},
     errorContentDescription: String? = null,
+    placeholder: @Composable (() -> Unit)? = null,
+    leadingIcon: @Composable (() -> Unit)? = null,
+    trailingIcon: @Composable (() -> Unit)? = null,
     visualTransformation: VisualTransformation = VisualTransformation.None,
     keyboardOptions: KeyboardOptions = KeyboardOptions.Default,
     keyboardActions: KeyboardActions = KeyboardActions.Default,
@@ -66,6 +71,7 @@ fun TextInputField(
         TextField(
             modifier = modifier,
             value = text,
+            textStyle = textStyle,
             enabled = enabled,
             label = {
                 Text(
@@ -76,13 +82,15 @@ fun TextInputField(
                 onTextChanged(text)
                 onErrorCleared()
             },
-            trailingIcon = {
-                error?.run {
+            leadingIcon = leadingIcon,
+            placeholder = placeholder,
+            trailingIcon = @Composable {
+                if (error != null) {
                     Icon(
                         imageVector = Icons.Filled.Warning,
                         contentDescription = errorContentDescription,
                         tint = MaterialTheme.colors.error)
-                }
+                } else { trailingIcon?.invoke() }
             },
             singleLine = singleLine,
             maxLines = maxLines,
@@ -102,11 +110,15 @@ fun TextInputField(
 fun OutlinedTextInputField(
     modifier: Modifier = Modifier,
     text: String,
+    textStyle: TextStyle = LocalTextStyle.current,
     onTextChanged: (String) -> Unit,
     error: String? = null,
     hasError: Boolean = false,
     onErrorCleared: () -> Unit = {},
     errorContentDescription: String? = null,
+    placeholder: @Composable (() -> Unit)? = null,
+    leadingIcon: @Composable (() -> Unit)? = null,
+    trailingIcon: @Composable (() -> Unit)? = null,
     visualTransformation: VisualTransformation = VisualTransformation.None,
     keyboardOptions: KeyboardOptions = KeyboardOptions.Default,
     keyboardActions: KeyboardActions = KeyboardActions.Default,
@@ -124,6 +136,7 @@ fun OutlinedTextInputField(
         OutlinedTextField(
             modifier = modifier,
             value = text,
+            textStyle = textStyle,
             enabled = enabled,
             label = {
                 Text(
@@ -134,13 +147,15 @@ fun OutlinedTextInputField(
                 onTextChanged(text)
                 onErrorCleared()
             },
+            leadingIcon = leadingIcon,
+            placeholder = placeholder,
             trailingIcon = {
-                error?.run {
+                if (error != null) {
                     Icon(
                         imageVector = Icons.Filled.Warning,
                         contentDescription = errorContentDescription,
                         tint = MaterialTheme.colors.error)
-                }
+                } else { trailingIcon?.invoke() }
             },
             singleLine = singleLine,
             maxLines = maxLines,
@@ -160,11 +175,14 @@ fun OutlinedTextInputField(
 fun OutlinedPasswordTextInputField(
     modifier: Modifier = Modifier,
     password: String,
+    textStyle: TextStyle,
     onTextChanged: (String) -> Unit,
     error: String? = null,
     hasError: Boolean = false,
     onErrorCleared: () -> Unit = {},
     errorContentDescription: String? = null,
+    placeholder: @Composable (() -> Unit)? = null,
+    leadingIcon: @Composable (() -> Unit)? = null,
     keyboardOptions: KeyboardOptions = KeyboardOptions.Default,
     keyboardActions: KeyboardActions = KeyboardActions.Default,
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
@@ -180,6 +198,7 @@ fun OutlinedPasswordTextInputField(
         OutlinedTextField(
             modifier = modifier,
             value = password,
+            textStyle = textStyle,
             enabled = enabled,
             label = {
                 Text(
@@ -190,6 +209,8 @@ fun OutlinedPasswordTextInputField(
                 onTextChanged(text)
                 onErrorCleared()
             },
+            leadingIcon = leadingIcon,
+            placeholder = placeholder,
             trailingIcon = {
                 PasswordFieldTrailingIcon(
                     hasError = hasError,
@@ -216,10 +237,13 @@ fun OutlinedPasswordTextInputField(
 fun PasswordTextInputField(
     modifier: Modifier = Modifier,
     password: String,
+    textStyle: TextStyle,
     onTextChanged: (String) -> Unit,
     error: String? = null,
     onErrorCleared: () -> Unit = {},
     errorContentDescription: String? = null,
+    placeholder: @Composable (() -> Unit)? = null,
+    leadingIcon: @Composable (() -> Unit)? = null,
     keyboardOptions: KeyboardOptions = KeyboardOptions.Default,
     keyboardActions: KeyboardActions = KeyboardActions.Default,
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
@@ -236,6 +260,7 @@ fun PasswordTextInputField(
         TextField(
             modifier = modifier,
             value = password,
+            textStyle = textStyle,
             enabled = enabled,
             label = {
                 Text(
@@ -246,6 +271,8 @@ fun PasswordTextInputField(
                 onTextChanged(text)
                 onErrorCleared()
             },
+            leadingIcon = leadingIcon,
+            placeholder = placeholder,
             trailingIcon = {
                 PasswordFieldTrailingIcon(
                     hasError = hasError,
