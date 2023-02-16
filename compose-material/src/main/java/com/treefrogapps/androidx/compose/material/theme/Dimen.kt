@@ -13,6 +13,9 @@ data class Dimens internal constructor(
     val zero: Dp = 0.dp,
     val hairline: Dp = 0.5.dp,
     val one: Dp = 1.dp,
+    val two: Dp = 2.dp,
+    val three: Dp = 3.dp,
+    val four: Dp = 4.dp,
     val elevation: Elevation = Elevation(),
     val spacing: Spacing = Spacing(),
     val icon: Icon = Icon())
