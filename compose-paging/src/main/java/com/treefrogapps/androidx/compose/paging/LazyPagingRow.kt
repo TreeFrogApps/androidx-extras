@@ -3,6 +3,8 @@ package com.treefrogapps.androidx.compose.paging
 import androidx.compose.foundation.gestures.FlingBehavior
 import androidx.compose.foundation.gestures.ScrollableDefaults
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.BoxScope
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.lazy.LazyItemScope
 import androidx.compose.foundation.lazy.LazyListState
@@ -27,8 +29,9 @@ fun <T : Any> LazyPagingRow(
     verticalAlignment: Alignment.Vertical = Alignment.Top,
     flingBehavior: FlingBehavior = ScrollableDefaults.flingBehavior(),
     userScrollEnabled: Boolean = true,
-    refreshLoadingContent: @Composable () -> Unit = {},
-    refreshErrorContent: @Composable () -> Unit = {},
+    loadedEmptyContent: @Composable BoxScope.() -> Unit = {},
+    refreshLoadingContent: @Composable BoxScope.() -> Unit = {},
+    refreshErrorContent: @Composable BoxScope.() -> Unit = {},
     prependLoadingContent: @Composable LazyItemScope.() -> Unit = {},
     prependErrorContent: @Composable LazyItemScope.() -> Unit = {},
     appendLoadingContent: @Composable LazyItemScope.() -> Unit = {},
@@ -36,35 +39,43 @@ fun <T : Any> LazyPagingRow(
     loadedItemPlaceholderContent: @Composable LazyItemScope.() -> Unit = {},
     loadedItemContent: @Composable LazyItemScope.(T) -> Unit
 ) {
-    LazyRow(
-        state = state,
-        modifier = modifier,
-        contentPadding = contentPadding,
-        reverseLayout = reverseLayout,
-        horizontalArrangement = horizontalArrangement,
-        verticalAlignment = verticalAlignment,
-        flingBehavior = flingBehavior,
-        userScrollEnabled = userScrollEnabled
+    Box(
+        modifier = modifier
     ) {
-        pagingPrependLoadStateContent(
-            lazyPagingItems = lazyPagingItems,
-            prependLoadingContent = prependLoadingContent,
-            prependErrorContent = prependErrorContent)
+        if (lazyPagingItems.isEmpty()) {
+            loadedEmptyContent()
+        } else {
+            LazyRow(
+                state = state,
+                modifier = modifier,
+                contentPadding = contentPadding,
+                reverseLayout = reverseLayout,
+                horizontalArrangement = horizontalArrangement,
+                verticalAlignment = verticalAlignment,
+                flingBehavior = flingBehavior,
+                userScrollEnabled = userScrollEnabled
+            ) {
+                pagingPrependLoadStateContent(
+                    lazyPagingItems = lazyPagingItems,
+                    prependLoadingContent = prependLoadingContent,
+                    prependErrorContent = prependErrorContent)
 
-        pagingItemsContent(
-            lazyPagingItems = lazyPagingItems,
-            key = key,
-            loadedItemContent = loadedItemContent,
-            loadedItemPlaceholderContent = loadedItemPlaceholderContent)
+                pagingItemsContent(
+                    lazyPagingItems = lazyPagingItems,
+                    key = key,
+                    loadedItemContent = loadedItemContent,
+                    loadedItemPlaceholderContent = loadedItemPlaceholderContent)
 
-        pagingAppendLoadStateContent(
-            lazyPagingItems = lazyPagingItems,
-            appendLoadingContent = appendLoadingContent,
-            appendErrorContent = appendErrorContent)
+                pagingAppendLoadStateContent(
+                    lazyPagingItems = lazyPagingItems,
+                    appendLoadingContent = appendLoadingContent,
+                    appendErrorContent = appendErrorContent)
+            }
+
+            PagingRefreshLoadStateContent(
+                lazyPagingItems = lazyPagingItems,
+                loadingContent = refreshLoadingContent,
+                loadingErrorContent = refreshErrorContent)
+        }
     }
-
-    PagingRefreshLoadStateContent(
-        lazyPagingItems = lazyPagingItems,
-        loadingContent = refreshLoadingContent,
-        loadingErrorContent = refreshErrorContent)
 }

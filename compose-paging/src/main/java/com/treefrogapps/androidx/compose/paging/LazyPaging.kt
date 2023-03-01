@@ -1,6 +1,7 @@
 package com.treefrogapps.androidx.compose.paging
 
 import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.foundation.layout.BoxScope
 import androidx.compose.foundation.lazy.LazyItemScope
 import androidx.compose.foundation.lazy.LazyListScope
 import androidx.compose.foundation.lazy.grid.LazyGridItemScope
@@ -13,10 +14,10 @@ import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.items
 
 @Composable
-internal fun <T : Any> PagingRefreshLoadStateContent(
+internal fun <T : Any> BoxScope.PagingRefreshLoadStateContent(
     lazyPagingItems: LazyPagingItems<T>,
-    loadingContent: @Composable () -> Unit,
-    loadingErrorContent: @Composable () -> Unit
+    loadingContent: @Composable BoxScope.() -> Unit,
+    loadingErrorContent: @Composable BoxScope.() -> Unit
 ) {
     when (lazyPagingItems.loadState.refresh) {
         is LoadState.Loading -> loadingContent()
@@ -147,4 +148,11 @@ internal fun <T : Any> LazyStaggeredGridScope.pagingAppendLoadStateContent(
         is LoadState.NotLoading -> {}
     }
 }
+
+internal fun <T : Any> LazyPagingItems<T>.isEmpty() : Boolean =
+    with(loadState) {
+        append.endOfPaginationReached
+            && prepend.endOfPaginationReached
+            && itemCount == 0
+    }
 
