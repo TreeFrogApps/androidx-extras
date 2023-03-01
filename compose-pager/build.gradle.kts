@@ -7,7 +7,7 @@ plugins {
 android {
     namespace = "com.treefrogapps.androidx.compose.pager"
     compileSdk = 33
-    buildToolsVersion = "33.0.0"
+    buildToolsVersion = "33.0.2"
 
     defaultConfig {
         minSdk = 26

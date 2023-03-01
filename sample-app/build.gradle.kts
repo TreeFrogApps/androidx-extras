@@ -5,7 +5,7 @@ plugins {
 
 android {
     compileSdk = 33
-    buildToolsVersion = "33.0.0"
+    buildToolsVersion = "33.0.2"
     namespace = "com.treefrogapps.androidx.extras.example"
 
     defaultConfig {
@@ -68,7 +68,6 @@ dependencies {
     implementation(libs.androidx.compose.foundation)
     implementation(libs.androidx.compose.material)
     implementation(libs.androidx.window)
-    implementation("androidx.core:core-ktx:+")
 
     debugImplementation(libs.androidx.compose.ui.tooling)
 }
