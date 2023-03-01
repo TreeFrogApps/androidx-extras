@@ -9,6 +9,9 @@ import androidx.compose.foundation.lazy.grid.LazyGridScope
 import androidx.compose.foundation.lazy.staggeredgrid.LazyStaggeredGridItemScope
 import androidx.compose.foundation.lazy.staggeredgrid.LazyStaggeredGridScope
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.State
+import androidx.compose.runtime.derivedStateOf
+import androidx.compose.runtime.remember
 import androidx.paging.LoadState
 import androidx.paging.compose.LazyPagingItems
 import androidx.paging.compose.items
@@ -149,10 +152,15 @@ internal fun <T : Any> LazyStaggeredGridScope.pagingAppendLoadStateContent(
     }
 }
 
-internal fun <T : Any> LazyPagingItems<T>.isEmpty() : Boolean =
-    with(loadState) {
-        append.endOfPaginationReached
-            && prepend.endOfPaginationReached
-            && itemCount == 0
+@Composable
+internal fun <T : Any> LazyPagingItems<T>.isEmpty(): Boolean =
+    remember {
+        derivedStateOf {
+            with(loadState) {
+                append.endOfPaginationReached
+                    && prepend.endOfPaginationReached
+                    && itemCount == 0
+            }
+        }.value
     }
 
