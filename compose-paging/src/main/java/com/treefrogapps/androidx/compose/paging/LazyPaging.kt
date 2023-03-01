@@ -1,5 +1,9 @@
 package com.treefrogapps.androidx.compose.paging
 
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.core.tween
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.BoxScope
 import androidx.compose.foundation.lazy.LazyItemScope
@@ -27,6 +31,18 @@ internal fun <T : Any> BoxScope.PagingRefreshLoadStateContent(
         is LoadState.Error   -> loadingErrorContent()
         else                 -> {}
     }
+}
+
+@Composable
+internal fun BoxScope.PagingAnimatedVisibilityEmptyContent(
+    visible : Boolean,
+    content : @Composable BoxScope.() -> Unit
+) {
+    AnimatedVisibility(
+        visible = visible,
+        enter = fadeIn(),
+        exit = fadeOut(animationSpec = tween(durationMillis = 100)),
+        content = { content() })
 }
 
 internal fun <T : Any> LazyListScope.pagingPrependLoadStateContent(
@@ -153,7 +169,7 @@ internal fun <T : Any> LazyStaggeredGridScope.pagingAppendLoadStateContent(
 }
 
 @Composable
-internal fun <T : Any> LazyPagingItems<T>.isEmpty(): Boolean =
+internal fun <T : Any> LazyPagingItems<T>.isEmpty(): State<Boolean> =
     remember {
         derivedStateOf {
             with(loadState) {
@@ -161,6 +177,6 @@ internal fun <T : Any> LazyPagingItems<T>.isEmpty(): Boolean =
                     && prepend.endOfPaginationReached
                     && itemCount == 0
             }
-        }.value
+        }
     }
 

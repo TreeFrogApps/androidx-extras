@@ -1,9 +1,5 @@
 package com.treefrogapps.androidx.compose.paging
 
-import androidx.compose.animation.AnimatedVisibility
-import androidx.compose.animation.core.tween
-import androidx.compose.animation.fadeIn
-import androidx.compose.animation.fadeOut
 import androidx.compose.foundation.gestures.FlingBehavior
 import androidx.compose.foundation.gestures.ScrollableDefaults
 import androidx.compose.foundation.layout.Arrangement
@@ -16,6 +12,7 @@ import androidx.compose.foundation.lazy.grid.LazyGridState
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.rememberLazyGridState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.paging.compose.LazyPagingItems
@@ -47,11 +44,8 @@ fun <T : Any> LazyPagingVerticalGrid(
     Box(
         modifier = modifier
     ) {
-        AnimatedVisibility(
-            visible = lazyPagingItems.isEmpty(),
-            enter = fadeIn(),
-            exit = fadeOut(animationSpec = tween(durationMillis = 100)),
-            content = { loadedEmptyContent() })
+        val emptyVisible by lazyPagingItems.isEmpty()
+
         LazyVerticalGrid(
             modifier = modifier,
             state = state,
@@ -79,6 +73,9 @@ fun <T : Any> LazyPagingVerticalGrid(
                 appendLoadingContent = appendLoadingContent,
                 appendErrorContent = appendErrorContent)
         }
+        PagingAnimatedVisibilityEmptyContent(
+            visible = emptyVisible,
+            content = loadedEmptyContent)
         PagingRefreshLoadStateContent(
             lazyPagingItems = lazyPagingItems,
             loadingContent = refreshLoadingContent,

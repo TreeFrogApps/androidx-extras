@@ -1,9 +1,5 @@
 package com.treefrogapps.androidx.compose.paging
 
-import androidx.compose.animation.AnimatedVisibility
-import androidx.compose.animation.core.tween
-import androidx.compose.animation.fadeIn
-import androidx.compose.animation.fadeOut
 import androidx.compose.foundation.gestures.FlingBehavior
 import androidx.compose.foundation.gestures.ScrollableDefaults
 import androidx.compose.foundation.layout.Arrangement
@@ -15,6 +11,7 @@ import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
@@ -46,11 +43,8 @@ fun <T : Any> LazyPagingRow(
     Box(
         modifier = modifier
     ) {
-        AnimatedVisibility(
-            visible = lazyPagingItems.isEmpty(),
-            enter = fadeIn(),
-            exit = fadeOut(animationSpec = tween(durationMillis = 100)),
-            content = { loadedEmptyContent() })
+        val emptyVisible by lazyPagingItems.isEmpty()
+
         LazyRow(
             state = state,
             modifier = modifier,
@@ -77,6 +71,9 @@ fun <T : Any> LazyPagingRow(
                 appendLoadingContent = appendLoadingContent,
                 appendErrorContent = appendErrorContent)
         }
+        PagingAnimatedVisibilityEmptyContent(
+            visible = emptyVisible,
+            content = loadedEmptyContent)
         PagingRefreshLoadStateContent(
             lazyPagingItems = lazyPagingItems,
             loadingContent = refreshLoadingContent,
