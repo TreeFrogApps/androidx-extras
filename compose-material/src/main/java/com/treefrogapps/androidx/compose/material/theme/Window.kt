@@ -12,35 +12,57 @@ import androidx.compose.ui.unit.DpSize
 import androidx.compose.ui.unit.dp
 import androidx.window.layout.WindowMetrics
 import androidx.window.layout.WindowMetricsCalculator
+import com.treefrogapps.androidx.compose.material.theme.WindowSize.Type.LargeLandscape
+import com.treefrogapps.androidx.compose.material.theme.WindowSize.Type.LargePortrait
+import com.treefrogapps.androidx.compose.material.theme.WindowSize.Type.MediumLandscape
+import com.treefrogapps.androidx.compose.material.theme.WindowSize.Type.MediumPortrait
+import com.treefrogapps.androidx.compose.material.theme.WindowSize.Type.SmallLandscape
+import com.treefrogapps.androidx.compose.material.theme.WindowSize.Type.SmallPortrait
 
 /**
  * Window size class for use in compose for determining the screen bucket size
  */
-enum class WindowSize {
-    SmallPortrait,
-    SmallLandscape,
-    MediumPortrait,
-    MediumLandscape,
-    LargePortrait,
-    LargeLandscape;
+data class WindowSize(
+    val type: Type,
+    val size: DpSize
+) {
+    val name = type.name
+
+    enum class Type {
+        SmallPortrait,
+        SmallLandscape,
+        MediumPortrait,
+        MediumLandscape,
+        LargePortrait,
+        LargeLandscape;
+    }
 
     companion object {
 
         fun WindowSize.isSmall(): Boolean =
-            this === SmallPortrait || this === SmallLandscape
+            type === SmallPortrait || type === SmallLandscape
 
         fun WindowSize.isMedium(): Boolean =
-            this === MediumPortrait || this === MediumLandscape
+            type === MediumPortrait || type === MediumLandscape
 
         fun WindowSize.isLarge(): Boolean =
-            this === LargePortrait || this === LargeLandscape
+            type === LargePortrait || type === LargeLandscape
 
         fun WindowSize.isLandscape(): Boolean =
-            this === SmallLandscape || this === MediumLandscape || this === LargeLandscape
+            type === SmallLandscape || type === MediumLandscape || type === LargeLandscape
     }
 }
 
-internal val LocalWindowSize = staticCompositionLocalOf { WindowSize.SmallPortrait }
+fun windowSizeOf(
+    type: WindowSize.Type = WindowSize.Type.SmallPortrait,
+    dimens: DpSize = DpSize.Unspecified
+): WindowSize = WindowSize(type, dimens)
+
+internal val LocalWindowSize = staticCompositionLocalOf {
+    WindowSize(
+        type = SmallPortrait,
+        size = DpSize.Unspecified)
+}
 
 /**
  * Remembers the [WindowSize] class for the window corresponding to the current window metrics.
@@ -66,15 +88,15 @@ private fun DpSize.toWindowSize(): WindowSize =
     if (width < height) {
         when {
             width < 0.dp    -> throw IllegalArgumentException("Dp value cannot be negative")
-            width <= 460.dp -> WindowSize.SmallPortrait
-            width <= 640.dp -> WindowSize.MediumPortrait
-            else            -> WindowSize.LargePortrait
-        }
+            width <= 460.dp -> SmallPortrait
+            width <= 640.dp -> MediumPortrait
+            else            -> LargePortrait
+        }.let { type -> WindowSize(type = type, size = this) }
     } else {
         when {
             width < 0.dp     -> throw IllegalArgumentException("Dp value cannot be negative")
-            width <= 960.dp  -> WindowSize.SmallLandscape
-            width <= 1024.dp -> WindowSize.MediumLandscape
-            else             -> WindowSize.LargeLandscape
-        }
+            width <= 960.dp  -> SmallLandscape
+            width <= 1024.dp -> MediumLandscape
+            else             -> LargeLandscape
+        }.let { type -> WindowSize(type = type, size = this) }
     }
