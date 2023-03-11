@@ -61,7 +61,9 @@ private fun SwitchPreferencePreview() {
         var checkedA by remember { mutableStateOf(true) }
         var checkedB by remember { mutableStateOf(true) }
         var checkedC by remember { mutableStateOf(false) }
-        Column {
+        PreferenceGroup(
+            title = "Switch Group"
+        ) {
             SwitchPreference(
                 checked = checkedA,
                 onCheckedChange = { checked -> checkedA = checked },
@@ -102,7 +104,9 @@ private fun SwitchPreferenceDarkPreview() {
         var checkedA by remember { mutableStateOf(true) }
         var checkedB by remember { mutableStateOf(true) }
         var checkedC by remember { mutableStateOf(false) }
-        Column {
+        PreferenceGroup(
+            title = "Switch Group"
+        ) {
             SwitchPreference(
                 checked = checkedA,
                 onCheckedChange = { checked -> checkedA = checked },

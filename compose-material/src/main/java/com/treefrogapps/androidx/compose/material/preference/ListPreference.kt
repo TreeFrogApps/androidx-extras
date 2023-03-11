@@ -5,7 +5,6 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.defaultMinSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.Card
-import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -100,7 +99,9 @@ private fun SwitchPreferencePreview() {
         var selectedItemA by remember { mutableStateOf<String?>(null) }
         var selectedItemB by remember { mutableStateOf<String?>("Item one") }
         var selectedItemC by remember { mutableStateOf<String?>("Item three") }
-        Column {
+        PreferenceGroup(
+            title = "List Group"
+        ) {
             ListPreference(
                 title = "List preference field title",
                 icon = painterResource(id = R.drawable.ic_confirmation_badge),
@@ -156,7 +157,9 @@ private fun SwitchPreferenceDarkPreview() {
         var selectedItemA by remember { mutableStateOf<String?>(null) }
         var selectedItemB by remember { mutableStateOf<String?>("Item one") }
         var selectedItemC by remember { mutableStateOf<String?>("Item three") }
-        Column {
+        PreferenceGroup(
+            title = "List Group"
+        ) {
             ListPreference(
                 title = "List preference field title",
                 icon = painterResource(id = R.drawable.ic_confirmation_badge),

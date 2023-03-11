@@ -5,13 +5,13 @@ import android.content.res.Configuration.UI_MODE_NIGHT_YES
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.wrapContentHeight
-import androidx.compose.material.ButtonColors
 import androidx.compose.material.Divider
 import androidx.compose.material.Icon
 import androidx.compose.material.MaterialTheme
@@ -62,51 +62,76 @@ fun CorePreference(
     AnimatedVisibility(
         visible = isVisible
     ) {
-        Surface(
-            color = colors.backgroundColor,
-            contentColor = contentColorFor(backgroundColor = colors.backgroundColor)
+        Column(modifier = Modifier
+            .fillMaxWidth()
+            .wrapContentHeight()
+            .clickable(enabled = enabled, onClick = onClick)
         ) {
-            Column(modifier = Modifier
-                .fillMaxWidth()
-                .wrapContentHeight()
-                .clickable(enabled = enabled, onClick = onClick)
+            Row(
+                modifier = Modifier.padding(all = Theme.dimens.spacing.normal),
+                verticalAlignment = Alignment.CenterVertically,
             ) {
-                Row(
-                    modifier = Modifier.padding(all = Theme.dimens.spacing.normal),
-                    verticalAlignment = Alignment.CenterVertically,
-                ) {
-                    icon?.let { ic ->
-                        Icon(
-                            modifier = Modifier
-                                .size(size = 48.dp)
-                                .padding(end = Theme.dimens.spacing.normal),
-                            painter = ic,
-                            tint = iconColor,
-                            contentDescription = title)
-                    }
-                    Column(
-                        modifier = Modifier.weight(weight = 1.0F)
-                    ) {
-                        Text(
-                            text = title,
-                            overflow = TextOverflow.Ellipsis,
-                            maxLines = 1,
-                            style = Theme.typography.h6,
-                            color = titleColor)
-                        summary?.let {
-                            Text(
-                                modifier = Modifier.padding(top = Theme.dimens.spacing.tiny),
-                                text = summary,
-                                overflow = TextOverflow.Ellipsis,
-                                maxLines = 2,
-                                style = Theme.typography.body1,
-                                color = summaryColor)
-                        }
-                    }
-                    innerContent()
+                icon?.let { ic ->
+                    Icon(
+                        modifier = Modifier
+                            .size(size = 48.dp)
+                            .padding(end = Theme.dimens.spacing.normal),
+                        painter = ic,
+                        tint = iconColor,
+                        contentDescription = title)
                 }
-                Divider(modifier = Modifier.fillMaxWidth())
+                Column(
+                    modifier = Modifier.weight(weight = 1.0F)
+                ) {
+                    Text(
+                        text = title,
+                        overflow = TextOverflow.Ellipsis,
+                        maxLines = 1,
+                        style = Theme.typography.h6,
+                        color = titleColor)
+                    summary?.let {
+                        Text(
+                            modifier = Modifier.padding(top = Theme.dimens.spacing.tiny),
+                            text = summary,
+                            overflow = TextOverflow.Ellipsis,
+                            maxLines = 2,
+                            style = Theme.typography.body1,
+                            color = summaryColor)
+                    }
+                }
+                innerContent()
             }
+        }
+    }
+}
+
+@Composable
+fun PreferenceGroup(
+    title: String,
+    titleColor: Color = Theme.colors.primary,
+    color: Color = MaterialTheme.colors.surface,
+    contentColor: Color = contentColorFor(color),
+    groupContent: @Composable ColumnScope.() -> Unit
+) {
+    Surface(
+        color = color,
+        contentColor = contentColor
+    ) {
+        Column(
+            modifier = Modifier.fillMaxWidth()
+        ) {
+            Text(
+                modifier = Modifier.padding(
+                    top = Theme.dimens.spacing.normal,
+                    start = Theme.dimens.spacing.normal,
+                    end = Theme.dimens.spacing.normal),
+                text = title,
+                color = titleColor,
+                style = Theme.typography.body2,
+                overflow = TextOverflow.Ellipsis,
+                maxLines = 1)
+            groupContent()
+            Divider(modifier = Modifier.fillMaxWidth())
         }
     }
 }
@@ -115,14 +140,12 @@ object PreferenceDefaults {
 
     @Composable
     fun preferenceColors(
-        backgroundColor: Color = MaterialTheme.colors.surface,
         titleColor: Color = MaterialThemeExtended.extendedTypographyColors.primary,
         summaryColor: Color = MaterialThemeExtended.extendedTypographyColors.secondaryVariant,
-        iconColor: Color = MaterialThemeExtended.colors.secondary,
+        iconColor: Color = MaterialThemeExtended.colors.primary,
         disabledColor: Color = MaterialTheme.colors.onSurface.copy(alpha = 0.12f)
             .compositeOver(MaterialTheme.colors.surface)
     ): PreferenceColors = DefaultPreferenceColors(
-        backgroundColor = backgroundColor,
         titleColor = titleColor,
         summaryColor = summaryColor,
         iconColor = iconColor,
@@ -131,8 +154,6 @@ object PreferenceDefaults {
 
 @Stable
 interface PreferenceColors {
-
-    val backgroundColor: Color
 
     @Composable
     fun titleColor(enabled: Boolean): State<Color>
@@ -145,11 +166,10 @@ interface PreferenceColors {
 }
 
 /**
- * Default [ButtonColors] implementation.
+ * Default [PreferenceColors] implementation.
  */
 @Immutable
 private class DefaultPreferenceColors(
-    override val backgroundColor: Color,
     private val titleColor: Color,
     private val summaryColor: Color,
     private val iconColor: Color,
@@ -174,7 +194,6 @@ private class DefaultPreferenceColors(
 
         other as DefaultPreferenceColors
 
-        if (backgroundColor != other.backgroundColor) return false
         if (titleColor != other.titleColor) return false
         if (summaryColor != other.summaryColor) return false
         if (iconColor != other.iconColor) return false
@@ -184,8 +203,7 @@ private class DefaultPreferenceColors(
     }
 
     override fun hashCode(): Int {
-        var result = backgroundColor.hashCode()
-        result = 31 * result + titleColor.hashCode()
+        var result = titleColor.hashCode()
         result = 31 * result + summaryColor.hashCode()
         result = 31 * result + iconColor.hashCode()
         result = 31 * result + disabledColor.hashCode()
@@ -261,6 +279,74 @@ private fun CorePreferenceDarkPreview() {
                 enabled = false,
                 icon = painterResource(id = R.drawable.ic_confirmation_badge)
             ) {
+            }
+        }
+        LaunchedEffect(key1 = Unit) {
+            while (true) {
+                delay(timeMillis = 3_000)
+                isVisible = !isVisible
+            }
+        }
+    }
+}
+
+@Preview(
+    showBackground = true,
+    uiMode = UI_MODE_NIGHT_NO)
+@Composable
+private fun PreferenceGroupPreview() {
+    MaterialThemeExtended(windowSize = windowSizeOf()) {
+        var isVisible by remember { mutableStateOf(true) }
+        Column {
+            PreferenceGroup(
+                title = "Preference Group A"
+            ) {
+                CorePreference(
+                    title = "Core preference field title",
+                    summary = "Core preference field summary",
+                    icon = painterResource(id = R.drawable.ic_confirmation_badge)
+                ) {
+                }
+                CorePreference(
+                    title = "Core preference field title",
+                    summary = "Core preference field summary",
+                    enabled = false,
+                    icon = painterResource(id = R.drawable.ic_confirmation_badge)
+                ) {
+                }
+                CorePreference(
+                    title = "Core preference field title",
+                    summary = "Core preference field summary",
+                    isVisible = isVisible,
+                    enabled = false,
+                    icon = painterResource(id = R.drawable.ic_confirmation_badge)
+                ) {
+                }
+            }
+            PreferenceGroup(
+                title = "Preference Group B"
+            ) {
+                CorePreference(
+                    title = "Core preference field title",
+                    summary = "Core preference field summary",
+                    icon = painterResource(id = R.drawable.ic_confirmation_badge)
+                ) {
+                }
+                CorePreference(
+                    title = "Core preference field title",
+                    summary = "Core preference field summary",
+                    enabled = false,
+                    icon = painterResource(id = R.drawable.ic_confirmation_badge)
+                ) {
+                }
+                CorePreference(
+                    title = "Core preference field title",
+                    summary = "Core preference field summary",
+                    isVisible = isVisible,
+                    enabled = false,
+                    icon = painterResource(id = R.drawable.ic_confirmation_badge)
+                ) {
+                }
             }
         }
         LaunchedEffect(key1 = Unit) {

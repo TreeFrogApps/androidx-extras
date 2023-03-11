@@ -2,7 +2,6 @@ package com.treefrogapps.androidx.compose.material.preference
 
 import android.content.res.Configuration
 import androidx.compose.foundation.interaction.MutableInteractionSource
-import androidx.compose.foundation.layout.Column
 import androidx.compose.material.Checkbox
 import androidx.compose.material.CheckboxColors
 import androidx.compose.material.CheckboxDefaults
@@ -61,7 +60,9 @@ private fun SwitchPreferencePreview() {
         var checkedA by remember { mutableStateOf(true) }
         var checkedB by remember { mutableStateOf(true) }
         var checkedC by remember { mutableStateOf(false) }
-        Column {
+        PreferenceGroup(
+            title = "Checkbox Group"
+        ) {
             CheckboxPreference(
                 checked = checkedA,
                 onCheckedChange = { checked -> checkedA = checked },
@@ -102,7 +103,9 @@ private fun SwitchPreferenceDarkPreview() {
         var checkedA by remember { mutableStateOf(true) }
         var checkedB by remember { mutableStateOf(true) }
         var checkedC by remember { mutableStateOf(false) }
-        Column {
+        PreferenceGroup(
+            title = "Checkbox Group"
+        ) {
             CheckboxPreference(
                 checked = checkedA,
                 onCheckedChange = { checked -> checkedA = checked },
