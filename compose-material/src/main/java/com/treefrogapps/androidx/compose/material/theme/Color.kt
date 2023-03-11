@@ -27,4 +27,4 @@ object ExtendedColors {
     val WhiteTint60 = Color(color = 0x99FFFFFF)
 }
 
-fun provideDefaultColors(darkMode: Boolean): Colors = if (darkMode) lightColors() else darkColors()
+fun provideDefaultColors(darkMode: Boolean): Colors = if (darkMode) darkColors() else lightColors()
