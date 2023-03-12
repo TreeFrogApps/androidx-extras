@@ -53,6 +53,7 @@ import kotlinx.coroutines.delay
 fun CorePreference(
     title: String,
     summary: String? = null,
+    information : String? = null,
     icon: Painter? = null,
     isVisible: Boolean = true,
     enabled: Boolean = true,
@@ -101,14 +102,23 @@ fun CorePreference(
                         maxLines = 1,
                         style = Theme.typography.h6,
                         color = titleColor)
-                    summary?.let {
+                    summary?.run {
                         Text(
                             modifier = Modifier.padding(top = Theme.dimens.spacing.tiny),
-                            text = summary,
+                            text = this,
                             overflow = TextOverflow.Ellipsis,
                             maxLines = 2,
                             style = Theme.typography.body1,
                             color = summaryColor)
+                    }
+                    information?.run {
+                        Text(
+                            modifier = Modifier.padding(top = Theme.dimens.spacing.tiny),
+                            text = this,
+                            overflow = TextOverflow.Ellipsis,
+                            maxLines = 1,
+                            style = Theme.typography.body1,
+                            color = iconColor)
                     }
                 }
                 innerContent()

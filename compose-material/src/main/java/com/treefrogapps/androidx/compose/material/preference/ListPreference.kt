@@ -28,10 +28,11 @@ import kotlinx.coroutines.delay
 @Composable
 fun <T : Any> ListPreference(
     title: String,
+    summary : String? = null,
     icon: Painter? = null,
     isVisible: Boolean = true,
     items: List<T>,
-    itemNameProvider: (T) -> String,
+    itemNameProvider: (T) -> String = { it.toString() },
     selectedItem: T?,
     onPreferenceChange: ((T) -> Unit)?,
     enabled: Boolean = true,
@@ -40,7 +41,8 @@ fun <T : Any> ListPreference(
     var isDialogOpen by rememberSaveable { mutableStateOf(value = false) }
     CorePreference(
         title = title,
-        summary = selectedItem?.let(itemNameProvider::invoke),
+        summary = summary,
+        information = selectedItem?.let(itemNameProvider::invoke),
         icon = icon,
         isVisible = isVisible,
         enabled = enabled,
@@ -109,6 +111,7 @@ private fun ListPreferencePreview() {
             ) {
                 ListPreference(
                     title = "List preference field title",
+                    summary = "List preference field summary",
                     icon = painterResource(id = R.drawable.ic_confirmation_badge),
                     itemNameProvider = String::toString,
                     items = listOf(
@@ -120,6 +123,7 @@ private fun ListPreferencePreview() {
                     onPreferenceChange = { selected -> selectedItemA = selected })
                 ListPreference(
                     title = "List preference field title",
+                    summary = "List preference field summary",
                     icon = painterResource(id = R.drawable.ic_confirmation_badge),
                     itemNameProvider = String::toString,
                     items = listOf(
@@ -131,6 +135,7 @@ private fun ListPreferencePreview() {
                     onPreferenceChange = { selected -> selectedItemB = selected })
                 ListPreference(
                     title = "List preference field title",
+                    summary = "List preference field summary",
                     icon = painterResource(id = R.drawable.ic_confirmation_badge),
                     itemNameProvider = String::toString,
                     items = listOf(
@@ -170,6 +175,7 @@ private fun ListPreferenceDarkPreview() {
             ) {
                 ListPreference(
                     title = "List preference field title",
+                    summary = "List preference field summary",
                     icon = painterResource(id = R.drawable.ic_confirmation_badge),
                     itemNameProvider = String::toString,
                     items = listOf(
@@ -181,6 +187,7 @@ private fun ListPreferenceDarkPreview() {
                     onPreferenceChange = { selected -> selectedItemA = selected })
                 ListPreference(
                     title = "List preference field title",
+                    summary = "List preference field summary",
                     icon = painterResource(id = R.drawable.ic_confirmation_badge),
                     itemNameProvider = String::toString,
                     items = listOf(
@@ -192,6 +199,7 @@ private fun ListPreferenceDarkPreview() {
                     onPreferenceChange = { selected -> selectedItemB = selected })
                 ListPreference(
                     title = "List preference field title",
+                    summary = "List preference field summary",
                     icon = painterResource(id = R.drawable.ic_confirmation_badge),
                     itemNameProvider = String::toString,
                     items = listOf(

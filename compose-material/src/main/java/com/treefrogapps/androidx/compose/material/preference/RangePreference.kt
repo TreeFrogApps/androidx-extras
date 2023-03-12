@@ -25,6 +25,7 @@ import kotlinx.coroutines.delay
 @Composable
 fun RangePreference(
     title: String,
+    summary : String? = null,
     icon: Painter? = null,
     isVisible: Boolean = true,
     min: Int,
@@ -39,7 +40,8 @@ fun RangePreference(
 
     CorePreference(
         title = title,
-        summary = current?.toString().orEmpty(),
+        summary = summary,
+        information = current?.toString().orEmpty(),
         icon = icon,
         isVisible = isVisible,
         enabled = enabled,
@@ -74,6 +76,7 @@ private fun RangePreferencePreview() {
             ) {
                 RangePreference(
                     title = "Range preference field title",
+                    summary = "Range preference field summary",
                     icon = painterResource(id = R.drawable.ic_confirmation_badge),
                     min = 0,
                     max = 100,
@@ -82,6 +85,7 @@ private fun RangePreferencePreview() {
                     onPreferenceChange = { selected -> selectedItemA = selected })
                 RangePreference(
                     title = "Range preference field title",
+                    summary = "Range preference field summary",
                     icon = painterResource(id = R.drawable.ic_confirmation_badge),
                     min = 0,
                     max = 100,
@@ -90,6 +94,7 @@ private fun RangePreferencePreview() {
                     onPreferenceChange = { selected -> selectedItemB = selected })
                 RangePreference(
                     title = "Range preference field title",
+                    summary = "Range preference field summary",
                     icon = painterResource(id = R.drawable.ic_confirmation_badge),
                     min = 0,
                     max = 100,
@@ -126,6 +131,7 @@ private fun RangePreferenceDarkPreview() {
             ) {
                 RangePreference(
                     title = "Range preference field title",
+                    summary = "Range preference field summary",
                     icon = painterResource(id = R.drawable.ic_confirmation_badge),
                     min = 0,
                     max = 100,
@@ -134,6 +140,7 @@ private fun RangePreferenceDarkPreview() {
                     onPreferenceChange = { selected -> selectedItemA = selected })
                 RangePreference(
                     title = "Range preference field title",
+                    summary = "Range preference field summary",
                     icon = painterResource(id = R.drawable.ic_confirmation_badge),
                     min = 0,
                     max = 100,
@@ -142,6 +149,7 @@ private fun RangePreferenceDarkPreview() {
                     onPreferenceChange = { selected -> selectedItemB = selected })
                 RangePreference(
                     title = "Range preference field title",
+                    summary = "Range preference field summary",
                     icon = painterResource(id = R.drawable.ic_confirmation_badge),
                     min = 0,
                     max = 100,
