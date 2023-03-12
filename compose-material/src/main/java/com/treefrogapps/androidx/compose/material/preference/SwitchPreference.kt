@@ -2,7 +2,6 @@ package com.treefrogapps.androidx.compose.material.preference
 
 import android.content.res.Configuration
 import androidx.compose.foundation.interaction.MutableInteractionSource
-import androidx.compose.foundation.layout.Column
 import androidx.compose.material.Switch
 import androidx.compose.material.SwitchColors
 import androidx.compose.material.SwitchDefaults
@@ -61,29 +60,32 @@ private fun SwitchPreferencePreview() {
         var checkedA by remember { mutableStateOf(true) }
         var checkedB by remember { mutableStateOf(true) }
         var checkedC by remember { mutableStateOf(false) }
-        PreferenceGroup(
-            title = "Switch Group"
-        ) {
-            SwitchPreference(
-                checked = checkedA,
-                onCheckedChange = { checked -> checkedA = checked },
-                title = "Switch preference field title",
-                summary = "Switch preference field summary",
-                icon = painterResource(id = R.drawable.ic_confirmation_badge))
-            SwitchPreference(
-                checked = checkedB,
-                onCheckedChange = { checked -> checkedB = checked },
-                title = "Switch preference field title",
-                summary = "Switch preference field summary",
-                enabled = false,
-                icon = painterResource(id = R.drawable.ic_confirmation_badge))
-            SwitchPreference(
-                checked = checkedC,
-                onCheckedChange = { checked -> checkedC = checked },
-                isVisible = isVisible,
-                title = "Switch preference field title",
-                summary = "Switch preference field summary",
-                icon = painterResource(id = R.drawable.ic_confirmation_badge))
+
+        PreferenceContainer {
+            PreferenceGroup(
+                title = "Switch Group"
+            ) {
+                SwitchPreference(
+                    checked = checkedA,
+                    onCheckedChange = { checked -> checkedA = checked },
+                    title = "Switch preference field title",
+                    summary = "Switch preference field summary",
+                    icon = painterResource(id = R.drawable.ic_confirmation_badge))
+                SwitchPreference(
+                    checked = checkedB,
+                    onCheckedChange = { checked -> checkedB = checked },
+                    title = "Switch preference field title",
+                    summary = "Switch preference field summary",
+                    enabled = false,
+                    icon = painterResource(id = R.drawable.ic_confirmation_badge))
+                SwitchPreference(
+                    checked = checkedC,
+                    onCheckedChange = { checked -> checkedC = checked },
+                    isVisible = isVisible,
+                    title = "Switch preference field title",
+                    summary = "Switch preference field summary",
+                    icon = painterResource(id = R.drawable.ic_confirmation_badge))
+            }
         }
         LaunchedEffect(key1 = Unit) {
             while (true) {
@@ -104,29 +106,32 @@ private fun SwitchPreferenceDarkPreview() {
         var checkedA by remember { mutableStateOf(true) }
         var checkedB by remember { mutableStateOf(true) }
         var checkedC by remember { mutableStateOf(false) }
-        PreferenceGroup(
-            title = "Switch Group"
-        ) {
-            SwitchPreference(
-                checked = checkedA,
-                onCheckedChange = { checked -> checkedA = checked },
-                title = "Switch preference field title",
-                summary = "Switch preference field summary",
-                icon = painterResource(id = R.drawable.ic_confirmation_badge))
-            SwitchPreference(
-                checked = checkedB,
-                onCheckedChange = { checked -> checkedB = checked },
-                title = "Switch preference field title",
-                summary = "Switch preference field summary",
-                enabled = false,
-                icon = painterResource(id = R.drawable.ic_confirmation_badge))
-            SwitchPreference(
-                checked = checkedC,
-                onCheckedChange = { checked -> checkedC = checked },
-                isVisible = isVisible,
-                title = "Switch preference field title",
-                summary = "Switch preference field summary",
-                icon = painterResource(id = R.drawable.ic_confirmation_badge))
+
+        PreferenceContainer {
+            PreferenceGroup(
+                title = "Switch Group"
+            ) {
+                SwitchPreference(
+                    checked = checkedA,
+                    onCheckedChange = { checked -> checkedA = checked },
+                    title = "Switch preference field title",
+                    summary = "Switch preference field summary",
+                    icon = painterResource(id = R.drawable.ic_confirmation_badge))
+                SwitchPreference(
+                    checked = checkedB,
+                    onCheckedChange = { checked -> checkedB = checked },
+                    title = "Switch preference field title",
+                    summary = "Switch preference field summary",
+                    enabled = false,
+                    icon = painterResource(id = R.drawable.ic_confirmation_badge))
+                SwitchPreference(
+                    checked = checkedC,
+                    onCheckedChange = { checked -> checkedC = checked },
+                    isVisible = isVisible,
+                    title = "Switch preference field title",
+                    summary = "Switch preference field summary",
+                    icon = painterResource(id = R.drawable.ic_confirmation_badge))
+            }
         }
         LaunchedEffect(key1 = Unit) {
             while (true) {

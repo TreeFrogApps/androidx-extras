@@ -3,6 +3,9 @@ package com.treefrogapps.androidx.compose.material.preference
 import android.content.res.Configuration.UI_MODE_NIGHT_NO
 import android.content.res.Configuration.UI_MODE_NIGHT_YES
 import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
+import androidx.compose.foundation.ScrollState
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
@@ -12,6 +15,8 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.wrapContentHeight
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Divider
 import androidx.compose.material.Icon
 import androidx.compose.material.MaterialTheme
@@ -53,19 +58,26 @@ fun CorePreference(
     enabled: Boolean = true,
     colors: PreferenceColors = PreferenceDefaults.preferenceColors(),
     onClick: () -> Unit = {},
-    innerContent: @Composable RowScope.() -> Unit
+    innerContent: @Composable RowScope.() -> Unit = {},
+    bottomContent: @Composable ColumnScope.() -> Unit = {},
 ) {
     val titleColor by colors.titleColor(enabled = enabled)
     val summaryColor by colors.summaryColor(enabled = enabled)
     val iconColor by colors.iconColor(enabled = enabled)
 
     AnimatedVisibility(
+        modifier = Modifier
+            .fillMaxWidth()
+            .wrapContentHeight(),
+        enter = fadeIn(),
+        exit = fadeOut(),
         visible = isVisible
     ) {
         Column(modifier = Modifier
             .fillMaxWidth()
-            .wrapContentHeight()
-            .clickable(enabled = enabled, onClick = onClick)
+            .clickable(
+                enabled = enabled,
+                onClick = onClick)
         ) {
             Row(
                 modifier = Modifier.padding(all = Theme.dimens.spacing.normal),
@@ -101,6 +113,7 @@ fun CorePreference(
                 }
                 innerContent()
             }
+            bottomContent()
         }
     }
 }
@@ -109,32 +122,48 @@ fun CorePreference(
 fun PreferenceGroup(
     title: String,
     titleColor: Color = Theme.colors.primary,
+    groupContent: @Composable ColumnScope.() -> Unit
+) {
+    Column(
+        modifier = Modifier
+            .fillMaxWidth()
+    ) {
+        Text(
+            modifier = Modifier.padding(
+                top = Theme.dimens.spacing.normal,
+                start = Theme.dimens.spacing.normal,
+                end = Theme.dimens.spacing.normal),
+            text = title,
+            color = titleColor,
+            style = Theme.typography.body2,
+            overflow = TextOverflow.Ellipsis,
+            maxLines = 1)
+        groupContent()
+        Divider(modifier = Modifier.fillMaxWidth())
+    }
+}
+
+@Composable
+fun PreferenceContainer(
     color: Color = MaterialTheme.colors.surface,
     contentColor: Color = contentColorFor(color),
-    groupContent: @Composable ColumnScope.() -> Unit
+    state: ScrollState = rememberScrollState(),
+    content: @Composable ColumnScope.() -> Unit
 ) {
     Surface(
         color = color,
         contentColor = contentColor
     ) {
         Column(
-            modifier = Modifier.fillMaxWidth()
+            modifier = Modifier
+                .fillMaxWidth()
+                .verticalScroll(state = state)
         ) {
-            Text(
-                modifier = Modifier.padding(
-                    top = Theme.dimens.spacing.normal,
-                    start = Theme.dimens.spacing.normal,
-                    end = Theme.dimens.spacing.normal),
-                text = title,
-                color = titleColor,
-                style = Theme.typography.body2,
-                overflow = TextOverflow.Ellipsis,
-                maxLines = 1)
-            groupContent()
-            Divider(modifier = Modifier.fillMaxWidth())
+            content()
         }
     }
 }
+
 
 object PreferenceDefaults {
 

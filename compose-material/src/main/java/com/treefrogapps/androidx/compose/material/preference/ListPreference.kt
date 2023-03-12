@@ -102,43 +102,46 @@ private fun ListPreferencePreview() {
         var selectedItemA by remember { mutableStateOf<String?>(null) }
         var selectedItemB by remember { mutableStateOf<String?>("Item one") }
         var selectedItemC by remember { mutableStateOf<String?>("Item three") }
-        PreferenceGroup(
-            title = "List Group"
-        ) {
-            ListPreference(
-                title = "List preference field title",
-                icon = painterResource(id = R.drawable.ic_confirmation_badge),
-                itemNameProvider = String::toString,
-                items = listOf(
-                    "Item one",
-                    "Item two",
-                    "Item three"),
-                selectedItem = selectedItemA,
-                enabled = true,
-                onPreferenceChange = { selected -> selectedItemA = selected })
-            ListPreference(
-                title = "List preference field title",
-                icon = painterResource(id = R.drawable.ic_confirmation_badge),
-                itemNameProvider = String::toString,
-                items = listOf(
-                    "Item one",
-                    "Item two",
-                    "Item three"),
-                selectedItem = selectedItemB,
-                enabled = false,
-                onPreferenceChange = { selected -> selectedItemB = selected })
-            ListPreference(
-                title = "List preference field title",
-                icon = painterResource(id = R.drawable.ic_confirmation_badge),
-                itemNameProvider = String::toString,
-                items = listOf(
-                    "Item one",
-                    "Item two",
-                    "Item three"),
-                selectedItem = selectedItemC,
-                enabled = true,
-                isVisible = isVisible,
-                onPreferenceChange = { selected -> selectedItemC = selected })
+
+        PreferenceContainer {
+            PreferenceGroup(
+                title = "List Group"
+            ) {
+                ListPreference(
+                    title = "List preference field title",
+                    icon = painterResource(id = R.drawable.ic_confirmation_badge),
+                    itemNameProvider = String::toString,
+                    items = listOf(
+                        "Item one",
+                        "Item two",
+                        "Item three"),
+                    selectedItem = selectedItemA,
+                    enabled = true,
+                    onPreferenceChange = { selected -> selectedItemA = selected })
+                ListPreference(
+                    title = "List preference field title",
+                    icon = painterResource(id = R.drawable.ic_confirmation_badge),
+                    itemNameProvider = String::toString,
+                    items = listOf(
+                        "Item one",
+                        "Item two",
+                        "Item three"),
+                    selectedItem = selectedItemB,
+                    enabled = false,
+                    onPreferenceChange = { selected -> selectedItemB = selected })
+                ListPreference(
+                    title = "List preference field title",
+                    icon = painterResource(id = R.drawable.ic_confirmation_badge),
+                    itemNameProvider = String::toString,
+                    items = listOf(
+                        "Item one",
+                        "Item two",
+                        "Item three"),
+                    selectedItem = selectedItemC,
+                    enabled = true,
+                    isVisible = isVisible,
+                    onPreferenceChange = { selected -> selectedItemC = selected })
+            }
         }
         LaunchedEffect(key1 = Unit) {
             while (true) {
@@ -160,43 +163,46 @@ private fun ListPreferenceDarkPreview() {
         var selectedItemA by remember { mutableStateOf<String?>(null) }
         var selectedItemB by remember { mutableStateOf<String?>("Item one") }
         var selectedItemC by remember { mutableStateOf<String?>("Item three") }
-        PreferenceGroup(
-            title = "List Group"
-        ) {
-            ListPreference(
-                title = "List preference field title",
-                icon = painterResource(id = R.drawable.ic_confirmation_badge),
-                itemNameProvider = String::toString,
-                items = listOf(
-                    "Item one",
-                    "Item two",
-                    "Item three"),
-                selectedItem = selectedItemA,
-                enabled = true,
-                onPreferenceChange = { selected -> selectedItemA = selected })
-            ListPreference(
-                title = "List preference field title",
-                icon = painterResource(id = R.drawable.ic_confirmation_badge),
-                itemNameProvider = String::toString,
-                items = listOf(
-                    "Item one",
-                    "Item two",
-                    "Item three"),
-                selectedItem = selectedItemB,
-                enabled = false,
-                onPreferenceChange = { selected -> selectedItemB = selected })
-            ListPreference(
-                title = "List preference field title",
-                icon = painterResource(id = R.drawable.ic_confirmation_badge),
-                itemNameProvider = String::toString,
-                items = listOf(
-                    "Item one",
-                    "Item two",
-                    "Item three"),
-                selectedItem = selectedItemC,
-                enabled = true,
-                isVisible = isVisible,
-                onPreferenceChange = { selected -> selectedItemC = selected })
+
+        PreferenceContainer {
+            PreferenceGroup(
+                title = "List Group"
+            ) {
+                ListPreference(
+                    title = "List preference field title",
+                    icon = painterResource(id = R.drawable.ic_confirmation_badge),
+                    itemNameProvider = String::toString,
+                    items = listOf(
+                        "Item one",
+                        "Item two",
+                        "Item three"),
+                    selectedItem = selectedItemA,
+                    enabled = true,
+                    onPreferenceChange = { selected -> selectedItemA = selected })
+                ListPreference(
+                    title = "List preference field title",
+                    icon = painterResource(id = R.drawable.ic_confirmation_badge),
+                    itemNameProvider = String::toString,
+                    items = listOf(
+                        "Item one",
+                        "Item two",
+                        "Item three"),
+                    selectedItem = selectedItemB,
+                    enabled = false,
+                    onPreferenceChange = { selected -> selectedItemB = selected })
+                ListPreference(
+                    title = "List preference field title",
+                    icon = painterResource(id = R.drawable.ic_confirmation_badge),
+                    itemNameProvider = String::toString,
+                    items = listOf(
+                        "Item one",
+                        "Item two",
+                        "Item three"),
+                    selectedItem = selectedItemC,
+                    enabled = true,
+                    isVisible = isVisible,
+                    onPreferenceChange = { selected -> selectedItemC = selected })
+            }
         }
         LaunchedEffect(key1 = Unit) {
             while (true) {
