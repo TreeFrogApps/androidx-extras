@@ -100,7 +100,7 @@ fun CorePreference(
                         text = title,
                         overflow = TextOverflow.Ellipsis,
                         maxLines = 1,
-                        style = Theme.typography.h6,
+                        style = Theme.extendedTypography.large,
                         color = titleColor)
                     summary?.run {
                         Text(
@@ -108,7 +108,7 @@ fun CorePreference(
                             text = this,
                             overflow = TextOverflow.Ellipsis,
                             maxLines = 2,
-                            style = Theme.typography.body1,
+                            style = Theme.extendedTypography.small,
                             color = summaryColor)
                     }
                     information?.run {
@@ -117,7 +117,7 @@ fun CorePreference(
                             text = this,
                             overflow = TextOverflow.Ellipsis,
                             maxLines = 1,
-                            style = Theme.typography.body1,
+                            style = Theme.extendedTypography.medium,
                             color = iconColor)
                     }
                 }
@@ -131,7 +131,7 @@ fun CorePreference(
 @Composable
 fun PreferenceGroup(
     title: String,
-    titleColor: Color = Theme.colors.primary,
+    titleColor: Color = Theme.colors.secondary,
     groupContent: @Composable ColumnScope.() -> Unit
 ) {
     Column(
@@ -181,7 +181,7 @@ object PreferenceDefaults {
     fun preferenceColors(
         titleColor: Color = MaterialThemeExtended.extendedTypographyColors.primary,
         summaryColor: Color = MaterialThemeExtended.extendedTypographyColors.secondaryVariant,
-        iconColor: Color = MaterialThemeExtended.colors.primary,
+        iconColor: Color = MaterialThemeExtended.colors.secondary,
         disabledColor: Color = MaterialTheme.colors.onSurface.copy(alpha = 0.12f)
             .compositeOver(MaterialTheme.colors.surface)
     ): PreferenceColors = DefaultPreferenceColors(

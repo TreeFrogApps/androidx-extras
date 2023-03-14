@@ -39,6 +39,7 @@ fun <T : Any> ListPreference(
     preferenceColors: PreferenceColors = PreferenceDefaults.preferenceColors(),
 ) {
     var isDialogOpen by rememberSaveable { mutableStateOf(value = false) }
+
     CorePreference(
         title = title,
         summary = summary,
