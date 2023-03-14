@@ -132,6 +132,7 @@ fun CorePreference(
 fun PreferenceGroup(
     title: String,
     titleColor: Color = Theme.colors.secondary,
+    enabledDivider : Boolean = false ,
     groupContent: @Composable ColumnScope.() -> Unit
 ) {
     Column(
@@ -148,8 +149,12 @@ fun PreferenceGroup(
             style = Theme.typography.body2,
             overflow = TextOverflow.Ellipsis,
             maxLines = 1)
+
         groupContent()
-        Divider(modifier = Modifier.fillMaxWidth())
+
+        if(enabledDivider) {
+            Divider(modifier = Modifier.fillMaxWidth())
+        }
     }
 }
 
