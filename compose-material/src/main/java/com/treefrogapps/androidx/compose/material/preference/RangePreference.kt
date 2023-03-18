@@ -126,6 +126,9 @@ private fun RangePreferenceDialogContent(
             verticalArrangement = Arrangement.Center,
         ) {
             Text(
+                modifier = Modifier.padding(
+                    start = Theme.dimens.spacing.small,
+                    bottom = Theme.dimens.spacing.normal),
                 text = sliderTitle,
                 overflow = TextOverflow.Ellipsis,
                 maxLines = 1,
