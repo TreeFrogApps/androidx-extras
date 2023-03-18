@@ -19,6 +19,7 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextOverflow
@@ -42,7 +43,10 @@ fun RangePreference(
     onPreferenceChange: ((Int) -> Unit)?,
     enabled: Boolean = true,
     preferenceColors: PreferenceColors = PreferenceDefaults.preferenceColors(),
-    sliderColors: SliderColors = SliderDefaults.colors(),
+    sliderTitle: String,
+    sliderColors: SliderColors = SliderDefaults.colors(
+        thumbColor = Theme.colors.secondary,
+        activeTickColor = Theme.colors.secondary),
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() }
 ) {
 
@@ -60,6 +64,8 @@ fun RangePreference(
 
     if (isDialogOpen) {
         RangePreferenceDialog(
+            sliderTitle = sliderTitle,
+            sliderTitleColor = preferenceColors.titleColor(enabled = enabled).value,
             min = min,
             max = max,
             current = current ?: min,
@@ -74,6 +80,8 @@ fun RangePreference(
 
 @Composable
 private fun RangePreferenceDialog(
+    sliderTitle: String,
+    sliderTitleColor: Color,
     min: Int,
     max: Int,
     current: Int,
@@ -87,6 +95,8 @@ private fun RangePreferenceDialog(
         onDismissRequest = onDismiss
     ) {
         RangePreferenceDialogContent(
+            sliderTitle = sliderTitle,
+            sliderTitleColor = sliderTitleColor,
             min = min,
             max = max,
             current = current,
@@ -99,6 +109,8 @@ private fun RangePreferenceDialog(
 
 @Composable
 private fun RangePreferenceDialogContent(
+    sliderTitle: String,
+    sliderTitleColor: Color,
     min: Int,
     max: Int,
     current: Int,
@@ -113,6 +125,12 @@ private fun RangePreferenceDialogContent(
                 .padding(all = Theme.dimens.spacing.large),
             verticalArrangement = Arrangement.Center,
         ) {
+            Text(
+                text = sliderTitle,
+                overflow = TextOverflow.Ellipsis,
+                maxLines = 1,
+                style = Theme.extendedTypography.large,
+                color = sliderTitleColor)
             Slider(
                 value = current.toFloat(),
                 onValueChange = { value -> onPreferenceChange?.invoke(value.toInt()) },
@@ -157,6 +175,7 @@ private fun RangePreferencePreview() {
                     max = 100,
                     current = selectedItemA,
                     enabled = true,
+                    sliderTitle = "Update Range Slider",
                     onPreferenceChange = { selected -> selectedItemA = selected })
                 RangePreference(
                     title = "Range preference field title",
@@ -166,6 +185,7 @@ private fun RangePreferencePreview() {
                     max = 100,
                     current = selectedItemB,
                     enabled = false,
+                    sliderTitle = "Update Range Slider",
                     onPreferenceChange = { selected -> selectedItemB = selected })
                 RangePreference(
                     title = "Range preference field title",
@@ -175,6 +195,7 @@ private fun RangePreferencePreview() {
                     max = 100,
                     current = selectedItemC,
                     enabled = true,
+                    sliderTitle = "Update Range Slider",
                     isVisible = isVisible,
                     onPreferenceChange = { selected -> selectedItemC = selected })
             }
@@ -212,6 +233,7 @@ private fun RangePreferenceDarkPreview() {
                     max = 100,
                     current = selectedItemA,
                     enabled = true,
+                    sliderTitle = "Update Range Slider",
                     onPreferenceChange = { selected -> selectedItemA = selected })
                 RangePreference(
                     title = "Range preference field title",
@@ -221,6 +243,7 @@ private fun RangePreferenceDarkPreview() {
                     max = 100,
                     current = selectedItemB,
                     enabled = false,
+                    sliderTitle = "Update Range Slider",
                     onPreferenceChange = { selected -> selectedItemB = selected })
                 RangePreference(
                     title = "Range preference field title",
@@ -230,6 +253,7 @@ private fun RangePreferenceDarkPreview() {
                     max = 100,
                     current = selectedItemC,
                     enabled = true,
+                    sliderTitle = "Update Range Slider",
                     isVisible = isVisible,
                     onPreferenceChange = { selected -> selectedItemC = selected })
             }
@@ -258,6 +282,8 @@ private fun RangePreferenceDialogContentPreview() {
                 max = 100,
                 current = selectedItemA ?: 0,
                 enabled = true,
+                sliderTitle = "Update Range Slider",
+                sliderTitleColor = Theme.extendedTypographyColors.primary,
                 onPreferenceChange = { selected -> selectedItemA = selected })
         }
         LaunchedEffect(key1 = Unit) {
