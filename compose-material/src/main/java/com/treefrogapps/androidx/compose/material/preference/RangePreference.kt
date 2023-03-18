@@ -30,6 +30,7 @@ import com.treefrogapps.androidx.compose.material.theme.MaterialThemeExtended
 import com.treefrogapps.androidx.compose.material.theme.Theme
 import com.treefrogapps.androidx.compose.material.theme.windowSizeOf
 import kotlinx.coroutines.delay
+import java.text.DecimalFormat
 
 @Composable
 fun RangePreference(
@@ -37,10 +38,12 @@ fun RangePreference(
     summary: String? = null,
     icon: Painter? = null,
     isVisible: Boolean = true,
-    min: Int,
-    max: Int,
-    current: Int?,
-    onPreferenceChange: ((Int) -> Unit)?,
+    min: Float,
+    max: Float,
+    steps : Int = 0,
+    current: Float?,
+    currentFormat : DecimalFormat = DecimalFormat("##0"),
+    onPreferenceChange: ((Float) -> Unit)?,
     enabled: Boolean = true,
     preferenceColors: PreferenceColors = PreferenceDefaults.preferenceColors(),
     sliderTitle: String,
@@ -55,7 +58,7 @@ fun RangePreference(
     CorePreference(
         title = title,
         summary = summary,
-        information = current?.toString().orEmpty(),
+        information = currentFormat.format(current ?: min),
         icon = icon,
         isVisible = isVisible,
         enabled = enabled,
@@ -68,6 +71,7 @@ fun RangePreference(
             sliderTitleColor = preferenceColors.titleColor(enabled = enabled).value,
             min = min,
             max = max,
+            steps = steps,
             current = current ?: min,
             onPreferenceChange = onPreferenceChange,
             enabled = enabled,
@@ -82,10 +86,12 @@ fun RangePreference(
 private fun RangePreferenceDialog(
     sliderTitle: String,
     sliderTitleColor: Color,
-    min: Int,
-    max: Int,
-    current: Int,
-    onPreferenceChange: ((Int) -> Unit)?,
+    min: Float,
+    max: Float,
+    current: Float,
+    steps : Int,
+    currentFormat : DecimalFormat = DecimalFormat("##0"),
+    onPreferenceChange: ((Float) -> Unit)?,
     enabled: Boolean = true,
     sliderColors: SliderColors = SliderDefaults.colors(),
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
@@ -99,7 +105,9 @@ private fun RangePreferenceDialog(
             sliderTitleColor = sliderTitleColor,
             min = min,
             max = max,
+            steps = steps,
             current = current,
+            currentFormat = currentFormat,
             onPreferenceChange = onPreferenceChange,
             enabled = enabled,
             sliderColors = sliderColors,
@@ -111,10 +119,12 @@ private fun RangePreferenceDialog(
 private fun RangePreferenceDialogContent(
     sliderTitle: String,
     sliderTitleColor: Color,
-    min: Int,
-    max: Int,
-    current: Int,
-    onPreferenceChange: ((Int) -> Unit)?,
+    min: Float,
+    max: Float,
+    steps : Int = 0,
+    current: Float,
+    currentFormat : DecimalFormat = DecimalFormat("##0"),
+    onPreferenceChange: ((Float) -> Unit)?,
     enabled: Boolean = true,
     sliderColors: SliderColors = SliderDefaults.colors(),
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
@@ -135,18 +145,18 @@ private fun RangePreferenceDialogContent(
                 style = Theme.extendedTypography.large,
                 color = sliderTitleColor)
             Slider(
-                value = current.toFloat(),
-                onValueChange = { value -> onPreferenceChange?.invoke(value.toInt()) },
+                value = current,
+                onValueChange = { value -> onPreferenceChange?.invoke(value) },
                 enabled = enabled,
-                valueRange = min.toFloat()..max.toFloat(),
-                steps = 0,
+                valueRange = min..max,
+                steps = steps,
                 colors = sliderColors,
                 interactionSource = interactionSource)
             Text(
                 modifier = Modifier
                     .align(alignment = Alignment.End)
                     .padding(end = Theme.dimens.spacing.small),
-                text = current.toString(),
+                text = currentFormat.format(current),
                 overflow = TextOverflow.Ellipsis,
                 maxLines = 1,
                 style = Theme.typography.body1,
@@ -163,9 +173,9 @@ private fun RangePreferenceDialogContent(
 private fun RangePreferencePreview() {
     MaterialThemeExtended(windowSize = windowSizeOf()) {
         var isVisible by remember { mutableStateOf(true) }
-        var selectedItemA by remember { mutableStateOf<Int?>(null) }
-        var selectedItemB by remember { mutableStateOf<Int?>(50) }
-        var selectedItemC by remember { mutableStateOf<Int?>(75) }
+        var selectedItemA by remember { mutableStateOf<Float?>(null) }
+        var selectedItemB by remember { mutableStateOf<Float?>(50F) }
+        var selectedItemC by remember { mutableStateOf<Float?>(75F) }
         PreferenceContainer {
             PreferenceGroup(
                 title = "Range Group"
@@ -174,8 +184,8 @@ private fun RangePreferencePreview() {
                     title = "Range preference field title",
                     summary = "Range preference field summary",
                     icon = painterResource(id = R.drawable.ic_confirmation_badge),
-                    min = 0,
-                    max = 100,
+                    min = 0F,
+                    max = 100F,
                     current = selectedItemA,
                     enabled = true,
                     sliderTitle = "Update Range Slider",
@@ -184,8 +194,8 @@ private fun RangePreferencePreview() {
                     title = "Range preference field title",
                     summary = "Range preference field summary",
                     icon = painterResource(id = R.drawable.ic_confirmation_badge),
-                    min = 0,
-                    max = 100,
+                    min = 0F,
+                    max = 100F,
                     current = selectedItemB,
                     enabled = false,
                     sliderTitle = "Update Range Slider",
@@ -194,8 +204,8 @@ private fun RangePreferencePreview() {
                     title = "Range preference field title",
                     summary = "Range preference field summary",
                     icon = painterResource(id = R.drawable.ic_confirmation_badge),
-                    min = 0,
-                    max = 100,
+                    min = 0F,
+                    max = 100F,
                     current = selectedItemC,
                     enabled = true,
                     sliderTitle = "Update Range Slider",
@@ -220,9 +230,9 @@ private fun RangePreferencePreview() {
 private fun RangePreferenceDarkPreview() {
     MaterialThemeExtended(windowSize = windowSizeOf()) {
         var isVisible by remember { mutableStateOf(true) }
-        var selectedItemA by remember { mutableStateOf<Int?>(null) }
-        var selectedItemB by remember { mutableStateOf<Int?>(50) }
-        var selectedItemC by remember { mutableStateOf<Int?>(75) }
+        var selectedItemA by remember { mutableStateOf<Float?>(null) }
+        var selectedItemB by remember { mutableStateOf<Float?>(50F) }
+        var selectedItemC by remember { mutableStateOf<Float?>(75F) }
 
         PreferenceContainer {
             PreferenceGroup(
@@ -232,8 +242,8 @@ private fun RangePreferenceDarkPreview() {
                     title = "Range preference field title",
                     summary = "Range preference field summary",
                     icon = painterResource(id = R.drawable.ic_confirmation_badge),
-                    min = 0,
-                    max = 100,
+                    min = 0F,
+                    max = 100F,
                     current = selectedItemA,
                     enabled = true,
                     sliderTitle = "Update Range Slider",
@@ -242,8 +252,8 @@ private fun RangePreferenceDarkPreview() {
                     title = "Range preference field title",
                     summary = "Range preference field summary",
                     icon = painterResource(id = R.drawable.ic_confirmation_badge),
-                    min = 0,
-                    max = 100,
+                    min = 0F,
+                    max = 100F,
                     current = selectedItemB,
                     enabled = false,
                     sliderTitle = "Update Range Slider",
@@ -252,8 +262,8 @@ private fun RangePreferenceDarkPreview() {
                     title = "Range preference field title",
                     summary = "Range preference field summary",
                     icon = painterResource(id = R.drawable.ic_confirmation_badge),
-                    min = 0,
-                    max = 100,
+                    min = 0F,
+                    max = 100F,
                     current = selectedItemC,
                     enabled = true,
                     sliderTitle = "Update Range Slider",
@@ -277,13 +287,13 @@ private fun RangePreferenceDarkPreview() {
 private fun RangePreferenceDialogContentPreview() {
     MaterialThemeExtended(windowSize = windowSizeOf()) {
         var isVisible by remember { mutableStateOf(true) }
-        var selectedItemA by remember { mutableStateOf<Int?>(null) }
+        var selectedItemA by remember { mutableStateOf<Float?>(null) }
 
         PreferenceContainer {
             RangePreferenceDialogContent(
-                min = 0,
-                max = 100,
-                current = selectedItemA ?: 0,
+                min = 0F,
+                max = 100F,
+                current = selectedItemA ?: 0F,
                 enabled = true,
                 sliderTitle = "Update Range Slider",
                 sliderTitleColor = Theme.extendedTypographyColors.primary,
