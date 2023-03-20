@@ -48,7 +48,7 @@ dependencyResolutionManagement {
             library("androidx-paging-runtime", "androidx.paging:paging-runtime:3.2.0-alpha04")
             library("androidx-activity-compose", "androidx.activity:activity-compose:1.6.1")
             library("androidx-navigation-compose", "androidx.navigation:navigation-compose:2.5.3")
-            library("androidx-compose-material", "androidx.compose.material:material:1.3.1")
+            library("androidx-compose-material", "androidx.compose.material:material:1.4.0-rc01")
             library("androidx-compose-foundation", "androidx.compose.foundation:foundation:1.3.1")
             library("androidx-compose-runtime", "androidx.compose.runtime:runtime:1.3.2")
             library("androidx-paging-compose", "androidx.paging:paging-compose:1.0.0-alpha18")
