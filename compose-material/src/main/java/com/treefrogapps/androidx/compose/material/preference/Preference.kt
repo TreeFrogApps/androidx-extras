@@ -87,7 +87,7 @@ fun CorePreference(
                 icon?.let { ic ->
                     Icon(
                         modifier = Modifier
-                            .size(size = 48.dp)
+                            .size(size = Theme.dimens.icon.big)
                             .padding(end = Theme.dimens.spacing.normal),
                         painter = ic,
                         tint = iconColor,
@@ -142,7 +142,7 @@ fun PreferenceGroup(
         Text(
             modifier = Modifier.padding(
                 top = Theme.dimens.spacing.normal,
-                start = Theme.dimens.spacing.normal,
+                start = (Theme.dimens.spacing.normal * 2) + Theme.dimens.icon.big,
                 end = Theme.dimens.spacing.normal),
             text = title,
             color = titleColor,
