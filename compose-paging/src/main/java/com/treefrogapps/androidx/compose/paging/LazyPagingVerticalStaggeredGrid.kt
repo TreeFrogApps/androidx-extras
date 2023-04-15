@@ -16,6 +16,7 @@ import androidx.compose.foundation.lazy.staggeredgrid.rememberLazyStaggeredGridS
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.paging.compose.LazyPagingItems
 
@@ -28,7 +29,8 @@ fun <T : Any> LazyPagingVerticalStaggeredGrid(
     lazyPagingItems: LazyPagingItems<T>,
     key: ((T) -> Any)? = null,
     contentPadding: PaddingValues = PaddingValues(0.dp),
-    verticalArrangement: Arrangement.Vertical = Arrangement.spacedBy(0.dp),
+    verticalItemSpacing: Dp = 0.dp,
+    reverseLayout : Boolean = false,
     horizontalArrangement: Arrangement.Horizontal = Arrangement.spacedBy(0.dp),
     flingBehavior: FlingBehavior = ScrollableDefaults.flingBehavior(),
     userScrollEnabled: Boolean = true,
@@ -53,7 +55,8 @@ fun <T : Any> LazyPagingVerticalStaggeredGrid(
             columns = columns,
             contentPadding = contentPadding,
             horizontalArrangement = horizontalArrangement,
-            verticalArrangement = verticalArrangement,
+            verticalItemSpacing = verticalItemSpacing,
+            reverseLayout = reverseLayout,
             flingBehavior = flingBehavior,
             userScrollEnabled = userScrollEnabled
         ) {
