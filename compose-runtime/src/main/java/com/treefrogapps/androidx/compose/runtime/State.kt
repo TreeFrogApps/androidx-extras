@@ -12,6 +12,8 @@ import androidx.compose.runtime.saveable.Saver
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.snapshotFlow
 import androidx.compose.runtime.structuralEqualityPolicy
+import androidx.compose.ui.text.TextRange
+import androidx.compose.ui.text.input.TextFieldValue
 import com.treefrogapps.androidx.compose.saveable.mutableStateSaver
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.launchIn
@@ -50,6 +52,24 @@ fun <T : Any> MutableStateFlow<T?>.collectAsNullableMutableState(
                     .launchIn(this)
             }
         }
+
+@Composable
+fun MutableStateFlow<String>.collectAsTextFieldValueMutableState(
+    key1: Any? = null,
+    key2: Any? = null
+): MutableState<TextFieldValue> =
+    remember(key1 = key1, key2 = key2) { mutableStateOf(TextFieldValue(text = value, selection = TextRange(index = value.length))) }
+        .apply {
+            LaunchedEffect(key1 = this, key2 = this@collectAsTextFieldValueMutableState) {
+                this@collectAsTextFieldValueMutableState
+                    .onEach { value = value.copy(text = it) }
+                    .launchIn(this)
+                snapshotFlow { value }
+                    .onEach { this@collectAsTextFieldValueMutableState.value = it.text }
+                    .launchIn(this)
+            }
+        }
+
 
 @Composable
 fun <T> rememberMutableState(
