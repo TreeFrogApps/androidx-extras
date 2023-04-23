@@ -62,6 +62,7 @@ fun TextInputField(
     labelText: String = "",
     enabled: Boolean = true,
     singleLine: Boolean = true,
+    minLines: Int = 1,
     maxLines: Int = 1,
     colors: TextFieldColors = TextFieldDefaults.textFieldColors()
 ) {
@@ -98,6 +99,7 @@ fun TextInputField(
                 }
             },
             singleLine = singleLine,
+            minLines = minLines,
             maxLines = maxLines,
             isError = hasError,
             keyboardOptions = keyboardOptions,
@@ -132,6 +134,7 @@ fun TextInputField(
     labelText: String = "",
     enabled: Boolean = true,
     singleLine: Boolean = true,
+    minLines: Int = 1,
     maxLines: Int = 1,
     colors: TextFieldColors = TextFieldDefaults.textFieldColors()
 ) {
@@ -170,6 +173,7 @@ fun TextInputField(
                 }
             },
             singleLine = singleLine,
+            minLines = minLines,
             maxLines = maxLines,
             isError = hasError,
             keyboardOptions = keyboardOptions,
@@ -205,6 +209,7 @@ fun OutlinedTextInputField(
     labelText: String = "",
     enabled: Boolean = true,
     singleLine: Boolean = true,
+    minLines: Int = 1,
     maxLines: Int = 1,
     colors: TextFieldColors = TextFieldDefaults.outlinedTextFieldColors()
 ) {
@@ -241,6 +246,7 @@ fun OutlinedTextInputField(
                 }
             },
             singleLine = singleLine,
+            minLines = minLines,
             maxLines = maxLines,
             isError = hasError,
             keyboardOptions = keyboardOptions,
@@ -276,6 +282,7 @@ fun OutlinedTextInputField(
     labelText: String = "",
     enabled: Boolean = true,
     singleLine: Boolean = true,
+    minLines: Int = 1,
     maxLines: Int = 1,
     colors: TextFieldColors = TextFieldDefaults.outlinedTextFieldColors()
 ) {
@@ -310,6 +317,7 @@ fun OutlinedTextInputField(
                 }
             },
             singleLine = singleLine,
+            minLines= minLines,
             maxLines = maxLines,
             isError = hasError,
             keyboardOptions = keyboardOptions,
