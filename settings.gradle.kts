@@ -33,7 +33,7 @@ dependencyResolutionManagement {
             version("coroutines", "1.6.4")
             version("kotlin", "1.8.10")
             version("compose-ui", "1.4.1")
-            version("compose-compiler", "1.4.5")
+            version("compose-compiler", "1.4.6")
 
             library("kotlinx-coroutines-android", "org.jetbrains.kotlinx", "kotlinx-coroutines-android").versionRef("coroutines")
             library("kotlinx-coroutines-core", "org.jetbrains.kotlinx", "kotlinx-coroutines-core").versionRef("coroutines")
