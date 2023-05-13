@@ -11,7 +11,7 @@ fun <T : Any> mutableStateSaver(): Saver<MutableState<T>, T> =
         override fun SaverScope.save(value: MutableState<T>): T = value.value
     }
 
-inline fun <reified E : Enum<E>> enumSaver() : Saver<Enum<E>, String> = object : Saver<Enum<E>, String> {
+inline fun <reified E : Enum<E>> enumSaver(): Saver<Enum<E>, String> = object : Saver<Enum<E>, String> {
     override fun restore(value: String): Enum<E> = enumValueOf<E>(value)
     override fun SaverScope.save(value: Enum<E>): String = value.name
 }

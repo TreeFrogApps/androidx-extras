@@ -40,7 +40,7 @@ android {
 }
 
 publishing {
-    val repositoryUri : String by extra
+    val repositoryUri: String by extra
 
     repositories {
         maven {
@@ -57,7 +57,7 @@ publishing {
         register<MavenPublication>(name = "release") {
             groupId = "com.treefrogapps.androidx.activity"
             artifactId = "activity"
-            version = "1.1.0"
+            version = "1.2.0"
 
             afterEvaluate {
                 from(components["release"])

@@ -18,7 +18,7 @@ import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.remember
 import androidx.paging.LoadState
 import androidx.paging.compose.LazyPagingItems
-import androidx.paging.compose.items
+import androidx.paging.compose.itemKey
 
 @Composable
 internal fun <T : Any> BoxScope.PagingRefreshLoadStateContent(
@@ -35,8 +35,8 @@ internal fun <T : Any> BoxScope.PagingRefreshLoadStateContent(
 
 @Composable
 internal fun BoxScope.PagingAnimatedVisibilityEmptyContent(
-    visible : Boolean,
-    content : @Composable BoxScope.() -> Unit
+    visible: Boolean,
+    content: @Composable BoxScope.() -> Unit
 ) {
     AnimatedVisibility(
         visible = visible,
@@ -64,9 +64,10 @@ internal fun <T : Any> LazyListScope.pagingItemsContent(
     loadedItemContent: @Composable LazyItemScope.(T) -> Unit
 ) {
     items(
-        items = lazyPagingItems,
-        key = key
-    ) { item ->
+        count = lazyPagingItems.itemCount,
+        key = lazyPagingItems.itemKey(key),
+    ) { index ->
+        val item = lazyPagingItems[index]
         if (item != null) {
             loadedItemContent(this, item)
         } else loadedItemPlaceholderContent(this)

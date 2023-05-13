@@ -30,7 +30,7 @@ fun <T : Any> LazyPagingVerticalStaggeredGrid(
     key: ((T) -> Any)? = null,
     contentPadding: PaddingValues = PaddingValues(0.dp),
     verticalItemSpacing: Dp = 0.dp,
-    reverseLayout : Boolean = false,
+    reverseLayout: Boolean = false,
     horizontalArrangement: Arrangement.Horizontal = Arrangement.spacedBy(0.dp),
     flingBehavior: FlingBehavior = ScrollableDefaults.flingBehavior(),
     userScrollEnabled: Boolean = true,

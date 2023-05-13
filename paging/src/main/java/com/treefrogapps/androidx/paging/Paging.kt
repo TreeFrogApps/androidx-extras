@@ -8,11 +8,11 @@ data class IndexedKey(
 
 private fun PagingSource.LoadParams<IndexedKey>.defaultPrevRefreshKey(loadedSize: Int): () -> IndexedKey? = {
     key?.run {
-        if(offset > 0 && page > 0) {
+        if (offset > 0 && page > 0) {
             IndexedKey(
                 page = key?.page?.let { p -> p - 1 } ?: 0,
                 offset = (key?.offset ?: 0) - loadedSize)
-    } else null
+        } else null
     }
 }
 

@@ -28,7 +28,7 @@ import kotlinx.coroutines.delay
 @Composable
 fun <T : Any> ListPreference(
     title: String,
-    summary : String? = null,
+    summary: String? = null,
     icon: Painter? = null,
     isVisible: Boolean = true,
     items: List<T>,

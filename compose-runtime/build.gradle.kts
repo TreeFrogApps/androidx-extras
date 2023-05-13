@@ -32,7 +32,7 @@ android {
     }
 
     buildFeatures {
-        compose =  true
+        compose = true
     }
 
     composeOptions {
@@ -48,7 +48,7 @@ android {
 }
 
 publishing {
-    val repositoryUri : String by extra
+    val repositoryUri: String by extra
 
     repositories {
         maven {
@@ -65,7 +65,7 @@ publishing {
         register<MavenPublication>(name = "release") {
             groupId = "com.treefrogapps.androidx.compose"
             artifactId = "compose-runtime"
-            version = "1.1.2"
+            version = "1.2.0"
 
             afterEvaluate {
                 from(components["release"])

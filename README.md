@@ -6,7 +6,6 @@ Collection of Androidx Jetpack Extension Libraries
 
 - `sample-app` : Sample Application testing some library features
 
-
 #### Libraries
 
 ##### compose-activity

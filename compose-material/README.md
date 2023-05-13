@@ -20,7 +20,7 @@ to create layout for different screen sizes based on the resources folder hierar
 ```
 
 Jetpack Compose has the concept of qualified resources for `layout` resources and has no inbuilt
-was to determine current screen bucket size.  This base project includes :
+was to determine current screen bucket size. This base project includes :
 
 ---
 
@@ -71,7 +71,6 @@ fun SingleOrTwoPane(isTwoPane: Boolean) {
     }
 }
 ```
-
 
 # Subpackage - swipeable
 

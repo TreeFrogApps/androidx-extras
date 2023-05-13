@@ -317,7 +317,7 @@ fun OutlinedTextInputField(
                 }
             },
             singleLine = singleLine,
-            minLines= minLines,
+            minLines = minLines,
             maxLines = maxLines,
             isError = hasError,
             keyboardOptions = keyboardOptions,

@@ -6,7 +6,6 @@ import androidx.work.*
 import com.google.common.util.concurrent.ListenableFuture
 import com.treefrogapps.androidx.kwork.KWorkRequest.Companion.isValidOrThrow
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.channels.awaitClose
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.suspendCancellableCoroutine
@@ -28,7 +27,6 @@ class KWorkManager(
         internal const val KWorkTag = "kwork_tag"
         internal const val KWorkProgress = "kwork_progress_key"
 
-        @OptIn(ExperimentalCoroutinesApi::class)
         private fun <T> LiveData<T>.asFlow(): Flow<T> = channelFlow {
             val observer: Observer<T> = Observer<T>(this::trySend)
             observeForever(observer)
@@ -40,7 +38,7 @@ class KWorkManager(
         request.isValidOrThrow()
         when (val workRequest = KWorkRequestConverter(request)) {
             is OneTimeWorkRequest  -> workManager.enqueueUniqueWork(request.workId, ExistingWorkPolicy.REPLACE, workRequest)
-            is PeriodicWorkRequest -> workManager.enqueueUniquePeriodicWork(request.workId, ExistingPeriodicWorkPolicy.REPLACE, workRequest)
+            is PeriodicWorkRequest -> workManager.enqueueUniquePeriodicWork(request.workId, ExistingPeriodicWorkPolicy.UPDATE, workRequest)
         }
     }
 

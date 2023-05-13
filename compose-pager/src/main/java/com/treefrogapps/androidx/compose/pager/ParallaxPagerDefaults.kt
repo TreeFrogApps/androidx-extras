@@ -12,7 +12,7 @@ object ParallaxPagerDefaults {
 
     fun effect(): ParallaxEffect = ParallaxEffect.Small
 
-    fun mode() : ParallaxMode = ParallaxMode.Overlay
+    fun mode(): ParallaxMode = ParallaxMode.Overlay
 
     @OptIn(ExperimentalSnapperApi::class)
     @Composable

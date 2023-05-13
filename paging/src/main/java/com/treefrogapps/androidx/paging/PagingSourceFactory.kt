@@ -13,7 +13,7 @@ import kotlin.coroutines.CoroutineContext
 fun <K : Any, V : Any> pagingSource(
     refreshKey: (state: PagingState<K, V>) -> K?,
     load: suspend (params: PagingSource.LoadParams<K>) -> PagingSource.LoadResult<K, V>,
-    loadContext : CoroutineContext = Dispatchers.IO
+    loadContext: CoroutineContext = Dispatchers.IO
 ): PagingSource<K, V> = object : PagingSource<K, V>() {
 
     override fun getRefreshKey(state: PagingState<K, V>): K? = refreshKey(state)

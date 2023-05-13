@@ -30,7 +30,7 @@ fun <T : Any> LazyPagingHorizontalStaggeredGrid(
     contentPadding: PaddingValues = PaddingValues(0.dp),
     verticalArrangement: Arrangement.Vertical = Arrangement.spacedBy(0.dp),
     horizontalItemSpacing: Dp = 0.dp,
-    reverseLayout : Boolean = false,
+    reverseLayout: Boolean = false,
     flingBehavior: FlingBehavior = ScrollableDefaults.flingBehavior(),
     userScrollEnabled: Boolean = true,
     loadedEmptyContent: @Composable BoxScope.() -> Unit = {},

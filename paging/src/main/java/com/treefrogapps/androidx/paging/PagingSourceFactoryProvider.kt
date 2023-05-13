@@ -12,7 +12,7 @@ import kotlin.coroutines.CoroutineContext
 fun <K : Any, V : Any> pagingSourceFactoryProvider(
     refreshKey: (state: PagingState<K, V>) -> K?,
     load: suspend (params: PagingSource.LoadParams<K>) -> PagingSource.LoadResult<K, V>,
-    loadContext : CoroutineContext = Dispatchers.IO
+    loadContext: CoroutineContext = Dispatchers.IO
 ): () -> PagingSource<K, V> = {
     pagingSource(
         refreshKey = refreshKey,

@@ -53,7 +53,7 @@ import kotlinx.coroutines.delay
 fun CorePreference(
     title: String,
     summary: String? = null,
-    information : String? = null,
+    information: String? = null,
     icon: Painter? = null,
     isVisible: Boolean = true,
     enabled: Boolean = true,
@@ -132,7 +132,7 @@ fun CorePreference(
 fun PreferenceGroup(
     title: String,
     titleColor: Color = Theme.colors.secondary,
-    enabledDivider : Boolean = false ,
+    enabledDivider: Boolean = false,
     groupContent: @Composable ColumnScope.() -> Unit
 ) {
     Column(
@@ -152,7 +152,7 @@ fun PreferenceGroup(
 
         groupContent()
 
-        if(enabledDivider) {
+        if (enabledDivider) {
             Divider(modifier = Modifier.fillMaxWidth())
         }
     }

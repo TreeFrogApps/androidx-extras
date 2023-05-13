@@ -18,7 +18,7 @@ data class KWorkRequest(
     val workTag: String? = null,
     val worker: KClass<out Worker>,
     val requiresNetwork: Boolean = false,
-    val requiresStorageNotLow : Boolean = true,
+    val requiresStorageNotLow: Boolean = true,
     val periodicIntervalMillis: Long = 0,
     val initialDelay: Long = 0,
     val isOneshot: Boolean = true,

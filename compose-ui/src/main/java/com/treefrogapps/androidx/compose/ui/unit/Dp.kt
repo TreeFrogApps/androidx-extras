@@ -12,10 +12,10 @@ fun Dp.toHorizontalPaddingValues(): PaddingValues = PaddingValues(horizontal = t
 fun Dp.toVerticalPaddingValues(): PaddingValues = PaddingValues(vertical = this)
 
 @Composable
-fun Dp.dpToPx() : Float = with(LocalDensity.current) { this@dpToPx.toPx() }
+fun Dp.dpToPx(): Float = with(LocalDensity.current) { this@dpToPx.toPx() }
 
 @Composable
-fun Dp.dpToRoundedPx() : Int = with(LocalDensity.current) { this@dpToRoundedPx.roundToPx() }
+fun Dp.dpToRoundedPx(): Int = with(LocalDensity.current) { this@dpToRoundedPx.roundToPx() }
 
 @Composable
-fun Int.pxToDp() : Dp = with(LocalDensity.current) { this@pxToDp.toDp() }
+fun Int.pxToDp(): Dp = with(LocalDensity.current) { this@pxToDp.toDp() }
