@@ -19,7 +19,7 @@ interface NavigateActions {
  */
 interface NavigateWithArgActions<NavArg> : NavigateActions {
 
-    fun navArg(): NavArg?
+    fun navArg(controller: NavHostController): NavArg?
 
     fun navigateTo(navArg: NavArg, controller: NavHostController)
 
@@ -41,43 +41,34 @@ abstract class NavigationDestination(
         controller.navigate(route)
 
     override fun navigateToPoppingBackStack(controller: NavHostController) {
-        navigatePoppingBackStack(
-            navController = controller,
-            destinationRoute = route)
+        navigatePoppingBackStack(navController = controller, destinationRoute = route)
     }
 }
 
 /**
  * Navigation Facade to assist Jetpack Compose Navigation.
  *
- * This is a very basic implementation that uses a [Map] object to
- * store and retrieve [NavArg].  This will mean on process death that
- * [NavArg] will NOT be restored.
+ * This uses [androidx.lifecycle.SavedStateHandle] to
  */
 abstract class NavigationDestinationWithArgument<NavArg>(
     route: String,
 ) : NavigationDestination(route), NavigateWithArgActions<NavArg> {
 
-    companion object {
-        private val argumentStore: MutableMap<String, Any?> = mutableMapOf()
-    }
-
-    @Suppress("UNCHECKED_CAST")
-    override fun navArg(): NavArg? =
-        argumentStore[route] as? NavArg?
+    override fun navArg(controller: NavHostController): NavArg? =
+        controller.previousBackStackEntry?.savedStateHandle?.get<NavArg>(route)
 
     override fun navigateTo(navArg: NavArg, controller: NavHostController) {
-        argumentStore[route] = navArg
-        controller.navigate(route) {
-            launchSingleTop
+        with(controller) {
+            currentBackStackEntry?.savedStateHandle?.set(route, navArg)
+            navigate(route) {
+                launchSingleTop
+            }
         }
     }
 
     override fun navigateToPoppingBackStack(navArg: NavArg, controller: NavHostController) {
-        argumentStore[route] = navArg
-        navigatePoppingBackStack(
-            navController = controller,
-            destinationRoute = route)
+        controller.currentBackStackEntry?.savedStateHandle?.set(route, navArg)
+        navigatePoppingBackStack(navController = controller, destinationRoute = route)
     }
 }
 
