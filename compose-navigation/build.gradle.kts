@@ -1,16 +1,16 @@
 plugins {
-    id("com.android.library")
-    kotlin("android")
+    alias(libs.plugins.android.library)
+    alias(libs.plugins.kotlin.android)
     `maven-publish`
 }
 
 android {
     namespace = "com.treefrogapps.androidx.compose.navigation"
-    compileSdk = 33
-    buildToolsVersion = "33.0.2"
+    compileSdk = libs.versions.android.compilesdk.get().toInt()
+    buildToolsVersion = libs.versions.android.buildtools.get()
 
     defaultConfig {
-        minSdk = 26
+        minSdk = libs.versions.android.minsdk.get().toInt()
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
     }
@@ -33,6 +33,7 @@ android {
 
     buildFeatures {
         compose = true
+        buildConfig = true
     }
 
     composeOptions {

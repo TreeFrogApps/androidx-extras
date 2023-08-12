@@ -16,10 +16,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
-import com.treefrogapps.androidx.extras.example.swipeable.SwipeableActivity
-import com.treefrogapps.androidx.extras.example.parallax.ParallaxActivity
 import com.treefrogapps.androidx.compose.material.theme.MaterialThemeExtended
 import com.treefrogapps.androidx.compose.material.theme.rememberWindowSize
+import com.treefrogapps.androidx.extras.example.parallax.ParallaxActivity
+import com.treefrogapps.androidx.extras.example.swipeable.SwipeableActivity
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -55,7 +55,10 @@ class MainActivity : ComponentActivity() {
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(vertical = 8.dp),
-            onClick = { context.startActivity(Intent(context, T::class.java)) }
+            onClick = {
+                context.startActivity(Intent(context, T::class.java)
+                    .setClassName(context, T::class.java.canonicalName.orEmpty()))
+            }
         ) {
             Text(text = text)
         }

@@ -1,17 +1,17 @@
 plugins {
-    id("com.android.application")
-    kotlin("android")
+    alias(libs.plugins.android.application)
+    alias(libs.plugins.kotlin.android)
 }
 
 android {
-    compileSdk = 33
-    buildToolsVersion = "33.0.2"
+    compileSdk = libs.versions.android.compilesdk.get().toInt()
+    buildToolsVersion = libs.versions.android.buildtools.get()
     namespace = "com.treefrogapps.androidx.extras.example"
 
     defaultConfig {
         applicationId = "com.treefrogapps.androidx.extras.example"
-        minSdk = 28
-        targetSdk = 33
+        minSdk = libs.versions.android.minsdk.get().toInt()
+        targetSdk = compileSdk
         versionCode = 1
         versionName = "1.0.0"
 
@@ -36,6 +36,7 @@ android {
 
     buildFeatures {
         compose = true
+        buildConfig = true
     }
 
     composeOptions {
