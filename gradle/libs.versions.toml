@@ -56,8 +56,8 @@ chrisbanes-snapper = { module = "dev.chrisbanes.snapper:snapper", version.ref = 
 junit = { module = "junit:junit", version.ref = "junit" }
 
 [plugins]
-android-application = { id = "com.android.application", version = "8.2.0-alpha15" }
-android-library = { id = "com.android.library", version = "8.2.0-alpha15" }
+android-application = { id = "com.android.application", version = "8.2.0-beta01" }
+android-library = { id = "com.android.library", version = "8.2.0-beta01" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 
 
