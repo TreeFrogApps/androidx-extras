@@ -1,0 +1,12 @@
+#!/bin/bash
+
+./gradlew activity:publishReleasePublicationToGitHubPackagesRepository \
+compose-activity:publishReleasePublicationToGitHubPackagesRepository \
+compose-material:publishReleasePublicationToGitHubPackagesRepository \
+compose-navigation:publishReleasePublicationToGitHubPackagesRepository \
+compose-pager:publishReleasePublicationToGitHubPackagesRepository \
+compose-paging:publishReleasePublicationToGitHubPackagesRepository \
+compose-runtime:publishReleasePublicationToGitHubPackagesRepository \
+compose-ui:publishReleasePublicationToGitHubPackagesRepository \
+kwork:publishReleasePublicationToGitHubPackagesRepository \
+paging:publishReleasePublicationToGitHubPackagesRepository
