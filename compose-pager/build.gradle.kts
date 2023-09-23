@@ -66,7 +66,7 @@ publishing {
         register<MavenPublication>(name = "release") {
             groupId = "com.treefrogapps.androidx.compose"
             artifactId = "compose-pager"
-            version = "1.2.0"
+            version = "1.3.0"
 
             afterEvaluate {
                 from(components["release"])
@@ -85,7 +85,6 @@ dependencies {
     implementation(libs.androidx.compose.ui)
     implementation(libs.androidx.compose.ui.tooling.preview)
     implementation(libs.androidx.compose.foundation)
-    implementation(libs.chrisbanes.snapper)
 
     debugImplementation(libs.androidx.compose.ui.tooling)
 }

@@ -1,23 +1,22 @@
 [versions]
 coroutines = "1.7.3"
-kotlin = "1.9.0"
+kotlin = "1.9.10"
 activity-ktx = "1.7.2"
-core-ktx = "1.10.1"
-lifecycle-ktx = "2.6.1"
+core-ktx = "1.12.0"
+lifecycle-ktx = "2.6.2"
 workmanager-ktx = "2.8.1"
 window = "1.1.0"
-paging-runtime = "3.2.0"
+paging-runtime = "3.2.1"
 activity-compose = "1.7.2"
-navigation-compose = "2.7.0"
-compose-compiler = "1.5.1"
-compose-ui = "1.5.0"
-compose-material = "1.5.0"
-compose-foundation = "1.5.0"
-compose-runtime = "1.5.0"
-compose-paging = "3.2.0"
+navigation-compose = "2.7.3"
+compose-compiler = "1.5.3"
+compose-ui = "1.5.1"
+compose-material = "1.5.1"
+compose-foundation = "1.5.1"
+compose-runtime = "1.5.1"
+compose-paging = "3.2.1"
 test-junit = "1.1.5"
 test-espresso = "3.5.1"
-snapper = "0.3.0"
 junit = "4.13.2"
 android-minsdk = "26"
 android-compilesdk = "34"
@@ -51,13 +50,11 @@ androidx-compose-ui-test-manifest = { group = "androidx.compose.ui", name = "ui-
 androidx-test-junit = { module = "androidx.test.ext:junit", version.ref = "test-junit" }
 androidx-test-espresso = { module = "androidx.test.espresso:espresso-core", version.ref = "test-espresso" }
 
-chrisbanes-snapper = { module = "dev.chrisbanes.snapper:snapper", version.ref = "snapper" }
-
 junit = { module = "junit:junit", version.ref = "junit" }
 
 [plugins]
-android-application = { id = "com.android.application", version = "8.2.0-beta01" }
-android-library = { id = "com.android.library", version = "8.2.0-beta01" }
+android-application = { id = "com.android.application", version = "8.2.0-beta05" }
+android-library = { id = "com.android.library", version = "8.2.0-beta05" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 
 

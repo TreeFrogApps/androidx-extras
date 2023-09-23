@@ -4,7 +4,6 @@ import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
-import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.BoxScope
 import androidx.compose.foundation.lazy.LazyItemScope
 import androidx.compose.foundation.lazy.LazyListScope
@@ -126,7 +125,6 @@ internal fun <T : Any> LazyGridScope.pagingAppendLoadStateContent(
     }
 }
 
-@OptIn(ExperimentalFoundationApi::class)
 internal fun <T : Any> LazyStaggeredGridScope.pagingPrependLoadStateContent(
     lazyPagingItems: LazyPagingItems<T>,
     prependLoadingContent: @Composable LazyStaggeredGridItemScope.() -> Unit,
@@ -139,7 +137,6 @@ internal fun <T : Any> LazyStaggeredGridScope.pagingPrependLoadStateContent(
     }
 }
 
-@OptIn(ExperimentalFoundationApi::class)
 internal fun <T : Any> LazyStaggeredGridScope.pagingItemsContent(
     lazyPagingItems: LazyPagingItems<T>,
     key: ((T) -> Any)? = null,
@@ -156,7 +153,6 @@ internal fun <T : Any> LazyStaggeredGridScope.pagingItemsContent(
     }
 }
 
-@OptIn(ExperimentalFoundationApi::class)
 internal fun <T : Any> LazyStaggeredGridScope.pagingAppendLoadStateContent(
     lazyPagingItems: LazyPagingItems<T>,
     appendLoadingContent: @Composable LazyStaggeredGridItemScope.() -> Unit,

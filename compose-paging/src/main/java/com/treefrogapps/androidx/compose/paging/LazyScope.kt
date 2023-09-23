@@ -1,9 +1,7 @@
 package com.treefrogapps.androidx.compose.paging
 
-import android.annotation.SuppressLint
 import android.os.Parcel
 import android.os.Parcelable
-import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.lazy.grid.LazyGridItemScope
 import androidx.compose.foundation.lazy.grid.LazyGridScope
 import androidx.compose.foundation.lazy.staggeredgrid.LazyStaggeredGridItemScope
@@ -52,7 +50,6 @@ fun <T : Any> LazyGridScope.itemsIndexed(
     }
 }
 
-@OptIn(ExperimentalFoundationApi::class)
 fun <T : Any> LazyStaggeredGridScope.items(
     items: LazyPagingItems<T>,
     key: ((item: T) -> Any)? = null,
@@ -73,7 +70,6 @@ fun <T : Any> LazyStaggeredGridScope.items(
     }
 }
 
-@OptIn(ExperimentalFoundationApi::class)
 fun <T : Any> LazyStaggeredGridScope.itemsIndexed(
     items: LazyPagingItems<T>,
     key: ((index: Int, item: T) -> Any)? = null,
@@ -94,7 +90,6 @@ fun <T : Any> LazyStaggeredGridScope.itemsIndexed(
     }
 }
 
-@SuppressLint("BanParcelableUsage")
 private data class PagingPlaceholderKey(private val index: Int) : Parcelable {
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeInt(index)

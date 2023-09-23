@@ -1,6 +1,5 @@
 package com.treefrogapps.androidx.compose.paging
 
-import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.gestures.FlingBehavior
 import androidx.compose.foundation.gestures.ScrollableDefaults
 import androidx.compose.foundation.layout.Arrangement
@@ -19,7 +18,6 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.paging.compose.LazyPagingItems
 
-@OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun <T : Any> LazyPagingHorizontalStaggeredGrid(
     modifier: Modifier = Modifier,
