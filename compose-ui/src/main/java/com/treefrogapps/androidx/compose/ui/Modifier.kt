@@ -14,6 +14,7 @@ import androidx.compose.foundation.relocation.BringIntoViewRequester
 import androidx.compose.foundation.relocation.bringIntoViewRequester
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.runtime.Composable
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
@@ -31,8 +32,8 @@ import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.graphics.Shape
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import com.treefrogapps.androidx.compose.ui.graphics.defaultDurationMillis
-import com.treefrogapps.androidx.compose.ui.graphics.defaultShimmerColors
+import com.treefrogapps.androidx.compose.ui.graphics.LocalShimmerTheme
+import com.treefrogapps.androidx.compose.ui.graphics.ShimmerTheme
 import com.treefrogapps.androidx.compose.ui.graphics.linearVerticalGradient
 import com.treefrogapps.androidx.compose.ui.graphics.shimmerBrush
 import kotlinx.coroutines.launch
@@ -151,31 +152,28 @@ private fun Modifier.verticalScrollBar(
     })
 }
 
+@Composable
 fun Modifier.shimmerBackground(
     enabled: Boolean = true,
-    shimmerColors: List<Color>? = null,
-    durationMillis: Int? = null
-): Modifier = composed {
+    shimmerTheme: ShimmerTheme = LocalShimmerTheme.current
+): Modifier =
     this then Modifier.background(
         brush = shimmerBrush(
             enabled = enabled,
-            shimmerColors = shimmerColors ?: defaultShimmerColors,
-            durationMillis = durationMillis ?: defaultDurationMillis
+            shimmerTheme = shimmerTheme
         )
     )
-}
 
+@Composable
 fun Modifier.shimmerForeground(
     enabled: Boolean = true,
-    shimmerColors: List<Color>? = null,
-    durationMillis: Int? = null
-): Modifier = composed {
+    shimmerTheme: ShimmerTheme = LocalShimmerTheme.current
+): Modifier {
     val shimmerBrush = shimmerBrush(
         enabled = enabled,
-        shimmerColors = shimmerColors ?: defaultShimmerColors,
-        durationMillis = durationMillis ?: defaultDurationMillis
+        shimmerTheme = shimmerTheme
     )
-    this then Modifier.drawWithContent {
+    return this then Modifier.drawWithContent {
         drawContent()
         drawRect(brush = shimmerBrush)
     }

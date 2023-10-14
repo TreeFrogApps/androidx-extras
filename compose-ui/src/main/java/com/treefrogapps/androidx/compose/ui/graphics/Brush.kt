@@ -1,38 +1,9 @@
 package com.treefrogapps.androidx.compose.ui.graphics
 
-import androidx.compose.animation.core.RepeatMode
-import androidx.compose.animation.core.animateFloat
-import androidx.compose.animation.core.infiniteRepeatable
-import androidx.compose.animation.core.rememberInfiniteTransition
-import androidx.compose.animation.core.tween
-import androidx.compose.foundation.isSystemInDarkTheme
-import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Stable
-import androidx.compose.runtime.getValue
-import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.TileMode
-import kotlin.math.max
-
-private val lightShimmerColors = listOf(
-    Color(color = 0xFFE7E7E7),
-    Color(color = 0xFFF7F7F7),
-    Color(color = 0xFFE7E7E7)
-)
-private val darkShimmerColors = listOf(
-    Color(color = 0xFF292929),
-    Color(color = 0xFF383838),
-    Color(color = 0xFF292929)
-)
-private val defaultColors = listOf(
-    Color.Transparent,
-    Color.Transparent
-)
-
-internal const val defaultDurationMillis: Int = 1600
-internal val defaultShimmerColors: List<Color>
-    @Composable get() = if (isSystemInDarkTheme()) darkShimmerColors else lightShimmerColors
 
 @Stable
 fun Brush.Companion.linearVerticalGradient(
@@ -120,36 +91,3 @@ fun Brush.Companion.linearGradient(
     angleInDegrees = angleInDegrees,
     useAsCssAngle = useAsCssAngle
 )
-
-@Composable
-fun shimmerBrush(
-    enabled: Boolean = true,
-    shimmerColors: List<Color> = defaultShimmerColors,
-    durationMillis: Int = defaultDurationMillis
-): Brush = if (enabled) {
-    val start = 0.0f
-    val gradientWidth = 400.0f
-    val transition = rememberInfiniteTransition(label = "ShimmerInfiniteTransition")
-    val translateAnimation by transition.animateFloat(
-        initialValue = 0f,
-        targetValue = 1200f,
-        animationSpec = infiniteRepeatable(
-            animation = tween(durationMillis = durationMillis),
-            repeatMode = RepeatMode.Restart
-        ),
-        label = "ShimmerFloatAnimation"
-    )
-    val startXYOffset = max(start, translateAnimation - gradientWidth)
-    val endXYOffset = translateAnimation
-    Brush.linearGradient(
-        colors = shimmerColors,
-        start = Offset(x = startXYOffset, y = startXYOffset),
-        end = Offset(x = endXYOffset, y = endXYOffset)
-    )
-} else {
-    Brush.linearGradient(
-        colors = defaultColors,
-        start = Offset.Zero,
-        end = Offset.Zero
-    )
-}
