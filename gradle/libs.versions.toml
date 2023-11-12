@@ -53,8 +53,8 @@ androidx-test-espresso = { module = "androidx.test.espresso:espresso-core", vers
 junit = { module = "junit:junit", version.ref = "junit" }
 
 [plugins]
-android-application = { id = "com.android.application", version = "8.2.0-beta06" }
-android-library = { id = "com.android.library", version = "8.2.0-beta06" }
+android-application = { id = "com.android.application", version = "8.2.0-rc03" }
+android-library = { id = "com.android.library", version = "8.2.0-rc03" }
 kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 
 
