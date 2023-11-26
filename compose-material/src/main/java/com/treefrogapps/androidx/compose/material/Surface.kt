@@ -25,7 +25,7 @@ fun surfaceColorAtElevation(
         ?.apply(
             color = MaterialTheme.colors.surface,
             elevation = LocalAbsoluteElevation.current + elevation
-        ) ?: MaterialTheme.colors.surface
+        ) ?: MaterialTheme.colors.primarySurface
 
 /**
  * Calculate the color at [elevation].
