@@ -15,7 +15,7 @@ import androidx.compose.ui.unit.dp
  * this wil return the normal [MaterialTheme.colors] surface color.
  */
 @Composable
-private fun surfaceColorAtElevation(
+fun surfaceColorAtElevation(
     elevation: Dp = 0.dp
 ): Color =
     LocalElevationOverlay.current
@@ -29,7 +29,7 @@ private fun surfaceColorAtElevation(
  * this wil return [color].
  */
 @Composable
-private fun colorAtElevation(
+fun colorAtElevation(
     color: Color,
     elevation: Dp = 0.dp
 ): Color =
