@@ -77,11 +77,16 @@ fun MaterialThemeExtended(
     isDarkMode: Boolean = isSystemInDarkTheme(),
     colors: Colors = provideDefaultColors(isDarkMode),
     typography: Typography = Theme.typography,
+    extendedTypography: ExtendedTypography = Theme.extendedTypography,
+    extendedTypographyColors: ExtendedTypographyColors = provideDefaultTypographyColors(isDarkMode),
     shapes: Shapes = DefaultShapes,
     content: @Composable () -> Unit
 ) {
-    MaterialThemeExtended(
-        windowSize = windowSize
+    MaterialThemeExtendedInternal(
+        windowSize = windowSize,
+        isDarkMode = isDarkMode,
+        extendedTypography = extendedTypography,
+        extendedTypographyColors = extendedTypographyColors
     ) {
         MaterialTheme(
             colors = colors,
@@ -92,10 +97,10 @@ fun MaterialThemeExtended(
 }
 
 @Composable
-private fun MaterialThemeExtended(
+private fun MaterialThemeExtendedInternal(
     windowSize: WindowSize,
     isDarkMode: Boolean = isSystemInDarkTheme(),
-    appTypography: ExtendedTypography = Theme.extendedTypography,
+    extendedTypography: ExtendedTypography = Theme.extendedTypography,
     extendedTypographyColors: ExtendedTypographyColors = provideDefaultTypographyColors(isDarkMode),
     content: @Composable () -> Unit
 ) {
@@ -108,7 +113,7 @@ private fun MaterialThemeExtended(
         values = arrayOf(
             LocalWindowSize provides rememberedWindowSize,
             LocalAppDimens provides rememberedDimens,
-            LocalExtendedTypography provides appTypography,
+            LocalExtendedTypography provides extendedTypography,
             LocalExtendedTypographyColors provides rememberedTypographyColors),
         content = content)
 }
@@ -120,7 +125,7 @@ private fun MaterialThemeExtended(
     device = Devices.PIXEL_C)
 @Composable
 fun ThemedContentPreview() {
-    MaterialThemeExtended(windowSize = windowSizeOf(Type.LargeLandscape)) {
+    MaterialThemeExtendedInternal(windowSize = windowSizeOf(Type.LargeLandscape)) {
         PreviewContent()
     }
 }
@@ -132,7 +137,7 @@ fun ThemedContentPreview() {
     device = Devices.PIXEL_C)
 @Composable
 fun ThemedContentDarkModePreview() {
-    MaterialThemeExtended(windowSize = windowSizeOf(Type.LargeLandscape)) {
+    MaterialThemeExtendedInternal(windowSize = windowSizeOf(Type.LargeLandscape)) {
         PreviewContent()
     }
 }
