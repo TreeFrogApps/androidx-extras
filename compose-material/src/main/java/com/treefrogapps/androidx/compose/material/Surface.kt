@@ -1,7 +1,9 @@
 package com.treefrogapps.androidx.compose.material
 
+import androidx.compose.material.LocalAbsoluteElevation
 import androidx.compose.material.LocalElevationOverlay
 import androidx.compose.material.MaterialTheme
+import androidx.compose.material.primarySurface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.Dp
@@ -19,8 +21,11 @@ fun surfaceColorAtElevation(
     elevation: Dp = 0.dp
 ): Color =
     LocalElevationOverlay.current
-        ?.apply(color = MaterialTheme.colors.surface, elevation)
-        ?: MaterialTheme.colors.surface
+        ?.takeIf { MaterialTheme.colors.primarySurface == MaterialTheme.colors.surface }
+        ?.apply(
+            color = MaterialTheme.colors.surface,
+            elevation = LocalAbsoluteElevation.current + elevation
+        ) ?: MaterialTheme.colors.surface
 
 /**
  * Calculate the color at [elevation].
@@ -34,5 +39,7 @@ fun colorAtElevation(
     elevation: Dp = 0.dp
 ): Color =
     LocalElevationOverlay.current
-        ?.apply(color = color, elevation)
-        ?: color
+        ?.apply(
+            color = color,
+            elevation = LocalAbsoluteElevation.current + elevation
+        ) ?: color
