@@ -23,7 +23,7 @@ import kotlinx.coroutines.launch
  * these devices.
  *
  * This implementation also adds [LocalWindow] as a [CompositionLocalProvider] which can then be
- * referenced by  the client.
+ * referenced by  the client.  This is null by default.
  */
 fun ComponentActivity.setContent(
     parent: CompositionContext? = null,
@@ -44,7 +44,6 @@ fun ComponentActivity.setContent(
     }
 }
 
-
-val LocalWindow = staticCompositionLocalOf<Window> {
-    error("CompositionLocal LocalView not present")
+val LocalWindow = staticCompositionLocalOf<Window?> {
+    null
 }
