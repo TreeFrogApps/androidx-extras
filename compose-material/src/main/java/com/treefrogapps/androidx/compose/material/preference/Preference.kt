@@ -41,7 +41,6 @@ import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
 import com.treefrogapps.androidx.compose.material.R
 import com.treefrogapps.androidx.compose.material.theme.MaterialThemeExtended
 import com.treefrogapps.androidx.compose.material.theme.Theme
@@ -74,11 +73,13 @@ fun CorePreference(
         exit = fadeOut(),
         visible = isVisible
     ) {
-        Column(modifier = Modifier
-            .fillMaxWidth()
-            .clickable(
-                enabled = enabled,
-                onClick = onClick)
+        Column(
+            modifier = Modifier
+                .fillMaxWidth()
+                .clickable(
+                    enabled = enabled,
+                    onClick = onClick
+                )
         ) {
             Row(
                 modifier = Modifier.padding(all = Theme.dimens.spacing.normal),
@@ -91,7 +92,8 @@ fun CorePreference(
                             .padding(end = Theme.dimens.spacing.normal),
                         painter = ic,
                         tint = iconColor,
-                        contentDescription = title)
+                        contentDescription = title
+                    )
                 }
                 Column(
                     modifier = Modifier.weight(weight = 1.0F)
@@ -101,7 +103,8 @@ fun CorePreference(
                         overflow = TextOverflow.Ellipsis,
                         maxLines = 1,
                         style = Theme.extendedTypography.large,
-                        color = titleColor)
+                        color = titleColor
+                    )
                     summary?.run {
                         Text(
                             modifier = Modifier.padding(top = Theme.dimens.spacing.tiny),
@@ -109,7 +112,8 @@ fun CorePreference(
                             overflow = TextOverflow.Ellipsis,
                             maxLines = 2,
                             style = Theme.extendedTypography.small,
-                            color = summaryColor)
+                            color = summaryColor
+                        )
                     }
                     information?.run {
                         Text(
@@ -118,7 +122,8 @@ fun CorePreference(
                             overflow = TextOverflow.Ellipsis,
                             maxLines = 1,
                             style = Theme.extendedTypography.medium,
-                            color = iconColor)
+                            color = iconColor
+                        )
                     }
                 }
                 innerContent()
@@ -136,19 +141,20 @@ fun PreferenceGroup(
     groupContent: @Composable ColumnScope.() -> Unit
 ) {
     Column(
-        modifier = Modifier
-            .fillMaxWidth()
+        modifier = Modifier.fillMaxWidth()
     ) {
         Text(
             modifier = Modifier.padding(
                 top = Theme.dimens.spacing.normal,
                 start = Theme.dimens.spacing.normal + Theme.dimens.icon.big,
-                end = Theme.dimens.spacing.normal),
+                end = Theme.dimens.spacing.normal
+            ),
             text = title,
             color = titleColor,
             style = Theme.typography.body2,
             overflow = TextOverflow.Ellipsis,
-            maxLines = 1)
+            maxLines = 1
+        )
 
         groupContent()
 
@@ -193,7 +199,8 @@ object PreferenceDefaults {
         titleColor = titleColor,
         summaryColor = summaryColor,
         iconColor = iconColor,
-        disabledColor = disabledColor)
+        disabledColor = disabledColor
+    )
 }
 
 @Stable
@@ -241,9 +248,7 @@ private class DefaultPreferenceColors(
         if (titleColor != other.titleColor) return false
         if (summaryColor != other.summaryColor) return false
         if (iconColor != other.iconColor) return false
-        if (disabledColor != other.disabledColor) return false
-
-        return true
+        return disabledColor == other.disabledColor
     }
 
     override fun hashCode(): Int {
@@ -258,7 +263,8 @@ private class DefaultPreferenceColors(
 
 @Preview(
     showBackground = true,
-    uiMode = UI_MODE_NIGHT_NO)
+    uiMode = UI_MODE_NIGHT_NO
+)
 @Composable
 private fun CorePreferencePreview() {
     MaterialThemeExtended(windowSize = windowSizeOf()) {
@@ -297,7 +303,8 @@ private fun CorePreferencePreview() {
 
 @Preview(
     showBackground = true,
-    uiMode = UI_MODE_NIGHT_YES)
+    uiMode = UI_MODE_NIGHT_YES
+)
 @Composable
 private fun CorePreferenceDarkPreview() {
     MaterialThemeExtended(windowSize = windowSizeOf()) {
@@ -336,7 +343,8 @@ private fun CorePreferenceDarkPreview() {
 
 @Preview(
     showBackground = true,
-    uiMode = UI_MODE_NIGHT_NO)
+    uiMode = UI_MODE_NIGHT_NO
+)
 @Composable
 private fun PreferenceGroupPreview() {
     MaterialThemeExtended(windowSize = windowSizeOf()) {
