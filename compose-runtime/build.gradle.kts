@@ -66,7 +66,7 @@ publishing {
         register<MavenPublication>(name = "release") {
             groupId = "com.treefrogapps.androidx.compose"
             artifactId = "compose-runtime"
-            version = "1.5.0"
+            version = "1.6.0"
 
             afterEvaluate {
                 from(components["release"])
@@ -86,6 +86,8 @@ dependencies {
     implementation(libs.androidx.compose.ui.tooling.preview)
     implementation(libs.androidx.compose.foundation)
     implementation(libs.androidx.compose.runtime)
+
+    implementation(libs.androidx.lifecycle.ktx)
 
     debugImplementation(libs.androidx.compose.ui.tooling)
 }
