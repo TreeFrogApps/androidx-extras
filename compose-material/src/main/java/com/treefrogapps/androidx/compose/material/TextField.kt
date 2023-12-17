@@ -1,6 +1,12 @@
 package com.treefrogapps.androidx.compose.material
 
-import androidx.compose.animation.*
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.EnterTransition
+import androidx.compose.animation.ExitTransition
+import androidx.compose.animation.expandVertically
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
+import androidx.compose.animation.shrinkVertically
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Column
@@ -12,7 +18,15 @@ import androidx.compose.foundation.relocation.bringIntoViewRequester
 import androidx.compose.foundation.shape.ZeroCornerSize
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.material.*
+import androidx.compose.material.Icon
+import androidx.compose.material.IconButton
+import androidx.compose.material.LocalTextStyle
+import androidx.compose.material.MaterialTheme
+import androidx.compose.material.OutlinedTextField
+import androidx.compose.material.Text
+import androidx.compose.material.TextField
+import androidx.compose.material.TextFieldColors
+import androidx.compose.material.TextFieldDefaults
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Warning
 import androidx.compose.runtime.Composable
@@ -70,17 +84,18 @@ fun TextInputField(
     val hasError = remember(text) { error != null }
 
     Column(
-        modifier = Modifier.bringIntoViewWhenFocused()
+        modifier = modifier.bringIntoViewWhenFocused()
     ) {
         TextField(
-            modifier = modifier,
+            modifier = Modifier.fillMaxWidth(),
             value = text,
             textStyle = textStyle,
             enabled = enabled,
             label = {
                 Text(
                     text = labelText,
-                    modifier = Modifier.padding(Theme.dimens.spacing.tiny))
+                    modifier = Modifier.padding(Theme.dimens.spacing.tiny)
+                )
             },
             onValueChange = { text ->
                 onTextChanged(text)
@@ -93,7 +108,8 @@ fun TextInputField(
                     Icon(
                         imageVector = Icons.Filled.Warning,
                         contentDescription = errorContentDescription,
-                        tint = MaterialTheme.colors.error)
+                        tint = MaterialTheme.colors.error
+                    )
                 } else {
                     trailingIcon?.invoke()
                 }
@@ -107,10 +123,12 @@ fun TextInputField(
             visualTransformation = visualTransformation,
             interactionSource = interactionSource,
             shape = shape,
-            colors = colors)
+            colors = colors
+        )
         ErrorText(
             error = error,
-            hasError = hasError)
+            hasError = hasError
+        )
     }
 }
 
@@ -142,19 +160,20 @@ fun TextInputField(
     val hasError = remember(textFieldValue) { error != null }
 
     Column(
-        modifier = Modifier.bringIntoViewWhenFocused {
+        modifier = modifier.bringIntoViewWhenFocused {
             onTextChanged(textFieldValue.copy(selection = TextRange(index = textFieldValue.text.length)))
         }
     ) {
         TextField(
-            modifier = modifier,
+            modifier = Modifier.fillMaxWidth(),
             value = textFieldValue,
             textStyle = textStyle,
             enabled = enabled,
             label = {
                 Text(
                     text = labelText,
-                    modifier = Modifier.padding(Theme.dimens.spacing.tiny))
+                    modifier = Modifier.padding(Theme.dimens.spacing.tiny)
+                )
             },
             onValueChange = { text ->
                 onTextChanged(text)
@@ -167,7 +186,8 @@ fun TextInputField(
                     Icon(
                         imageVector = Icons.Filled.Warning,
                         contentDescription = errorContentDescription,
-                        tint = MaterialTheme.colors.error)
+                        tint = MaterialTheme.colors.error
+                    )
                 } else {
                     trailingIcon?.invoke()
                 }
@@ -181,10 +201,12 @@ fun TextInputField(
             visualTransformation = visualTransformation,
             interactionSource = interactionSource,
             shape = shape,
-            colors = colors)
+            colors = colors
+        )
         ErrorText(
             error = error,
-            hasError = hasError)
+            hasError = hasError
+        )
     }
 }
 
@@ -215,19 +237,20 @@ fun OutlinedTextInputField(
 ) {
 
     Column(
-        Modifier.bringIntoViewWhenFocused {
+        modifier.bringIntoViewWhenFocused {
             onTextChanged(textFieldValue.copy(selection = TextRange(index = textFieldValue.text.length)))
         }
     ) {
         OutlinedTextField(
-            modifier = modifier,
+            modifier = Modifier.fillMaxWidth(),
             value = textFieldValue,
             textStyle = textStyle,
             enabled = enabled,
             label = {
                 Text(
                     text = labelText,
-                    modifier = Modifier.padding(Theme.dimens.spacing.tiny))
+                    modifier = Modifier.padding(Theme.dimens.spacing.tiny)
+                )
             },
             onValueChange = { text ->
                 onTextChanged(text)
@@ -240,7 +263,8 @@ fun OutlinedTextInputField(
                     Icon(
                         imageVector = Icons.Filled.Warning,
                         contentDescription = errorContentDescription,
-                        tint = MaterialTheme.colors.error)
+                        tint = MaterialTheme.colors.error
+                    )
                 } else {
                     trailingIcon?.invoke()
                 }
@@ -254,10 +278,12 @@ fun OutlinedTextInputField(
             visualTransformation = visualTransformation,
             interactionSource = interactionSource,
             shape = shape,
-            colors = colors)
+            colors = colors
+        )
         ErrorText(
             error = error,
-            hasError = hasError)
+            hasError = hasError
+        )
     }
 }
 
@@ -288,17 +314,18 @@ fun OutlinedTextInputField(
 ) {
 
     Column(
-        modifier = Modifier.bringIntoViewWhenFocused()
+        modifier = modifier.bringIntoViewWhenFocused()
     ) {
         OutlinedTextField(
-            modifier = modifier,
+            modifier = Modifier.fillMaxWidth(),
             value = text,
             textStyle = textStyle,
             enabled = enabled,
             label = {
                 Text(
                     text = labelText,
-                    modifier = Modifier.padding(Theme.dimens.spacing.tiny))
+                    modifier = Modifier.padding(Theme.dimens.spacing.tiny)
+                )
             },
             onValueChange = { text ->
                 onTextChanged(text)
@@ -311,7 +338,8 @@ fun OutlinedTextInputField(
                     Icon(
                         imageVector = Icons.Filled.Warning,
                         contentDescription = errorContentDescription,
-                        tint = MaterialTheme.colors.error)
+                        tint = MaterialTheme.colors.error
+                    )
                 } else {
                     trailingIcon?.invoke()
                 }
@@ -325,10 +353,12 @@ fun OutlinedTextInputField(
             visualTransformation = visualTransformation,
             interactionSource = interactionSource,
             shape = shape,
-            colors = colors)
+            colors = colors
+        )
         ErrorText(
             error = error,
-            hasError = hasError)
+            hasError = hasError
+        )
     }
 }
 
@@ -355,18 +385,19 @@ fun OutlinedPasswordTextInputField(
     var passwordVisible by rememberSaveable { mutableStateOf(false) }
 
     Column(
-        Modifier.bringIntoViewWhenFocused {
+        modifier.bringIntoViewWhenFocused {
             onTextChanged(passwordValue.copy(selection = TextRange(index = passwordValue.text.length)))
         }) {
         OutlinedTextField(
-            modifier = modifier,
+            modifier = Modifier.fillMaxWidth(),
             value = passwordValue,
             textStyle = textStyle,
             enabled = enabled,
             label = {
                 Text(
                     text = labelText,
-                    modifier = Modifier.padding(Theme.dimens.spacing.tiny))
+                    modifier = Modifier.padding(Theme.dimens.spacing.tiny)
+                )
             },
             onValueChange = { text ->
                 onTextChanged(text)
@@ -390,10 +421,12 @@ fun OutlinedPasswordTextInputField(
             keyboardActions = keyboardActions,
             shape = shape,
             interactionSource = interactionSource,
-            colors = colors)
+            colors = colors
+        )
         ErrorText(
             error = error,
-            hasError = hasError)
+            hasError = hasError
+        )
     }
 }
 
@@ -421,17 +454,18 @@ fun OutlinedPasswordTextInputField(
     var passwordVisible by rememberSaveable { mutableStateOf(false) }
 
     Column(
-        modifier = Modifier.bringIntoViewWhenFocused()
+        modifier = modifier.bringIntoViewWhenFocused()
     ) {
         OutlinedTextField(
-            modifier = modifier,
+            modifier = Modifier.fillMaxWidth(),
             value = password,
             textStyle = textStyle,
             enabled = enabled,
             label = {
                 Text(
                     text = labelText,
-                    modifier = Modifier.padding(Theme.dimens.spacing.tiny))
+                    modifier = Modifier.padding(Theme.dimens.spacing.tiny)
+                )
             },
             onValueChange = { text ->
                 onTextChanged(text)
@@ -455,10 +489,12 @@ fun OutlinedPasswordTextInputField(
             keyboardActions = keyboardActions,
             shape = shape,
             interactionSource = interactionSource,
-            colors = colors)
+            colors = colors
+        )
         ErrorText(
             error = error,
-            hasError = hasError)
+            hasError = hasError
+        )
     }
 }
 
@@ -485,19 +521,20 @@ fun PasswordTextInputField(
     val hasError = remember(passwordValue) { error != null }
 
     Column(
-        Modifier.bringIntoViewWhenFocused {
+        modifier.bringIntoViewWhenFocused {
             onTextChanged(passwordValue.copy(selection = TextRange(index = passwordValue.text.length)))
         }
     ) {
         TextField(
-            modifier = modifier,
+            modifier = Modifier.fillMaxWidth(),
             value = passwordValue,
             textStyle = textStyle,
             enabled = enabled,
             label = {
                 Text(
                     text = labelText,
-                    modifier = Modifier.padding(Theme.dimens.spacing.tiny))
+                    modifier = Modifier.padding(Theme.dimens.spacing.tiny)
+                )
             },
             onValueChange = { text ->
                 onTextChanged(text)
@@ -521,10 +558,12 @@ fun PasswordTextInputField(
             keyboardActions = keyboardActions,
             interactionSource = interactionSource,
             shape = shape,
-            colors = colors)
+            colors = colors
+        )
         ErrorText(
             error = error,
-            hasError = hasError)
+            hasError = hasError
+        )
     }
 }
 
@@ -551,17 +590,18 @@ fun PasswordTextInputField(
     val hasError = remember(password) { error != null }
 
     Column(
-        modifier = Modifier.bringIntoViewWhenFocused()
+        modifier = modifier.bringIntoViewWhenFocused()
     ) {
         TextField(
-            modifier = modifier,
+            modifier = Modifier.fillMaxWidth(),
             value = password,
             textStyle = textStyle,
             enabled = enabled,
             label = {
                 Text(
                     text = labelText,
-                    modifier = Modifier.padding(Theme.dimens.spacing.tiny))
+                    modifier = Modifier.padding(Theme.dimens.spacing.tiny)
+                )
             },
             onValueChange = { text ->
                 onTextChanged(text)
@@ -585,10 +625,12 @@ fun PasswordTextInputField(
             keyboardActions = keyboardActions,
             interactionSource = interactionSource,
             shape = shape,
-            colors = colors)
+            colors = colors
+        )
         ErrorText(
             error = error,
-            hasError = hasError)
+            hasError = hasError
+        )
     }
 }
 
@@ -628,7 +670,8 @@ fun ErrorTextWithIcon(
                 .padding(
                     start = Theme.dimens.spacing.normal,
                     end = Theme.dimens.spacing.normal,
-                    bottom = Theme.dimens.spacing.small),
+                    bottom = Theme.dimens.spacing.small
+                ),
             verticalAlignment = Alignment.CenterVertically
         ) {
             ErrorIcon()
@@ -647,7 +690,9 @@ private fun ErrorText(error: String?) {
         overflow = TextOverflow.Ellipsis,
         modifier = Modifier.padding(
             start = Theme.dimens.spacing.small,
-            end = Theme.dimens.spacing.small))
+            end = Theme.dimens.spacing.small
+        )
+    )
 }
 
 @Composable
@@ -655,7 +700,8 @@ private fun ErrorIcon() {
     Icon(
         painter = painterResource(id = drawable.ic_error_outline),
         tint = Theme.colors.error,
-        contentDescription = stringResource(id = string.content_description_error))
+        contentDescription = stringResource(id = string.content_description_error)
+    )
 }
 
 @Composable
@@ -670,7 +716,8 @@ private fun PasswordFieldTrailingIcon(
         Icon(
             imageVector = Icons.Filled.Warning,
             contentDescription = errorContentDescription,
-            tint = MaterialTheme.colors.error)
+            tint = MaterialTheme.colors.error
+        )
     } else IconButton(
         enabled = enabled,
         onClick = onVisibilityChange
@@ -678,7 +725,8 @@ private fun PasswordFieldTrailingIcon(
         Icon(
             painter = painterResource(id = if (passwordVisible) drawable.ic_visibility else drawable.ic_visibility_off),
             tint = Color.LightGray,
-            contentDescription = stringResource(id = string.content_description_visibility))
+            contentDescription = stringResource(id = string.content_description_visibility)
+        )
     }
 }
 
