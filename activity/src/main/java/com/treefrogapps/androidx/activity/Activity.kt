@@ -4,7 +4,6 @@ import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.os.Parcelable
-import java.io.Serializable
 
 
 inline fun <reified T : Activity, V : Any> Context.launchActivity(extra: V? = null, builder: Intent.() -> Unit = {}) {
@@ -40,7 +39,6 @@ fun <V : Any> Activity.extractExtra(default: V, key: String): V =
             is Long -> getLongExtra(key, Long.MIN_VALUE)
             is Double -> getDoubleExtra(key, Double.MIN_VALUE)
             is Parcelable -> getParcelableExtra(key)
-            is Serializable -> getSerializableExtra(key)
             else -> throw IllegalArgumentException("Unknown extra type ${default::class}")
         } as? V ?: default
     }
