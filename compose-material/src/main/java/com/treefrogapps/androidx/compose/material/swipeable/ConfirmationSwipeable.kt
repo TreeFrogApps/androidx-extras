@@ -1,3 +1,5 @@
+@file:Suppress("DEPRECATION")
+
 package com.treefrogapps.androidx.compose.material.swipeable
 
 import android.content.res.Configuration.UI_MODE_NIGHT_YES
