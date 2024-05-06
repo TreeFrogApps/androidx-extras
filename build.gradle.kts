@@ -4,4 +4,4 @@ plugins {
     alias(libs.plugins.kotlin.android) apply false
 }
 
-tasks.register("clean", Delete::class.java).configure { delete(project.buildDir) }
+tasks.register("clean", Delete::class.java).configure { delete(project.layout.buildDirectory) }
