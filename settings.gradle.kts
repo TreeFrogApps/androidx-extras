@@ -1,3 +1,5 @@
+@file:Suppress("UnstableApiUsage")
+
 rootProject.name = "androidx-extras"
 
 include(":sample-app")
@@ -9,8 +11,11 @@ include(":compose-pager")
 include(":compose-paging")
 include(":compose-runtime")
 include(":compose-ui")
+include(":compose-ui-tooling")
 include(":kwork")
 include(":paging")
+
+enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")
 
 pluginManagement {
     repositories {

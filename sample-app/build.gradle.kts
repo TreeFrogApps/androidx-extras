@@ -53,8 +53,9 @@ android {
 
 dependencies {
 
-    implementation(project(":compose-pager"))
-    implementation(project(":compose-material"))
+    implementation(projects.composePager)
+    implementation(projects.composeMaterial)
+    implementation(projects.composeUiTooling)
 
     implementation(libs.kotlinx.coroutines.android)
     implementation(libs.kotlinx.coroutines.core)

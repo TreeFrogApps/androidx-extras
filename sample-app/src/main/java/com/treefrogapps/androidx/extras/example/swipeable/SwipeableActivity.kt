@@ -4,18 +4,16 @@ import android.os.Bundle
 import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.padding
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
+import androidx.compose.material.darkColors
+import androidx.compose.material.lightColors
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Devices
-import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
 import com.treefrogapps.androidx.compose.material.swipeable.ConfirmationSwipeable
+import com.treefrogapps.androidx.compose.ui.tooling.DayNightPreview
 
 class SwipeableActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -28,12 +26,10 @@ class SwipeableActivity : ComponentActivity() {
     @OptIn(ExperimentalMaterialApi::class)
     @Composable
     private fun GesturesActivityContent() {
-        MaterialTheme {
-            Surface(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .padding(all = 8.dp)
-            ) {
+        MaterialTheme(
+            colors = if (isSystemInDarkTheme()) darkColors() else lightColors()
+        ) {
+            Surface {
                 Column {
                     ConfirmationSwipeable {
                         Log.e("Example", "Confirmed")
@@ -56,11 +52,7 @@ class SwipeableActivity : ComponentActivity() {
     }
 
     @Composable
-    @Preview(
-        showSystemUi = true,
-        showBackground = true,
-        device = Devices.PIXEL_4
-    )
+    @DayNightPreview
     private fun GesturesActivityPreview() {
         GesturesActivityContent()
     }

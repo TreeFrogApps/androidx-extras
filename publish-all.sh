@@ -8,5 +8,6 @@ compose-pager:publishReleasePublicationToGitHubPackagesRepository \
 compose-paging:publishReleasePublicationToGitHubPackagesRepository \
 compose-runtime:publishReleasePublicationToGitHubPackagesRepository \
 compose-ui:publishReleasePublicationToGitHubPackagesRepository \
+compose-ui-tooling:publishReleasePublicationToGitHubPackagesRepository \
 kwork:publishReleasePublicationToGitHubPackagesRepository \
 paging:publishReleasePublicationToGitHubPackagesRepository
