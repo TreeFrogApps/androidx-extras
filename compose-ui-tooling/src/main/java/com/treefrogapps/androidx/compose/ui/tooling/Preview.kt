@@ -60,6 +60,11 @@ annotation class DayNightFoldablePreview
 )
 annotation class DayNightTabletPreview
 
+@Retention(AnnotationRetention.BINARY)
+@Target(
+    AnnotationTarget.ANNOTATION_CLASS,
+    AnnotationTarget.FUNCTION
+)
 @DayNightPreview
 @DayNightFoldablePreview
 @DayNightTabletPreview
