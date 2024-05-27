@@ -52,7 +52,7 @@ dependencies {
 
     implementation(projects.composePager)
     implementation(projects.composeMaterial)
-    implementation(projects.composeUiTooling)
+    implementation(projects.composeUiToolingPreview)
 
     implementation(libs.kotlinx.coroutines.android)
     implementation(libs.kotlinx.coroutines.core)

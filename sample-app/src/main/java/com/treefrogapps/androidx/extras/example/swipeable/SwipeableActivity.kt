@@ -13,7 +13,7 @@ import androidx.compose.material.darkColors
 import androidx.compose.material.lightColors
 import androidx.compose.runtime.Composable
 import com.treefrogapps.androidx.compose.material.swipeable.ConfirmationSwipeable
-import com.treefrogapps.androidx.compose.ui.tooling.DayNightPreview
+import com.treefrogapps.androidx.compose.ui.tooling.preview.DayNightPreview
 
 class SwipeableActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

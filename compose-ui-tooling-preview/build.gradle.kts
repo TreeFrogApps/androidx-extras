@@ -6,7 +6,7 @@ plugins {
 }
 
 android {
-    namespace = "com.treefrogapps.androidx.compose.ui.tooling"
+    namespace = "com.treefrogapps.androidx.compose.ui.tooling.preview"
     compileSdk = libs.versions.android.compilesdk.get().toInt()
     buildToolsVersion = libs.versions.android.buildtools.get()
 
@@ -62,8 +62,8 @@ publishing {
     publications {
         register<MavenPublication>(name = "release") {
             groupId = "com.treefrogapps.androidx.compose"
-            artifactId = "compose-ui-tooling"
-            version = "1.0.2"
+            artifactId = "compose-ui-tooling-preview"
+            version = "1.0.0"
 
             afterEvaluate {
                 from(components["release"])

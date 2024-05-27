@@ -11,7 +11,7 @@ include(":compose-pager")
 include(":compose-paging")
 include(":compose-runtime")
 include(":compose-ui")
-include(":compose-ui-tooling")
+include(":compose-ui-tooling-preview")
 include(":kwork")
 include(":paging")
 

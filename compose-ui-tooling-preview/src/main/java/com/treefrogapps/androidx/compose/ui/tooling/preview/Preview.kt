@@ -1,4 +1,4 @@
-package com.treefrogapps.androidx.compose.ui.tooling
+package com.treefrogapps.androidx.compose.ui.tooling.preview
 
 import android.content.res.Configuration.UI_MODE_NIGHT_NO
 import android.content.res.Configuration.UI_MODE_NIGHT_YES
