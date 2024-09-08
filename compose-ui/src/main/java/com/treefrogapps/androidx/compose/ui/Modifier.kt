@@ -132,7 +132,7 @@ private fun Modifier.verticalScrollBar(
         label = "VerticalScrollbarFloatAnimation"
     )
 
-    then(drawWithContent {
+    drawWithContent {
         drawContent()
 
         val firstVisibleIndex: Int by derivedStateOf { firstVisibleItemIndex }
@@ -149,7 +149,7 @@ private fun Modifier.verticalScrollBar(
                 alpha = alpha
             )
         }
-    })
+    }
 }
 
 @Composable

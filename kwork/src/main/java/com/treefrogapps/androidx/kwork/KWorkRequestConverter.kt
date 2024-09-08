@@ -1,6 +1,12 @@
 package com.treefrogapps.androidx.kwork
 
-import androidx.work.*
+import androidx.work.Constraints
+import androidx.work.Data
+import androidx.work.NetworkType
+import androidx.work.OneTimeWorkRequest
+import androidx.work.OutOfQuotaPolicy
+import androidx.work.PeriodicWorkRequest
+import androidx.work.WorkRequest
 import androidx.work.WorkRequest.Builder
 import java.time.Duration
 
@@ -12,7 +18,7 @@ object KWorkRequestConverter : (KWorkRequest) -> WorkRequest {
     private fun KWorkRequest.toBuilder(): Builder<*, *> =
         when {
             isOneshot -> OneTimeWorkRequest.Builder(worker.java)
-            else      -> PeriodicWorkRequest.Builder(worker.java, Duration.ofMillis(periodicIntervalMillis))
+            else -> PeriodicWorkRequest.Builder(worker.java, Duration.ofMillis(periodicIntervalMillis))
         }.setInitialDelay(Duration.ofMillis(initialDelay))
             .addTag(KWorkManager.KWorkTag)
             .addRequestTag(request = this)
@@ -28,12 +34,15 @@ object KWorkRequestConverter : (KWorkRequest) -> WorkRequest {
             Constraints.Builder()
                 .setRequiresStorageNotLow(request.requiresStorageNotLow)
                 .setRequiredNetworkType(if (request.requiresNetwork) NetworkType.CONNECTED else NetworkType.NOT_REQUIRED)
-                .build())
+                .build()
+        )
 
     private fun Builder<*, *>.setRequestData(request: KWorkRequest): Builder<*, *> =
-        setInputData(Data.Builder()
-            .putAll(request.inputData)
-            .build())
+        setInputData(
+            Data.Builder()
+                .putAll(request.inputData)
+                .build()
+        )
 
     private fun Builder<*, *>.setExpeditedIfPossible(request: KWorkRequest): Builder<*, *> =
         if (request.isOneshot) {

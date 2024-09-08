@@ -10,7 +10,13 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
+import androidx.compose.runtime.snapshotFlow
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -18,7 +24,14 @@ import androidx.compose.ui.tooling.preview.Devices
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import com.treefrogapps.androidx.compose.pager.*
+import com.treefrogapps.androidx.compose.pager.HorizontalParallaxPageIndicator
+import com.treefrogapps.androidx.compose.pager.HorizontalParallaxPager
+import com.treefrogapps.androidx.compose.pager.ParallaxEffect
+import com.treefrogapps.androidx.compose.pager.ParallaxMode
+import com.treefrogapps.androidx.compose.pager.ParallaxPage
+import com.treefrogapps.androidx.compose.pager.VerticalParallaxPageIndicator
+import com.treefrogapps.androidx.compose.pager.VerticalParallaxPager
+import com.treefrogapps.androidx.compose.pager.rememberParallaxPagerState
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
@@ -112,11 +125,11 @@ class ParallaxActivity : ComponentActivity() {
                             ::Triple
                         ).onEach { (page, _, rtOffset) ->
                             color = when (page) {
-                                0    -> Color.Yellow
-                                1    -> Color.Red
-                                2    -> Color.Cyan
-                                3    -> Color.Magenta
-                                4    -> Color.Blue
+                                0 -> Color.Yellow
+                                1 -> Color.Red
+                                2 -> Color.Cyan
+                                3 -> Color.Magenta
+                                4 -> Color.Blue
                                 else -> Color.Yellow
                             }.copy(alpha = max(a = 0.0F, b = 0.25F - abs(rtOffset) / 2))
                         }.launchIn(scope = this)
@@ -151,11 +164,11 @@ class ParallaxActivity : ComponentActivity() {
                             ::Triple
                         ).onEach { (page, _, rtOffset) ->
                             color = when (page) {
-                                0    -> Color.Yellow
-                                1    -> Color.Red
-                                2    -> Color.Cyan
-                                3    -> Color.Magenta
-                                4    -> Color.Blue
+                                0 -> Color.Yellow
+                                1 -> Color.Red
+                                2 -> Color.Cyan
+                                3 -> Color.Magenta
+                                4 -> Color.Blue
                                 else -> Color.Yellow
                             }.copy(alpha = max(a = 0.0F, b = 0.25F - abs(rtOffset) / 2))
                         }.launchIn(scope = this)

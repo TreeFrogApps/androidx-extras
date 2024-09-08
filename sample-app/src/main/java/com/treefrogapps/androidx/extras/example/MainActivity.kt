@@ -56,8 +56,10 @@ class MainActivity : ComponentActivity() {
                 .fillMaxWidth()
                 .padding(vertical = 8.dp),
             onClick = {
-                context.startActivity(Intent(context, T::class.java)
-                    .setClassName(context, T::class.java.canonicalName.orEmpty()))
+                context.startActivity(
+                    Intent(context, T::class.java)
+                        .setClassName(context, T::class.java.canonicalName.orEmpty())
+                )
             }
         ) {
             Text(text = text)

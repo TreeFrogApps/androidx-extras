@@ -49,7 +49,8 @@ fun RangePreference(
     sliderTitle: String,
     sliderColors: SliderColors = SliderDefaults.colors(
         thumbColor = Theme.colors.secondary,
-        activeTickColor = Theme.colors.secondary),
+        activeTickColor = Theme.colors.secondary
+    ),
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() }
 ) {
 
@@ -111,7 +112,8 @@ private fun RangePreferenceDialog(
             onPreferenceChange = onPreferenceChange,
             enabled = enabled,
             sliderColors = sliderColors,
-            interactionSource = interactionSource)
+            interactionSource = interactionSource
+        )
     }
 }
 
@@ -138,12 +140,14 @@ private fun RangePreferenceDialogContent(
             Text(
                 modifier = Modifier.padding(
                     start = Theme.dimens.spacing.small,
-                    bottom = Theme.dimens.spacing.normal),
+                    bottom = Theme.dimens.spacing.normal
+                ),
                 text = sliderTitle,
                 overflow = TextOverflow.Ellipsis,
                 maxLines = 1,
                 style = Theme.extendedTypography.large,
-                color = sliderTitleColor)
+                color = sliderTitleColor
+            )
             Slider(
                 value = current,
                 onValueChange = { value -> onPreferenceChange?.invoke(value) },
@@ -151,7 +155,8 @@ private fun RangePreferenceDialogContent(
                 valueRange = min..max,
                 steps = steps,
                 colors = sliderColors,
-                interactionSource = interactionSource)
+                interactionSource = interactionSource
+            )
             Text(
                 modifier = Modifier
                     .align(alignment = Alignment.End)
@@ -160,7 +165,8 @@ private fun RangePreferenceDialogContent(
                 overflow = TextOverflow.Ellipsis,
                 maxLines = 1,
                 style = Theme.typography.body1,
-                color = sliderColors.thumbColor(enabled = enabled).value)
+                color = sliderColors.thumbColor(enabled = enabled).value
+            )
         }
     }
 }
@@ -168,7 +174,8 @@ private fun RangePreferenceDialogContent(
 @Preview(
     showBackground = true,
     showSystemUi = true,
-    uiMode = Configuration.UI_MODE_NIGHT_NO)
+    uiMode = Configuration.UI_MODE_NIGHT_NO
+)
 @Composable
 private fun RangePreferencePreview() {
     MaterialThemeExtended(windowSize = windowSizeOf()) {
@@ -225,7 +232,8 @@ private fun RangePreferencePreview() {
 @Preview(
     showBackground = true,
     showSystemUi = true,
-    uiMode = Configuration.UI_MODE_NIGHT_YES)
+    uiMode = Configuration.UI_MODE_NIGHT_YES
+)
 @Composable
 private fun RangePreferenceDarkPreview() {
     MaterialThemeExtended(windowSize = windowSizeOf()) {
@@ -282,7 +290,8 @@ private fun RangePreferenceDarkPreview() {
 
 @Preview(
     showBackground = true,
-    showSystemUi = true)
+    showSystemUi = true
+)
 @Composable
 private fun RangePreferenceDialogContentPreview() {
     MaterialThemeExtended(windowSize = windowSizeOf()) {

@@ -4,7 +4,8 @@ import androidx.paging.PagingSource
 
 data class IndexedKey(
     val page: Int,
-    val offset: Int)
+    val offset: Int
+)
 
 private fun PagingSource.LoadParams<IndexedKey>.defaultPrevRefreshKey(loadedSize: Int): () -> IndexedKey? = {
     key?.run {
@@ -56,15 +57,20 @@ fun <V : Any> PagingSource.LoadParams<IndexedKey>.toLoadResult(
             refresh(
                 prevKey = prevKeyRefresh,
                 nextKey = nextKeyRefresh,
-                loaded = loaded)
-        is PagingSource.LoadParams.Append  ->
+                loaded = loaded
+            )
+
+        is PagingSource.LoadParams.Append ->
             append(
                 nextKey = nextKeyAppend,
-                loaded = loaded)
+                loaded = loaded
+            )
+
         is PagingSource.LoadParams.Prepend ->
             prepend(
                 nextKey = nextKeyPrepend,
-                loaded = loaded)
+                loaded = loaded
+            )
     }
 
 private fun <V : Any> refresh(
@@ -75,7 +81,8 @@ private fun <V : Any> refresh(
     PagingSource.LoadResult.Page(
         data = loaded,
         prevKey = prevKey(),
-        nextKey = nextKey())
+        nextKey = nextKey()
+    )
 
 private fun <V : Any> append(
     nextKey: () -> IndexedKey?,
@@ -84,7 +91,8 @@ private fun <V : Any> append(
     PagingSource.LoadResult.Page(
         data = loaded,
         prevKey = null,
-        nextKey = nextKey())
+        nextKey = nextKey()
+    )
 
 private fun <V : Any> prepend(
     nextKey: () -> IndexedKey?,
@@ -93,4 +101,5 @@ private fun <V : Any> prepend(
     PagingSource.LoadResult.Page(
         data = loaded,
         prevKey = null,
-        nextKey = nextKey())
+        nextKey = nextKey()
+    )

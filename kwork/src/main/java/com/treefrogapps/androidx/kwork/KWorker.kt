@@ -7,7 +7,11 @@ import android.content.pm.ServiceInfo
 import android.os.Build
 import androidx.annotation.ChecksSdkIntAtLeast
 import androidx.core.content.getSystemService
-import androidx.work.*
+import androidx.work.CoroutineWorker
+import androidx.work.Data
+import androidx.work.ForegroundInfo
+import androidx.work.WorkerParameters
+import androidx.work.workDataOf
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.sync.Semaphore
 import kotlinx.coroutines.sync.withPermit
@@ -38,11 +42,13 @@ abstract class KWorker(
             ForegroundInfo(
                 notificationId,
                 createNotification(),
-                ServiceInfo.FOREGROUND_SERVICE_TYPE_DATA_SYNC)
+                ServiceInfo.FOREGROUND_SERVICE_TYPE_DATA_SYNC
+            )
         } else {
             ForegroundInfo(
                 notificationId,
-                createNotification())
+                createNotification()
+            )
         }
     }
 
@@ -65,8 +71,8 @@ abstract class KWorker(
         failureData: Data = Data.EMPTY,
         retryOnFailure: (Throwable?) -> Boolean = { true },
     ): Result = when {
-        isSuccess                         -> Result.success(successData)
+        isSuccess -> Result.success(successData)
         retryOnFailure(exceptionOrNull()) -> Result.retry()
-        else                              -> Result.failure(failureData)
+        else -> Result.failure(failureData)
     }
 }

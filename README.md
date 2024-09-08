@@ -40,7 +40,8 @@ Simple library that extends Jetpack compose ui components
 
 ##### activity
 
-Activity Module are a collection of helper functions to assist using Jetpack the `androidx.activity.*`
+Activity Module are a collection of helper functions to assist using Jetpack the
+`androidx.activity.*`
 library
 
 ##### kwork

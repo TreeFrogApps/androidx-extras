@@ -92,7 +92,8 @@ fun MaterialThemeExtended(
             colors = colors,
             typography = typography,
             shapes = shapes,
-            content = content)
+            content = content
+        )
     }
 }
 
@@ -114,15 +115,18 @@ private fun MaterialThemeExtendedInternal(
             LocalWindowSize provides rememberedWindowSize,
             LocalAppDimens provides rememberedDimens,
             LocalExtendedTypography provides extendedTypography,
-            LocalExtendedTypographyColors provides rememberedTypographyColors),
-        content = content)
+            LocalExtendedTypographyColors provides rememberedTypographyColors
+        ),
+        content = content
+    )
 }
 
 @Preview(
     name = "Tablet",
     showSystemUi = true,
     uiMode = Configuration.UI_MODE_NIGHT_NO,
-    device = Devices.PIXEL_C)
+    device = Devices.PIXEL_C
+)
 @Composable
 fun ThemedContentPreview() {
     MaterialThemeExtendedInternal(windowSize = windowSizeOf(Type.LargeLandscape)) {
@@ -134,7 +138,8 @@ fun ThemedContentPreview() {
     name = "Tablet Dark Mode",
     showSystemUi = true,
     uiMode = Configuration.UI_MODE_NIGHT_YES,
-    device = Devices.PIXEL_C)
+    device = Devices.PIXEL_C
+)
 @Composable
 fun ThemedContentDarkModePreview() {
     MaterialThemeExtendedInternal(windowSize = windowSizeOf(Type.LargeLandscape)) {
@@ -146,10 +151,12 @@ fun ThemedContentDarkModePreview() {
 fun PreviewContent() {
     Row(modifier = Modifier.fillMaxSize()) {
 
-        Column(modifier = Modifier
-            .weight(1.0F)
-            .verticalScroll(rememberScrollState())
-            .padding(Theme.dimens.spacing.large)) {
+        Column(
+            modifier = Modifier
+                .weight(1.0F)
+                .verticalScroll(rememberScrollState())
+                .padding(Theme.dimens.spacing.large)
+        ) {
 
             Text("Window ${Theme.windowSize.name}", color = Theme.colors.onBackground)
             Spacer(modifier = Modifier.height(Theme.dimens.spacing.normal))
@@ -178,241 +185,291 @@ fun PreviewContent() {
             Text(text = "Dimen icon thumbnail ${Theme.dimens.icon.thumbnail}", color = Theme.colors.onBackground)
         }
 
-        Column(modifier = Modifier
-            .weight(1.0F)
-            .verticalScroll(rememberScrollState())
-            .padding(Theme.dimens.spacing.large)) {
+        Column(
+            modifier = Modifier
+                .weight(1.0F)
+                .verticalScroll(rememberScrollState())
+                .padding(Theme.dimens.spacing.large)
+        ) {
             Text(
                 text = "Small Text Primary",
                 style = Theme.extendedTypography.small,
-                color = Theme.extendedTypographyColors.primary)
+                color = Theme.extendedTypographyColors.primary
+            )
 
             Text(
                 text = "Small Bold Text Primary",
                 style = Theme.extendedTypography.smallBold,
-                color = Theme.extendedTypographyColors.primary)
+                color = Theme.extendedTypographyColors.primary
+            )
 
             Text(
                 text = "Medium Text Primary",
                 style = Theme.extendedTypography.medium,
-                color = Theme.extendedTypographyColors.primary)
+                color = Theme.extendedTypographyColors.primary
+            )
 
             Text(
                 text = "Medium Bold Text Primary",
                 style = Theme.extendedTypography.mediumBold,
-                color = Theme.extendedTypographyColors.primary)
+                color = Theme.extendedTypographyColors.primary
+            )
 
             Text(
                 text = "Large Text Primary",
                 style = Theme.extendedTypography.large,
-                color = Theme.extendedTypographyColors.primary)
+                color = Theme.extendedTypographyColors.primary
+            )
 
             Text(
                 text = "Large Bold Text Primary",
                 style = Theme.extendedTypography.largeBold,
-                color = Theme.extendedTypographyColors.primary)
+                color = Theme.extendedTypographyColors.primary
+            )
 
-            Column(modifier = Modifier
-                .wrapContentHeight()
-                .background(color = Theme.colors.onBackground)) {
+            Column(
+                modifier = Modifier
+                    .wrapContentHeight()
+                    .background(color = Theme.colors.onBackground)
+            ) {
 
                 Text(
                     text = "Small Text Primary Inverse",
                     style = Theme.extendedTypography.small,
-                    color = Theme.extendedTypographyColors.primaryInverse)
+                    color = Theme.extendedTypographyColors.primaryInverse
+                )
 
                 Text(
                     text = "Small Bold Text Primary Inverse",
                     style = Theme.extendedTypography.smallBold,
-                    color = Theme.extendedTypographyColors.primaryInverse)
+                    color = Theme.extendedTypographyColors.primaryInverse
+                )
 
                 Text(
                     text = "Medium Text Primary Inverse",
                     style = Theme.extendedTypography.medium,
-                    color = Theme.extendedTypographyColors.primaryInverse)
+                    color = Theme.extendedTypographyColors.primaryInverse
+                )
 
                 Text(
                     text = "Medium Bold Text Primary Inverse",
                     style = Theme.extendedTypography.mediumBold,
-                    color = Theme.extendedTypographyColors.primaryInverse)
+                    color = Theme.extendedTypographyColors.primaryInverse
+                )
 
                 Text(
                     text = "Large Text Primary Inverse",
                     style = Theme.extendedTypography.large,
-                    color = Theme.extendedTypographyColors.primaryInverse)
+                    color = Theme.extendedTypographyColors.primaryInverse
+                )
 
                 Text(
                     text = "Large Bold Text Primary Inverse",
                     style = Theme.extendedTypography.largeBold,
-                    color = Theme.extendedTypographyColors.primaryInverse)
+                    color = Theme.extendedTypographyColors.primaryInverse
+                )
             }
 
             Text(
                 text = "Small Text Primary Variant",
                 style = Theme.extendedTypography.small,
-                color = Theme.extendedTypographyColors.primaryVariant)
+                color = Theme.extendedTypographyColors.primaryVariant
+            )
 
             Text(
                 text = "Small Bold Text Primary Variant",
                 style = Theme.extendedTypography.smallBold,
-                color = Theme.extendedTypographyColors.primaryVariant)
+                color = Theme.extendedTypographyColors.primaryVariant
+            )
 
             Text(
                 text = "Medium Text Primary Variant",
                 style = Theme.extendedTypography.medium,
-                color = Theme.extendedTypographyColors.primaryVariant)
+                color = Theme.extendedTypographyColors.primaryVariant
+            )
 
             Text(
                 text = "Medium Bold Text Primary Variant",
                 style = Theme.extendedTypography.mediumBold,
-                color = Theme.extendedTypographyColors.primaryVariant)
+                color = Theme.extendedTypographyColors.primaryVariant
+            )
 
             Text(
                 text = "Large Text Primary Variant",
                 style = Theme.extendedTypography.large,
-                color = Theme.extendedTypographyColors.primaryVariant)
+                color = Theme.extendedTypographyColors.primaryVariant
+            )
 
             Text(
                 text = "Large Bold Text Primary Variant",
                 style = Theme.extendedTypography.largeBold,
-                color = Theme.extendedTypographyColors.primaryVariant)
+                color = Theme.extendedTypographyColors.primaryVariant
+            )
 
             Text(
                 text = "Small Text Secondary",
                 style = Theme.extendedTypography.small,
-                color = Theme.extendedTypographyColors.secondary)
+                color = Theme.extendedTypographyColors.secondary
+            )
 
             Text(
                 text = "Small Bold Text Secondary",
                 style = Theme.extendedTypography.smallBold,
-                color = Theme.extendedTypographyColors.secondary)
+                color = Theme.extendedTypographyColors.secondary
+            )
 
             Text(
                 text = "Medium Text Secondary",
                 style = Theme.extendedTypography.medium,
-                color = Theme.extendedTypographyColors.secondary)
+                color = Theme.extendedTypographyColors.secondary
+            )
 
             Text(
                 text = "Medium Bold Text Secondary",
                 style = Theme.extendedTypography.mediumBold,
-                color = Theme.extendedTypographyColors.secondary)
+                color = Theme.extendedTypographyColors.secondary
+            )
 
             Text(
                 text = "Large Text Secondary",
                 style = Theme.extendedTypography.large,
-                color = Theme.extendedTypographyColors.secondary)
+                color = Theme.extendedTypographyColors.secondary
+            )
 
             Text(
                 text = "Large Bold Text Secondary",
                 style = Theme.extendedTypography.largeBold,
-                color = Theme.extendedTypographyColors.secondary)
+                color = Theme.extendedTypographyColors.secondary
+            )
 
-            Column(modifier = Modifier
-                .wrapContentHeight()
-                .background(color = Theme.colors.onBackground)) {
+            Column(
+                modifier = Modifier
+                    .wrapContentHeight()
+                    .background(color = Theme.colors.onBackground)
+            ) {
 
                 Text(
                     text = "Small Text Secondary Inverse",
                     style = Theme.extendedTypography.small,
-                    color = Theme.extendedTypographyColors.secondaryInverse)
+                    color = Theme.extendedTypographyColors.secondaryInverse
+                )
 
                 Text(
                     text = "Small Bold Text Secondary Inverse",
                     style = Theme.extendedTypography.smallBold,
-                    color = Theme.extendedTypographyColors.secondaryInverse)
+                    color = Theme.extendedTypographyColors.secondaryInverse
+                )
 
                 Text(
                     text = "Medium Text Primary Secondary Inverse",
                     style = Theme.extendedTypography.medium,
-                    color = Theme.extendedTypographyColors.secondaryInverse)
+                    color = Theme.extendedTypographyColors.secondaryInverse
+                )
 
                 Text(
                     text = "Medium Bold Text Secondary Inverse",
                     style = Theme.extendedTypography.mediumBold,
-                    color = Theme.extendedTypographyColors.secondaryInverse)
+                    color = Theme.extendedTypographyColors.secondaryInverse
+                )
 
                 Text(
                     text = "Large Text Secondary Inverse",
                     style = Theme.extendedTypography.large,
-                    color = Theme.extendedTypographyColors.secondaryInverse)
+                    color = Theme.extendedTypographyColors.secondaryInverse
+                )
 
                 Text(
                     text = "Large Bold Text Secondary Inverse",
                     style = Theme.extendedTypography.largeBold,
-                    color = Theme.extendedTypographyColors.secondaryInverse)
+                    color = Theme.extendedTypographyColors.secondaryInverse
+                )
             }
         }
 
 
-        Column(modifier = Modifier
-            .weight(1.0F)
-            .verticalScroll(rememberScrollState())
-            .padding(Theme.dimens.spacing.large)) {
+        Column(
+            modifier = Modifier
+                .weight(1.0F)
+                .verticalScroll(rememberScrollState())
+                .padding(Theme.dimens.spacing.large)
+        ) {
 
             ColorSwatch(
                 baseColor = Theme.colors.primary,
                 name = "Theme Color Primary",
-                textColor = Theme.extendedTypographyColors.primaryInverse)
+                textColor = Theme.extendedTypographyColors.primaryInverse
+            )
 
             ColorSwatch(
                 baseColor = Theme.colors.primaryVariant,
                 name = "Theme Color PrimaryVariant",
-                textColor = Theme.extendedTypographyColors.primaryInverse)
+                textColor = Theme.extendedTypographyColors.primaryInverse
+            )
 
             ColorSwatch(
                 baseColor = Theme.colors.secondary,
                 name = "Theme Color Secondary",
-                textColor = Theme.extendedTypographyColors.primaryInverse)
+                textColor = Theme.extendedTypographyColors.primaryInverse
+            )
 
             ColorSwatch(
                 baseColor = Theme.colors.secondaryVariant,
                 name = "Theme Color SecondaryVariant",
-                textColor = Theme.extendedTypographyColors.primaryInverse)
+                textColor = Theme.extendedTypographyColors.primaryInverse
+            )
 
             ColorSwatch(
                 baseColor = Theme.colors.background,
                 name = "Theme Color Background",
-                textColor = Theme.extendedTypographyColors.primary)
+                textColor = Theme.extendedTypographyColors.primary
+            )
 
             ColorSwatch(
                 baseColor = Theme.colors.surface,
                 name = "Theme Color surface",
-                textColor = Theme.extendedTypographyColors.primary)
+                textColor = Theme.extendedTypographyColors.primary
+            )
 
             ColorSwatch(
                 baseColor = Theme.colors.error,
                 name = "Theme Color Error",
-                textColor = Theme.extendedTypographyColors.primaryInverse)
+                textColor = Theme.extendedTypographyColors.primaryInverse
+            )
 
             ColorSwatch(
                 baseColor = Theme.colors.primary,
                 overlayColor = Theme.colors.onPrimary,
                 name = "Theme Color OnPrimary",
-                textColor = Theme.extendedTypographyColors.primary)
+                textColor = Theme.extendedTypographyColors.primary
+            )
 
             ColorSwatch(
                 baseColor = Theme.colors.secondary,
                 overlayColor = Theme.colors.onSecondary,
                 name = "Theme Color OnSecondary",
-                textColor = Theme.extendedTypographyColors.secondary)
+                textColor = Theme.extendedTypographyColors.secondary
+            )
 
             ColorSwatch(
                 baseColor = Theme.colors.background,
                 overlayColor = Theme.colors.onBackground,
                 name = "Theme Color OnBackground",
-                textColor = Theme.extendedTypographyColors.primaryInverse)
+                textColor = Theme.extendedTypographyColors.primaryInverse
+            )
 
             ColorSwatch(
                 baseColor = Theme.colors.surface,
                 overlayColor = Theme.colors.onSurface,
                 name = "Theme Color OnSurface",
-                textColor = Theme.extendedTypographyColors.primaryInverse)
+                textColor = Theme.extendedTypographyColors.primaryInverse
+            )
 
             ColorSwatch(
                 baseColor = Theme.colors.error,
                 overlayColor = Theme.colors.onError,
                 name = "Theme Color OnError",
-                textColor = Theme.extendedTypographyColors.primary)
+                textColor = Theme.extendedTypographyColors.primary
+            )
         }
     }
 }
@@ -422,14 +479,16 @@ private fun ColorSwatch(
     baseColor: Color,
     overlayColor: Color = baseColor,
     name: String,
-    textColor: Color) {
+    textColor: Color
+) {
     Spacer(modifier = Modifier.height(Theme.dimens.spacing.small))
 
-    Row(modifier = Modifier
-        .background(color = baseColor, shape = Theme.shapes.small)
-        .height(50.dp)
-        .fillMaxWidth()
-        .border(width = Theme.dimens.one, color = Theme.colors.surface)
+    Row(
+        modifier = Modifier
+            .background(color = baseColor, shape = Theme.shapes.small)
+            .height(50.dp)
+            .fillMaxWidth()
+            .border(width = Theme.dimens.one, color = Theme.colors.surface)
     ) {
 
         Surface(
@@ -442,7 +501,8 @@ private fun ColorSwatch(
                     .padding(Theme.dimens.spacing.small),
                 text = name,
                 style = Theme.extendedTypography.small,
-                color = textColor)
+                color = textColor
+            )
         }
     }
 }

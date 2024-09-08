@@ -1,7 +1,14 @@
 package com.treefrogapps.androidx.compose.pager
 
 import androidx.compose.foundation.Canvas
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.wrapContentHeight
+import androidx.compose.foundation.layout.wrapContentWidth
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
@@ -32,7 +39,8 @@ fun HorizontalParallaxPageIndicator(
         pageIndicatorSize = pageIndicatorSize,
         activePageIndicatorColor = activePageIndicatorColor,
         activePageIndicatorSize = activePageIndicatorSize,
-        isVertical = false)
+        isVertical = false
+    )
 }
 
 @Composable
@@ -53,7 +61,8 @@ fun VerticalParallaxPageIndicator(
         pageIndicatorSize = pageIndicatorSize,
         activePageIndicatorColor = activePageIndicatorColor,
         activePageIndicatorSize = activePageIndicatorSize,
-        isVertical = true)
+        isVertical = true
+    )
 }
 
 
@@ -85,7 +94,8 @@ private fun ParallaxPagerIndicator(
                         pageIndicatorColor = pageIndicatorColor,
                         pageIndicatorSize = pageIndicatorSize,
                         activePageIndicatorColor = activePageIndicatorColor,
-                        activePageIndicatorSize = activePageIndicatorSize)
+                        activePageIndicatorSize = activePageIndicatorSize
+                    )
                 }
             }
         } else {
@@ -104,7 +114,8 @@ private fun ParallaxPagerIndicator(
                         pageIndicatorColor = pageIndicatorColor,
                         pageIndicatorSize = pageIndicatorSize,
                         activePageIndicatorColor = activePageIndicatorColor,
-                        activePageIndicatorSize = activePageIndicatorSize)
+                        activePageIndicatorSize = activePageIndicatorSize
+                    )
                 }
             }
         }

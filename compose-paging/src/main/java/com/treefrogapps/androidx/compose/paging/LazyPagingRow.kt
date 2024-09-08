@@ -58,25 +58,30 @@ fun <T : Any> LazyPagingRow(
             pagingPrependLoadStateContent(
                 lazyPagingItems = lazyPagingItems,
                 prependLoadingContent = prependLoadingContent,
-                prependErrorContent = prependErrorContent)
+                prependErrorContent = prependErrorContent
+            )
 
             pagingItemsContent(
                 lazyPagingItems = lazyPagingItems,
                 key = key,
                 loadedItemContent = loadedItemContent,
-                loadedItemPlaceholderContent = loadedItemPlaceholderContent)
+                loadedItemPlaceholderContent = loadedItemPlaceholderContent
+            )
 
             pagingAppendLoadStateContent(
                 lazyPagingItems = lazyPagingItems,
                 appendLoadingContent = appendLoadingContent,
-                appendErrorContent = appendErrorContent)
+                appendErrorContent = appendErrorContent
+            )
         }
         PagingAnimatedVisibilityEmptyContent(
             visible = emptyVisible,
-            content = loadedEmptyContent)
+            content = loadedEmptyContent
+        )
         PagingRefreshLoadStateContent(
             lazyPagingItems = lazyPagingItems,
             loadingContent = refreshLoadingContent,
-            loadingErrorContent = refreshErrorContent)
+            loadingErrorContent = refreshErrorContent
+        )
     }
 }

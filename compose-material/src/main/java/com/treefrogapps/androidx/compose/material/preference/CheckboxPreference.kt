@@ -46,13 +46,15 @@ fun CheckboxPreference(
                 onCheckedChange = onCheckedChange,
                 enabled = enabled,
                 interactionSource = interactionSource,
-                colors = colors)
+                colors = colors
+            )
         })
 }
 
 @Preview(
     showBackground = true,
-    uiMode = Configuration.UI_MODE_NIGHT_NO)
+    uiMode = Configuration.UI_MODE_NIGHT_NO
+)
 @Composable
 private fun SwitchPreferencePreview() {
     MaterialThemeExtended(windowSize = windowSizeOf()) {
@@ -69,21 +71,24 @@ private fun SwitchPreferencePreview() {
                     onCheckedChange = { checked -> checkedA = checked },
                     title = "Switch preference field title",
                     summary = "Switch preference field summary",
-                    icon = painterResource(id = R.drawable.ic_confirmation_badge))
+                    icon = painterResource(id = R.drawable.ic_confirmation_badge)
+                )
                 CheckboxPreference(
                     checked = checkedB,
                     onCheckedChange = { checked -> checkedB = checked },
                     title = "Switch preference field title",
                     summary = "Switch preference field summary",
                     enabled = false,
-                    icon = painterResource(id = R.drawable.ic_confirmation_badge))
+                    icon = painterResource(id = R.drawable.ic_confirmation_badge)
+                )
                 CheckboxPreference(
                     checked = checkedC,
                     onCheckedChange = { checked -> checkedC = checked },
                     isVisible = isVisible,
                     title = "Switch preference field title",
                     summary = "Switch preference field summary",
-                    icon = painterResource(id = R.drawable.ic_confirmation_badge))
+                    icon = painterResource(id = R.drawable.ic_confirmation_badge)
+                )
             }
         }
         LaunchedEffect(key1 = Unit) {
@@ -97,7 +102,8 @@ private fun SwitchPreferencePreview() {
 
 @Preview(
     showBackground = true,
-    uiMode = Configuration.UI_MODE_NIGHT_YES)
+    uiMode = Configuration.UI_MODE_NIGHT_YES
+)
 @Composable
 private fun SwitchPreferenceDarkPreview() {
     MaterialThemeExtended(windowSize = windowSizeOf()) {
@@ -115,21 +121,24 @@ private fun SwitchPreferenceDarkPreview() {
                     onCheckedChange = { checked -> checkedA = checked },
                     title = "Switch preference field title",
                     summary = "Switch preference field summary",
-                    icon = painterResource(id = R.drawable.ic_confirmation_badge))
+                    icon = painterResource(id = R.drawable.ic_confirmation_badge)
+                )
                 CheckboxPreference(
                     checked = checkedB,
                     onCheckedChange = { checked -> checkedB = checked },
                     title = "Switch preference field title",
                     summary = "Switch preference field summary",
                     enabled = false,
-                    icon = painterResource(id = R.drawable.ic_confirmation_badge))
+                    icon = painterResource(id = R.drawable.ic_confirmation_badge)
+                )
                 CheckboxPreference(
                     checked = checkedC,
                     onCheckedChange = { checked -> checkedC = checked },
                     isVisible = isVisible,
                     title = "Switch preference field title",
                     summary = "Switch preference field summary",
-                    icon = painterResource(id = R.drawable.ic_confirmation_badge))
+                    icon = painterResource(id = R.drawable.ic_confirmation_badge)
+                )
             }
         }
         LaunchedEffect(key1 = Unit) {

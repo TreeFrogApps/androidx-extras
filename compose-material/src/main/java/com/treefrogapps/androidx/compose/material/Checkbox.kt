@@ -52,12 +52,13 @@ fun TextCheckbox(
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
     colors: CheckboxColors = CheckboxDefaults.colors()
 ) {
-    Row(modifier = modifier
-        .fillMaxWidth()
-        .clip(shape = Theme.shapes.medium)
-        .clickable(
-            enabled = enabled,
-            onClick = { onCheckedChange(!checked) }),
+    Row(
+        modifier = modifier
+            .fillMaxWidth()
+            .clip(shape = Theme.shapes.medium)
+            .clickable(
+                enabled = enabled,
+                onClick = { onCheckedChange(!checked) }),
         horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.CenterVertically
     ) {
@@ -77,13 +78,15 @@ fun TextCheckbox(
             softWrap = softWrap,
             maxLines = maxLines,
             onTextLayout = onTextLayout,
-            style = style)
+            style = style
+        )
         Checkbox(
             modifier = Modifier.padding(horizontal = Theme.dimens.spacing.small),
             checked = checked,
             onCheckedChange = onCheckedChange,
             enabled = enabled,
             interactionSource = interactionSource,
-            colors = colors)
+            colors = colors
+        )
     }
 }

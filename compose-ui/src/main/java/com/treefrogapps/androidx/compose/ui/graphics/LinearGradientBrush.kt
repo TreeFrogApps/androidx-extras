@@ -34,7 +34,7 @@ import kotlin.math.sqrt
  *     linear-gradient</a>
  */
 @Immutable
-data class LinearGradient constructor(
+data class LinearGradient(
     private val colors: List<Color>,
     private val stops: List<Float>? = null,
     private val tileMode: TileMode = TileMode.Clamp,
@@ -57,7 +57,8 @@ data class LinearGradient constructor(
             colorStops = stops,
             from = from,
             to = to,
-            tileMode = tileMode)
+            tileMode = tileMode
+        )
     }
 
     private fun getGradientCoordinates(size: Size): Pair<Offset, Offset> {

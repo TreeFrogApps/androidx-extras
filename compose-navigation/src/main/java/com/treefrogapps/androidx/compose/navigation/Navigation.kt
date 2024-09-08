@@ -74,7 +74,8 @@ abstract class NavigationDestinationWithArgument<NavArg>(
 
 fun navigationDestinationOf(route: String): NavigationDestination = object : NavigationDestination(route) {}
 
-fun <NavArg> navigationDestinationWithArgumentOf(route: String): NavigationDestinationWithArgument<NavArg> = object : NavigationDestinationWithArgument<NavArg>(route) {}
+fun <NavArg> navigationDestinationWithArgumentOf(route: String): NavigationDestinationWithArgument<NavArg> =
+    object : NavigationDestinationWithArgument<NavArg>(route) {}
 
 private fun navigatePoppingBackStack(
     navController: NavHostController,

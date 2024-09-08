@@ -11,17 +11,19 @@ object KWorkInfoConverter : (WorkInfo) -> KWorkInfo {
                 workId = id.toString(),
                 state = state.toKWorkState(),
                 progress = progress.extractProgress(),
-                extraData = outputData.extractStringAllKeyValues())
+                extraData = outputData.extractStringAllKeyValues()
+            )
         }
 
     private fun WorkInfo.State.toKWorkState(): KWorkInfo.KWorkState =
         when (this) {
             WorkInfo.State.ENQUEUED,
-            WorkInfo.State.BLOCKED   -> KWorkInfo.KWorkState.Enqueued
+            WorkInfo.State.BLOCKED -> KWorkInfo.KWorkState.Enqueued
+
             WorkInfo.State.CANCELLED -> KWorkInfo.KWorkState.Cancelled
-            WorkInfo.State.FAILED    -> KWorkInfo.KWorkState.Failed
+            WorkInfo.State.FAILED -> KWorkInfo.KWorkState.Failed
             WorkInfo.State.SUCCEEDED -> KWorkInfo.KWorkState.Complete
-            WorkInfo.State.RUNNING   -> KWorkInfo.KWorkState.Running
+            WorkInfo.State.RUNNING -> KWorkInfo.KWorkState.Running
         }
 
     private fun Data.extractProgress(): Int =

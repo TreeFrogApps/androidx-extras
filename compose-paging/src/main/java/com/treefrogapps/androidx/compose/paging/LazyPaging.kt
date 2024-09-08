@@ -27,8 +27,8 @@ internal fun <T : Any> BoxScope.PagingRefreshLoadStateContent(
 ) {
     when (lazyPagingItems.loadState.refresh) {
         is LoadState.Loading -> loadingContent()
-        is LoadState.Error   -> loadingErrorContent()
-        else                 -> {}
+        is LoadState.Error -> loadingErrorContent()
+        else -> {}
     }
 }
 
@@ -51,8 +51,8 @@ internal fun <T : Any> LazyListScope.pagingPrependLoadStateContent(
 ) {
     when (lazyPagingItems.loadState.prepend) {
         is LoadState.Loading -> item { prependLoadingContent(this) }
-        is LoadState.Error   -> item { prependErrorContent(this) }
-        else                 -> {}
+        is LoadState.Error -> item { prependErrorContent(this) }
+        else -> {}
     }
 }
 
@@ -79,8 +79,8 @@ internal fun <T : Any> LazyListScope.pagingAppendLoadStateContent(
     appendErrorContent: @Composable LazyItemScope.() -> Unit
 ) {
     when (lazyPagingItems.loadState.append) {
-        is LoadState.Loading    -> item { appendLoadingContent(this) }
-        is LoadState.Error      -> item { appendErrorContent(this) }
+        is LoadState.Loading -> item { appendLoadingContent(this) }
+        is LoadState.Error -> item { appendErrorContent(this) }
         is LoadState.NotLoading -> {}
     }
 }
@@ -91,8 +91,8 @@ internal fun <T : Any> LazyGridScope.pagingPrependLoadStateContent(
     prependErrorContent: @Composable LazyGridItemScope.() -> Unit
 ) {
     when (lazyPagingItems.loadState.prepend) {
-        is LoadState.Loading    -> item { prependLoadingContent(this) }
-        is LoadState.Error      -> item { prependErrorContent(this) }
+        is LoadState.Loading -> item { prependLoadingContent(this) }
+        is LoadState.Error -> item { prependErrorContent(this) }
         is LoadState.NotLoading -> {}
     }
 }
@@ -119,8 +119,8 @@ internal fun <T : Any> LazyGridScope.pagingAppendLoadStateContent(
     appendErrorContent: @Composable LazyGridItemScope.() -> Unit
 ) {
     when (lazyPagingItems.loadState.append) {
-        is LoadState.Loading    -> item { appendLoadingContent(this) }
-        is LoadState.Error      -> item { appendErrorContent(this) }
+        is LoadState.Loading -> item { appendLoadingContent(this) }
+        is LoadState.Error -> item { appendErrorContent(this) }
         is LoadState.NotLoading -> {}
     }
 }
@@ -131,8 +131,8 @@ internal fun <T : Any> LazyStaggeredGridScope.pagingPrependLoadStateContent(
     prependErrorContent: @Composable LazyStaggeredGridItemScope.() -> Unit
 ) {
     when (lazyPagingItems.loadState.prepend) {
-        is LoadState.Loading    -> item { prependLoadingContent(this) }
-        is LoadState.Error      -> item { prependErrorContent(this) }
+        is LoadState.Loading -> item { prependLoadingContent(this) }
+        is LoadState.Error -> item { prependErrorContent(this) }
         is LoadState.NotLoading -> {}
     }
 }
@@ -159,8 +159,8 @@ internal fun <T : Any> LazyStaggeredGridScope.pagingAppendLoadStateContent(
     appendErrorContent: @Composable LazyStaggeredGridItemScope.() -> Unit
 ) {
     when (lazyPagingItems.loadState.append) {
-        is LoadState.Loading    -> item { appendLoadingContent(this) }
-        is LoadState.Error      -> item { appendErrorContent(this) }
+        is LoadState.Loading -> item { appendLoadingContent(this) }
+        is LoadState.Error -> item { appendErrorContent(this) }
         is LoadState.NotLoading -> {}
     }
 }
@@ -171,8 +171,8 @@ internal fun <T : Any> LazyPagingItems<T>.isEmpty(): State<Boolean> =
         derivedStateOf {
             with(loadState) {
                 append.endOfPaginationReached
-                    && prepend.endOfPaginationReached
-                    && itemCount == 0
+                        && prepend.endOfPaginationReached
+                        && itemCount == 0
             }
         }
     }

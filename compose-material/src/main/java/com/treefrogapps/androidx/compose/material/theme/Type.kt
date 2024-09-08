@@ -71,7 +71,8 @@ class ExtendedTypographyColors internal constructor(
         secondary = this.secondary,
         secondaryVariant = this.secondaryVariant,
         secondaryInverse = this.secondaryInverse,
-        error = this.error)
+        error = this.error
+    )
 
     fun updateColorsFrom(other: ExtendedTypographyColors) {
         primary = other.primary
@@ -88,7 +89,8 @@ internal val DefaultExtendedTypography = ExtendedTypography()
 internal val LocalExtendedTypography = staticCompositionLocalOf { DefaultExtendedTypography }
 internal val LocalExtendedTypographyColors = staticCompositionLocalOf { lightExtendedTypographyColors() }
 
-internal fun provideDefaultTypographyColors(darkMode: Boolean): ExtendedTypographyColors = if (darkMode) darkExtendedTypographyColors() else lightExtendedTypographyColors()
+internal fun provideDefaultTypographyColors(darkMode: Boolean): ExtendedTypographyColors =
+    if (darkMode) darkExtendedTypographyColors() else lightExtendedTypographyColors()
 
 private fun lightExtendedTypographyColors(): ExtendedTypographyColors =
     ExtendedTypographyColors(
@@ -98,7 +100,8 @@ private fun lightExtendedTypographyColors(): ExtendedTypographyColors =
         secondary = Color.DarkGray,
         secondaryVariant = Color.Gray,
         secondaryInverse = Color.LightGray,
-        error = Color.Red)
+        error = Color.Red
+    )
 
 private fun darkExtendedTypographyColors(): ExtendedTypographyColors =
     ExtendedTypographyColors(
@@ -108,4 +111,5 @@ private fun darkExtendedTypographyColors(): ExtendedTypographyColors =
         secondary = Color.LightGray,
         secondaryVariant = Color.Gray,
         secondaryInverse = Color.DarkGray,
-        error = Color.Red)
+        error = Color.Red
+    )

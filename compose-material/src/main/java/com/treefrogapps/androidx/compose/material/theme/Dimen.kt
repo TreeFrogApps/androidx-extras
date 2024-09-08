@@ -18,12 +18,14 @@ data class Dimens internal constructor(
     val four: Dp = 4.dp,
     val elevation: Elevation = Elevation(),
     val spacing: Spacing = Spacing(),
-    val icon: Icon = Icon())
+    val icon: Icon = Icon()
+)
 
 data class Elevation internal constructor(
     val normal: Dp = 2.dp,
     val high: Dp = 4.dp,
-    val highest: Dp = 8.dp)
+    val highest: Dp = 8.dp
+)
 
 data class Spacing internal constructor(
     val tiny: Dp = 4.dp,
@@ -33,7 +35,8 @@ data class Spacing internal constructor(
     val big: Dp = 32.dp,
     val massive: Dp = 48.dp,
     val gigantic: Dp = 64.dp,
-    val enormous: Dp = 128.dp)
+    val enormous: Dp = 128.dp
+)
 
 data class Icon internal constructor(
     val minuscule: Dp = 8.dp,
@@ -45,7 +48,8 @@ data class Icon internal constructor(
     val massive: Dp = 64.dp,
     val gigantic: Dp = 96.dp,
     val enormous: Dp = 128.dp,
-    val thumbnail: Dp = 164.dp)
+    val thumbnail: Dp = 164.dp
+)
 
 private val smallDimens: Dimens = Dimens()
 private val mediumDimens: Dimens = Dimens(
@@ -57,7 +61,9 @@ private val mediumDimens: Dimens = Dimens(
         big = 36.dp,
         massive = 54.dp,
         gigantic = 72.dp,
-        enormous = 148.dp))
+        enormous = 148.dp
+    )
+)
 private val largeDimens: Dimens = Dimens(
     spacing = Spacing(
         tiny = 8.dp,
@@ -67,13 +73,15 @@ private val largeDimens: Dimens = Dimens(
         big = 40.dp,
         massive = 60.dp,
         gigantic = 80.dp,
-        enormous = 160.dp))
+        enormous = 160.dp
+    )
+)
 
 internal val LocalAppDimens = staticCompositionLocalOf { smallDimens }
 
 internal fun WindowSize.toDimens(): Dimens =
     when {
-        isSmall()  -> smallDimens
+        isSmall() -> smallDimens
         isMedium() -> mediumDimens
-        else       -> largeDimens
+        else -> largeDimens
     }

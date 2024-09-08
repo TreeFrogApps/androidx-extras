@@ -1,7 +1,13 @@
 package com.treefrogapps.androidx.compose.pager
 
 import androidx.compose.foundation.gestures.FlingBehavior
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.offset
+import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyListScope
 import androidx.compose.foundation.lazy.LazyRow
@@ -138,6 +144,7 @@ private fun LazyListScope.parallaxItems(
             pages = pages,
             isVertical = isVertical
         )
+
         ParallaxMode.Stacked -> stackedParallaxItems(
             state = state,
             effect = effect,
@@ -145,6 +152,7 @@ private fun LazyListScope.parallaxItems(
             pages = pages,
             isVertical = isVertical
         )
+
         ParallaxMode.Aligned -> alignedParallaxItems(
             state = state,
             effect = effect,

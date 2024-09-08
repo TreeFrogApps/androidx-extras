@@ -10,4 +10,5 @@ internal val DefaultShapes
     @Composable get() = Shapes(
         small = RoundedCornerShape(Theme.dimens.spacing.small),
         medium = RoundedCornerShape(Theme.dimens.spacing.normal),
-        large = RoundedCornerShape(Theme.dimens.spacing.large))
+        large = RoundedCornerShape(Theme.dimens.spacing.large)
+    )

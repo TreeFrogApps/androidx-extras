@@ -17,7 +17,8 @@ fun <K : Any, V : Any> pagingSourceFactoryProvider(
     pagingSource(
         refreshKey = refreshKey,
         load = load,
-        loadContext = loadContext)
+        loadContext = loadContext
+    )
 }
 
 

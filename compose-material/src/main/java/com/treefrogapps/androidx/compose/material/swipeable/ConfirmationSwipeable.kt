@@ -10,10 +10,33 @@ import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
 import androidx.compose.foundation.background
 import androidx.compose.foundation.gestures.Orientation
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.offset
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.*
-import androidx.compose.runtime.*
+import androidx.compose.material.Card
+import androidx.compose.material.ExperimentalMaterialApi
+import androidx.compose.material.FixedThreshold
+import androidx.compose.material.Icon
+import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Surface
+import androidx.compose.material.SwipeableState
+import androidx.compose.material.rememberSwipeableState
+import androidx.compose.material.swipeable
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.derivedStateOf
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
+import androidx.compose.runtime.snapshotFlow
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -21,7 +44,11 @@ import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.*
+import androidx.compose.ui.unit.Density
+import androidx.compose.ui.unit.Dp
+import androidx.compose.ui.unit.IntOffset
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.max
 import com.treefrogapps.androidx.compose.material.R
 import kotlinx.coroutines.flow.filter
 import kotlinx.coroutines.flow.launchIn
@@ -62,7 +89,8 @@ fun ConfirmationSwipeable(
             toggleColor = toggleColor,
             width = width,
             height = height,
-            shape = shape)
+            shape = shape
+        )
         SliderTarget(
             swipeableState = swipeableState,
             toggleColor = toggleColor,
@@ -70,12 +98,14 @@ fun ConfirmationSwipeable(
             width = width,
             height = height,
             sliderWidth = sliderWidth,
-            shape = shape)
+            shape = shape
+        )
     }
 
     SwipeableConfirmedLaunchedEffect(
         swipeableState = swipeableState,
-        block = onConfirmed)
+        block = onConfirmed
+    )
 }
 
 @OptIn(ExperimentalMaterialApi::class)
@@ -94,7 +124,8 @@ private fun SliderBackground(
         Animatable(
             if (swipeableState.currentValue === ConfirmationState.Swiped) {
                 swipedBackgroundColor
-            } else swipeableBackgroundColor)
+            } else swipeableBackgroundColor
+        )
     }
     Box(
         modifier = Modifier
@@ -102,7 +133,8 @@ private fun SliderBackground(
             .padding(all = 8.dp)
             .background(
                 color = backgroundTintColor.value,
-                shape = shape),
+                shape = shape
+            ),
         contentAlignment = Alignment.CenterStart
     ) {
         AnimatedVisibility(
@@ -114,14 +146,16 @@ private fun SliderBackground(
                 modifier = Modifier.padding(start = 2.dp),
                 painter = painterResource(id = R.drawable.ic_confirmation_badge),
                 contentDescription = null,
-                tint = toggleColor)
+                tint = toggleColor
+            )
         }
     }
 
     SwipeableConfirmedLaunchedEffect(swipeableState = swipeableState) {
         backgroundTintColor.animateTo(
             targetValue = swipedBackgroundColor,
-            animationSpec = tween(durationMillis = 250))
+            animationSpec = tween(durationMillis = 250)
+        )
     }
 }
 
@@ -153,7 +187,8 @@ private fun SliderTarget(
                     anchors = anchorStates,
                     thresholds = { _, _ -> FixedThreshold(offset = endState.first.dp) },
                     orientation = Orientation.Horizontal,
-                    velocityThreshold = Dp.Infinity)
+                    velocityThreshold = Dp.Infinity
+                )
         ) {
             Card(
                 modifier = Modifier
@@ -167,7 +202,8 @@ private fun SliderTarget(
             ) {
                 SliderTargetContent(
                     height = height,
-                    shape = shape)
+                    shape = shape
+                )
             }
         }
     }
@@ -188,7 +224,8 @@ private fun SliderTargetContent(
                     modifier = Modifier
                         .background(
                             shape = shape,
-                            color = MaterialTheme.colors.surface.copy(alpha = 0.9F))
+                            color = MaterialTheme.colors.surface.copy(alpha = 0.9F)
+                        )
                         .width(width = 3.dp)
                         .height(height = height / 3)
                 )
@@ -229,7 +266,8 @@ private fun ConfirmationSwipeableSwipedPreview() {
     MaterialTheme {
         Surface {
             ConfirmationSwipeable(
-                swipeableState = rememberSwipeableState(initialValue = ConfirmationState.Swiped))
+                swipeableState = rememberSwipeableState(initialValue = ConfirmationState.Swiped)
+            )
         }
     }
 }
@@ -263,7 +301,8 @@ private fun ConfirmationSwipeableSwipedDarkPreview() {
     MaterialTheme {
         Surface {
             ConfirmationSwipeable(
-                swipeableState = rememberSwipeableState(initialValue = ConfirmationState.Swiped))
+                swipeableState = rememberSwipeableState(initialValue = ConfirmationState.Swiped)
+            )
         }
     }
 }

@@ -52,12 +52,14 @@ fun TextRadioButton(
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
     colors: RadioButtonColors = RadioButtonDefaults.colors()
 ) {
-    Row(modifier = modifier
-        .fillMaxWidth()
-        .clip(shape = Theme.shapes.medium)
-        .clickable(
-            enabled = enabled,
-            onClick = onClick),
+    Row(
+        modifier = modifier
+            .fillMaxWidth()
+            .clip(shape = Theme.shapes.medium)
+            .clickable(
+                enabled = enabled,
+                onClick = onClick
+            ),
         horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.CenterVertically
     ) {
@@ -77,13 +79,15 @@ fun TextRadioButton(
             softWrap = softWrap,
             maxLines = maxLines,
             onTextLayout = onTextLayout,
-            style = style)
+            style = style
+        )
         RadioButton(
             modifier = Modifier.padding(horizontal = Theme.dimens.spacing.small),
             selected = selected,
             enabled = enabled,
             interactionSource = interactionSource,
             colors = colors,
-            onClick = onClick)
+            onClick = onClick
+        )
     }
 }

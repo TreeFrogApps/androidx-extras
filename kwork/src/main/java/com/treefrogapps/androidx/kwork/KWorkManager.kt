@@ -37,7 +37,7 @@ class KWorkManager(
     override fun addWork(request: KWorkRequest) {
         request.isValidOrThrow()
         when (val workRequest = KWorkRequestConverter(request)) {
-            is OneTimeWorkRequest  -> workManager.enqueueUniqueWork(request.workId, ExistingWorkPolicy.REPLACE, workRequest)
+            is OneTimeWorkRequest -> workManager.enqueueUniqueWork(request.workId, ExistingWorkPolicy.REPLACE, workRequest)
             is PeriodicWorkRequest -> workManager.enqueueUniquePeriodicWork(request.workId, ExistingPeriodicWorkPolicy.UPDATE, workRequest)
         }
     }
@@ -95,7 +95,7 @@ class KWorkManager(
                     val cause = throwable.cause ?: throwable
                     when (throwable) {
                         is CancellationException -> continuation.cancel(cause)
-                        else                     -> continuation.resumeWithException(cause)
+                        else -> continuation.resumeWithException(cause)
                     }
                 }
             }, KWorkDirectExecutor)

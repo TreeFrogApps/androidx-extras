@@ -38,7 +38,8 @@ fun RoundedButton(
         onClick = onClick,
         colors = ButtonDefaults.buttonColors(
             backgroundColor = backgroundColor,
-            contentColor = contentColorFor(backgroundColor = Theme.colors.primary)),
+            contentColor = contentColorFor(backgroundColor = Theme.colors.primary)
+        ),
         interactionSource = interactionSource,
         elevation = elevation,
         border = border,
@@ -47,6 +48,7 @@ fun RoundedButton(
         Text(
             modifier = Modifier.padding(horizontal = textHorizontalPadding),
             fontSize = 16.sp,
-            text = text)
+            text = text
+        )
     }
 }

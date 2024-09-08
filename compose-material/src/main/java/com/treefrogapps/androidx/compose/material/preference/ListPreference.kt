@@ -97,7 +97,8 @@ private fun <T : Any> ListPreferenceDialog(
 @Preview(
     showBackground = true,
     showSystemUi = true,
-    uiMode = Configuration.UI_MODE_NIGHT_NO)
+    uiMode = Configuration.UI_MODE_NIGHT_NO
+)
 @Composable
 private fun ListPreferencePreview() {
     MaterialThemeExtended(windowSize = windowSizeOf()) {
@@ -118,7 +119,8 @@ private fun ListPreferencePreview() {
                     items = listOf(
                         "Item one",
                         "Item two",
-                        "Item three"),
+                        "Item three"
+                    ),
                     selectedItem = selectedItemA,
                     enabled = true,
                     onPreferenceChange = { selected -> selectedItemA = selected })
@@ -130,7 +132,8 @@ private fun ListPreferencePreview() {
                     items = listOf(
                         "Item one",
                         "Item two",
-                        "Item three"),
+                        "Item three"
+                    ),
                     selectedItem = selectedItemB,
                     enabled = false,
                     onPreferenceChange = { selected -> selectedItemB = selected })
@@ -142,7 +145,8 @@ private fun ListPreferencePreview() {
                     items = listOf(
                         "Item one",
                         "Item two",
-                        "Item three"),
+                        "Item three"
+                    ),
                     selectedItem = selectedItemC,
                     enabled = true,
                     isVisible = isVisible,
@@ -161,7 +165,8 @@ private fun ListPreferencePreview() {
 @Preview(
     showBackground = true,
     showSystemUi = true,
-    uiMode = Configuration.UI_MODE_NIGHT_YES)
+    uiMode = Configuration.UI_MODE_NIGHT_YES
+)
 @Composable
 private fun ListPreferenceDarkPreview() {
     MaterialThemeExtended(windowSize = windowSizeOf()) {
@@ -182,7 +187,8 @@ private fun ListPreferenceDarkPreview() {
                     items = listOf(
                         "Item one",
                         "Item two",
-                        "Item three"),
+                        "Item three"
+                    ),
                     selectedItem = selectedItemA,
                     enabled = true,
                     onPreferenceChange = { selected -> selectedItemA = selected })
@@ -194,7 +200,8 @@ private fun ListPreferenceDarkPreview() {
                     items = listOf(
                         "Item one",
                         "Item two",
-                        "Item three"),
+                        "Item three"
+                    ),
                     selectedItem = selectedItemB,
                     enabled = false,
                     onPreferenceChange = { selected -> selectedItemB = selected })
@@ -206,7 +213,8 @@ private fun ListPreferenceDarkPreview() {
                     items = listOf(
                         "Item one",
                         "Item two",
-                        "Item three"),
+                        "Item three"
+                    ),
                     selectedItem = selectedItemC,
                     enabled = true,
                     isVisible = isVisible,

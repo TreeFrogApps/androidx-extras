@@ -61,7 +61,8 @@ fun windowSizeOf(
 internal val LocalWindowSize = staticCompositionLocalOf {
     WindowSize(
         type = SmallPortrait,
-        size = DpSize.Unspecified)
+        size = DpSize.Unspecified
+    )
 }
 
 /**
@@ -87,16 +88,16 @@ fun Activity.rememberWindowSize(): WindowSize {
 private fun DpSize.toWindowSize(): WindowSize =
     if (width < height) {
         when {
-            width < 0.dp    -> throw IllegalArgumentException("Dp value cannot be negative")
+            width < 0.dp -> throw IllegalArgumentException("Dp value cannot be negative")
             width <= 460.dp -> SmallPortrait
             width <= 640.dp -> MediumPortrait
-            else            -> LargePortrait
+            else -> LargePortrait
         }.let { type -> WindowSize(type = type, size = this) }
     } else {
         when {
-            width < 0.dp     -> throw IllegalArgumentException("Dp value cannot be negative")
-            width <= 960.dp  -> SmallLandscape
+            width < 0.dp -> throw IllegalArgumentException("Dp value cannot be negative")
+            width <= 960.dp -> SmallLandscape
             width <= 1024.dp -> MediumLandscape
-            else             -> LargeLandscape
+            else -> LargeLandscape
         }.let { type -> WindowSize(type = type, size = this) }
     }
