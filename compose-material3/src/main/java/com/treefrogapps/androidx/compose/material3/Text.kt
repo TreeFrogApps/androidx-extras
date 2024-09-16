@@ -1,4 +1,4 @@
-package com.treefrogapps.androidx.compose.material
+package com.treefrogapps.androidx.compose.material3
 
 import android.content.res.Configuration
 import androidx.compose.foundation.layout.Arrangement
@@ -6,9 +6,9 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.width
-import androidx.compose.material.LocalTextStyle
-import androidx.compose.material.Surface
-import androidx.compose.material.Text
+import androidx.compose.material3.LocalTextStyle
+import androidx.compose.material3.Surface
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableFloatStateOf
@@ -31,8 +31,8 @@ import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.isSpecified
 import androidx.compose.ui.unit.sp
-import com.treefrogapps.androidx.compose.material.theme.MaterialThemeExtended
-import com.treefrogapps.androidx.compose.material.theme.windowSizeOf
+import com.treefrogapps.androidx.compose.material3.theme.MaterialThemeExtended
+import com.treefrogapps.androidx.compose.material3.theme.windowSizeOf
 
 
 @Composable
@@ -100,27 +100,23 @@ private fun AutoResizeTextPreview() {
                     verticalArrangement = Arrangement.spacedBy(space = 8.dp)
                 ) {
                     AutoResizeText(
-                        text = "Some text using h1 style that should resize to the width",
-                        style = MaterialThemeExtended.typography.h1
+                        text = "headlineLarge resized to the width",
+                        style = MaterialThemeExtended.typography.headlineLarge
                     )
                     AutoResizeText(
-                        text = "Some text using h2 style that should resize to the width",
-                        style = MaterialThemeExtended.typography.h2
+                        text = "headlineMedium resized to the width",
+                        style = MaterialThemeExtended.typography.headlineMedium
                     )
                     AutoResizeText(
-                        text = "Some text using h3 style that should resize to the width",
-                        style = MaterialThemeExtended.typography.h3
+                        text = "headlineSmall resized to the width",
+                        style = MaterialThemeExtended.typography.headlineSmall
                     )
                     AutoResizeText(
-                        text = "Some text using h4 style that should resize to the width",
-                        style = MaterialThemeExtended.typography.h4
-                    )
-                    AutoResizeText(
-                        text = "Some using font size 48sp That should resize to the width",
+                        text = "48sp  resized to the width",
                         fontSize = 48.sp
                     )
                     AutoResizeText(
-                        text = "Some using font size 32sp That should resize to the width",
+                        text = "32sp resized to the width",
                         fontSize = 32.sp
                     )
                 }

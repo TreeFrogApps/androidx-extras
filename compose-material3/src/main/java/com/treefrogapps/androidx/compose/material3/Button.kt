@@ -1,22 +1,26 @@
-package com.treefrogapps.androidx.compose.material
+package com.treefrogapps.androidx.compose.material3
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.Button
-import androidx.compose.material.ButtonDefaults
-import androidx.compose.material.ButtonElevation
-import androidx.compose.material.Text
-import androidx.compose.material.contentColorFor
+import androidx.compose.material3.Button
+import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.ButtonElevation
+import androidx.compose.material3.Surface
+import androidx.compose.material3.Text
+import androidx.compose.material3.contentColorFor
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.sp
-import com.treefrogapps.androidx.compose.material.theme.Theme
+import com.treefrogapps.androidx.compose.material3.theme.MaterialThemeExtended
+import com.treefrogapps.androidx.compose.material3.theme.Theme
+import com.treefrogapps.androidx.compose.material3.theme.windowSizeOf
 
 @Composable
 fun RoundedButton(
@@ -24,9 +28,9 @@ fun RoundedButton(
     enabled: Boolean = true,
     text: String,
     textHorizontalPadding: Dp = Theme.dimens.spacing.large,
-    backgroundColor: Color = Theme.colors.secondary,
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
-    elevation: ButtonElevation? = ButtonDefaults.elevation(),
+    elevation: ButtonElevation? = ButtonDefaults.elevatedButtonElevation(),
+    containerColor: Color = Theme.colorScheme.secondary,
     border: BorderStroke? = null,
     contentPadding: PaddingValues = ButtonDefaults.ContentPadding,
     onClick: () -> Unit,
@@ -37,8 +41,8 @@ fun RoundedButton(
         enabled = enabled,
         onClick = onClick,
         colors = ButtonDefaults.buttonColors(
-            backgroundColor = backgroundColor,
-            contentColor = contentColorFor(backgroundColor = Theme.colors.primary)
+            containerColor = containerColor,
+            contentColor = contentColorFor(backgroundColor = Theme.colorScheme.primary)
         ),
         interactionSource = interactionSource,
         elevation = elevation,
@@ -50,5 +54,18 @@ fun RoundedButton(
             fontSize = 16.sp,
             text = text
         )
+    }
+}
+
+@Preview
+@Composable
+private fun RoundedButtonPreview() {
+    MaterialThemeExtended(windowSize = windowSizeOf()) {
+        Surface {
+            RoundedButton(
+                text = "Rounded Button",
+                onClick = { }
+            )
+        }
     }
 }

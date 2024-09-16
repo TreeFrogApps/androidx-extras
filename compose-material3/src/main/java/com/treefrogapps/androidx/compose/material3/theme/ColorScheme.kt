@@ -1,8 +1,8 @@
 package com.treefrogapps.androidx.compose.material3.theme
 
-import androidx.compose.material.Colors
-import androidx.compose.material.darkColors
-import androidx.compose.material.lightColors
+import androidx.compose.material3.ColorScheme
+import androidx.compose.material3.darkColorScheme
+import androidx.compose.material3.lightColorScheme
 import androidx.compose.ui.graphics.Color
 
 /**
@@ -27,4 +27,4 @@ object ExtendedColors {
     val WhiteTint60 = Color(color = 0x99FFFFFF)
 }
 
-fun provideDefaultColors(darkMode: Boolean): Colors = if (darkMode) darkColors() else lightColors()
+fun provideDefaultColors(darkMode: Boolean): ColorScheme = if (darkMode) darkColorScheme() else lightColorScheme()

@@ -1,4 +1,4 @@
-package com.treefrogapps.androidx.compose.material
+package com.treefrogapps.androidx.compose.material3
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.EnterTransition
@@ -18,17 +18,17 @@ import androidx.compose.foundation.relocation.bringIntoViewRequester
 import androidx.compose.foundation.shape.ZeroCornerSize
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.material.Icon
-import androidx.compose.material.IconButton
-import androidx.compose.material.LocalTextStyle
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.OutlinedTextField
-import androidx.compose.material.Text
-import androidx.compose.material.TextField
-import androidx.compose.material.TextFieldColors
-import androidx.compose.material.TextFieldDefaults
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Warning
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
+import androidx.compose.material3.LocalTextStyle
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.Text
+import androidx.compose.material3.TextField
+import androidx.compose.material3.TextFieldColors
+import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -50,9 +50,9 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.text.style.TextOverflow
-import com.treefrogapps.androidx.compose.material.R.drawable
-import com.treefrogapps.androidx.compose.material.R.string
-import com.treefrogapps.androidx.compose.material.theme.Theme
+import com.treefrogapps.androidx.compose.material3.R.drawable
+import com.treefrogapps.androidx.compose.material3.R.string
+import com.treefrogapps.androidx.compose.material3.theme.Theme
 import kotlinx.coroutines.launch
 
 
@@ -78,7 +78,7 @@ fun TextInputField(
     singleLine: Boolean = true,
     minLines: Int = 1,
     maxLines: Int = 1,
-    colors: TextFieldColors = TextFieldDefaults.textFieldColors()
+    colors: TextFieldColors = TextFieldDefaults.colors()
 ) {
 
     val hasError = remember(text) { error != null }
@@ -108,7 +108,7 @@ fun TextInputField(
                     Icon(
                         imageVector = Icons.Filled.Warning,
                         contentDescription = errorContentDescription,
-                        tint = MaterialTheme.colors.error
+                        tint = Theme.colorScheme.error
                     )
                 } else {
                     trailingIcon?.invoke()
@@ -154,7 +154,7 @@ fun TextInputField(
     singleLine: Boolean = true,
     minLines: Int = 1,
     maxLines: Int = 1,
-    colors: TextFieldColors = TextFieldDefaults.textFieldColors()
+    colors: TextFieldColors = TextFieldDefaults.colors()
 ) {
 
     val hasError = remember(textFieldValue) { error != null }
@@ -186,7 +186,7 @@ fun TextInputField(
                     Icon(
                         imageVector = Icons.Filled.Warning,
                         contentDescription = errorContentDescription,
-                        tint = MaterialTheme.colors.error
+                        tint = Theme.colorScheme.error
                     )
                 } else {
                     trailingIcon?.invoke()
@@ -233,7 +233,7 @@ fun OutlinedTextInputField(
     singleLine: Boolean = true,
     minLines: Int = 1,
     maxLines: Int = 1,
-    colors: TextFieldColors = TextFieldDefaults.outlinedTextFieldColors()
+    colors: TextFieldColors = TextFieldDefaults.colors()
 ) {
 
     Column(
@@ -263,7 +263,7 @@ fun OutlinedTextInputField(
                     Icon(
                         imageVector = Icons.Filled.Warning,
                         contentDescription = errorContentDescription,
-                        tint = MaterialTheme.colors.error
+                        tint = Theme.colorScheme.error
                     )
                 } else {
                     trailingIcon?.invoke()
@@ -310,7 +310,7 @@ fun OutlinedTextInputField(
     singleLine: Boolean = true,
     minLines: Int = 1,
     maxLines: Int = 1,
-    colors: TextFieldColors = TextFieldDefaults.outlinedTextFieldColors()
+    colors: TextFieldColors = TextFieldDefaults.colors()
 ) {
 
     Column(
@@ -338,7 +338,7 @@ fun OutlinedTextInputField(
                     Icon(
                         imageVector = Icons.Filled.Warning,
                         contentDescription = errorContentDescription,
-                        tint = MaterialTheme.colors.error
+                        tint = Theme.colorScheme.error
                     )
                 } else {
                     trailingIcon?.invoke()
@@ -380,7 +380,7 @@ fun OutlinedPasswordTextInputField(
     shape: Shape = MaterialTheme.shapes.small,
     labelText: String = "",
     enabled: Boolean = true,
-    colors: TextFieldColors = TextFieldDefaults.outlinedTextFieldColors()
+    colors: TextFieldColors = TextFieldDefaults.colors()
 ) {
     var passwordVisible by rememberSaveable { mutableStateOf(false) }
 
@@ -449,7 +449,7 @@ fun OutlinedPasswordTextInputField(
     shape: Shape = MaterialTheme.shapes.small,
     labelText: String = "",
     enabled: Boolean = true,
-    colors: TextFieldColors = TextFieldDefaults.outlinedTextFieldColors()
+    colors: TextFieldColors = TextFieldDefaults.colors()
 ) {
     var passwordVisible by rememberSaveable { mutableStateOf(false) }
 
@@ -515,7 +515,7 @@ fun PasswordTextInputField(
     shape: Shape = MaterialTheme.shapes.small.copy(bottomEnd = ZeroCornerSize, bottomStart = ZeroCornerSize),
     labelText: String = "",
     enabled: Boolean = true,
-    colors: TextFieldColors = TextFieldDefaults.textFieldColors()
+    colors: TextFieldColors = TextFieldDefaults.colors()
 ) {
     var passwordVisible by rememberSaveable { mutableStateOf(false) }
     val hasError = remember(passwordValue) { error != null }
@@ -584,7 +584,7 @@ fun PasswordTextInputField(
     shape: Shape = MaterialTheme.shapes.small.copy(bottomEnd = ZeroCornerSize, bottomStart = ZeroCornerSize),
     labelText: String = "",
     enabled: Boolean = true,
-    colors: TextFieldColors = TextFieldDefaults.textFieldColors()
+    colors: TextFieldColors = TextFieldDefaults.colors()
 ) {
     var passwordVisible by rememberSaveable { mutableStateOf(false) }
     val hasError = remember(password) { error != null }
@@ -684,8 +684,8 @@ fun ErrorTextWithIcon(
 private fun ErrorText(error: String?) {
     Text(
         text = error ?: "",
-        color = Theme.colors.error,
-        style = Theme.typography.caption,
+        color = Theme.colorScheme.error,
+        style = Theme.typography.labelSmall,
         maxLines = 3,
         overflow = TextOverflow.Ellipsis,
         modifier = Modifier.padding(
@@ -699,7 +699,7 @@ private fun ErrorText(error: String?) {
 private fun ErrorIcon() {
     Icon(
         painter = painterResource(id = drawable.ic_error_outline),
-        tint = Theme.colors.error,
+        tint = Theme.colorScheme.error,
         contentDescription = stringResource(id = string.content_description_error)
     )
 }
@@ -716,7 +716,7 @@ private fun PasswordFieldTrailingIcon(
         Icon(
             imageVector = Icons.Filled.Warning,
             contentDescription = errorContentDescription,
-            tint = MaterialTheme.colors.error
+            tint = Theme.colorScheme.error
         )
     } else IconButton(
         enabled = enabled,

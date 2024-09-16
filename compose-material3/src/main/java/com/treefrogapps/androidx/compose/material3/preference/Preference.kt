@@ -19,12 +19,12 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.Divider
-import androidx.compose.material.Icon
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Surface
-import androidx.compose.material.Text
-import androidx.compose.material.contentColorFor
+import androidx.compose.material3.HorizontalDivider
+import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
+import androidx.compose.material3.Text
+import androidx.compose.material3.contentColorFor
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Immutable
 import androidx.compose.runtime.LaunchedEffect
@@ -43,10 +43,10 @@ import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
-import com.treefrogapps.androidx.compose.material.R
-import com.treefrogapps.androidx.compose.material.theme.MaterialThemeExtended
-import com.treefrogapps.androidx.compose.material.theme.Theme
-import com.treefrogapps.androidx.compose.material.theme.windowSizeOf
+import com.treefrogapps.androidx.compose.material3.R
+import com.treefrogapps.androidx.compose.material3.theme.MaterialThemeExtended
+import com.treefrogapps.androidx.compose.material3.theme.Theme
+import com.treefrogapps.androidx.compose.material3.theme.windowSizeOf
 import kotlinx.coroutines.delay
 
 
@@ -139,7 +139,7 @@ fun CorePreference(
 @Composable
 fun PreferenceGroup(
     title: String,
-    titleColor: Color = Theme.colors.secondary,
+    titleColor: Color = Theme.colorScheme.secondary,
     enabledDivider: Boolean = false,
     groupContent: @Composable ColumnScope.() -> Unit
 ) {
@@ -154,7 +154,7 @@ fun PreferenceGroup(
             ),
             text = title,
             color = titleColor,
-            style = Theme.typography.body2,
+            style = Theme.typography.bodyMedium,
             overflow = TextOverflow.Ellipsis,
             maxLines = 1
         )
@@ -162,14 +162,14 @@ fun PreferenceGroup(
         groupContent()
 
         if (enabledDivider) {
-            Divider(modifier = Modifier.fillMaxWidth())
+            HorizontalDivider(modifier = Modifier.fillMaxWidth())
         }
     }
 }
 
 @Composable
 fun PreferenceContainer(
-    color: Color = MaterialTheme.colors.surface,
+    color: Color = MaterialTheme.colorScheme.surface,
     contentColor: Color = contentColorFor(color),
     state: ScrollState = rememberScrollState(),
     content: @Composable ColumnScope.() -> Unit
@@ -195,9 +195,9 @@ object PreferenceDefaults {
     fun preferenceColors(
         titleColor: Color = MaterialThemeExtended.extendedTypographyColors.primary,
         summaryColor: Color = MaterialThemeExtended.extendedTypographyColors.secondaryVariant,
-        iconColor: Color = MaterialThemeExtended.colors.secondary,
-        disabledColor: Color = MaterialTheme.colors.onSurface.copy(alpha = 0.12f)
-            .compositeOver(MaterialTheme.colors.surface)
+        iconColor: Color = MaterialThemeExtended.colorScheme.secondary,
+        disabledColor: Color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.12f)
+            .compositeOver(MaterialTheme.colorScheme.surface)
     ): PreferenceColors = DefaultPreferenceColors(
         titleColor = titleColor,
         summaryColor = summaryColor,

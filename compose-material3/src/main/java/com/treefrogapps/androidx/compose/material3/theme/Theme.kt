@@ -14,12 +14,12 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.Colors
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Shapes
-import androidx.compose.material.Surface
-import androidx.compose.material.Text
-import androidx.compose.material.Typography
+import androidx.compose.material3.ColorScheme
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Shapes
+import androidx.compose.material3.Surface
+import androidx.compose.material3.Text
+import androidx.compose.material3.Typography
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.ReadOnlyComposable
@@ -29,7 +29,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Devices
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.treefrogapps.androidx.compose.material.theme.WindowSize.Type
+import com.treefrogapps.androidx.compose.material3.theme.WindowSize.Type
 
 typealias Theme = MaterialThemeExtended
 
@@ -45,10 +45,10 @@ object MaterialThemeExtended {
         @Composable
         get() = LocalWindowSize.current
 
-    val colors: Colors
+    val colorScheme: ColorScheme
         @ReadOnlyComposable
         @Composable
-        get() = MaterialTheme.colors
+        get() = MaterialTheme.colorScheme
 
     val typography: Typography
         @ReadOnlyComposable
@@ -75,7 +75,7 @@ object MaterialThemeExtended {
 fun MaterialThemeExtended(
     windowSize: WindowSize,
     isDarkMode: Boolean = isSystemInDarkTheme(),
-    colors: Colors = provideDefaultColors(isDarkMode),
+    colorScheme: ColorScheme = provideDefaultColors(isDarkMode),
     typography: Typography = Theme.typography,
     extendedTypography: ExtendedTypography = Theme.extendedTypography,
     extendedTypographyColors: ExtendedTypographyColors = provideDefaultTypographyColors(isDarkMode),
@@ -89,7 +89,7 @@ fun MaterialThemeExtended(
         extendedTypographyColors = extendedTypographyColors
     ) {
         MaterialTheme(
-            colors = colors,
+            colorScheme = colorScheme,
             typography = typography,
             shapes = shapes,
             content = content
@@ -158,31 +158,31 @@ fun PreviewContent() {
                 .padding(Theme.dimens.spacing.large)
         ) {
 
-            Text("Window ${Theme.windowSize.name}", color = Theme.colors.onBackground)
+            Text("Window ${Theme.windowSize.name}", color = Theme.colorScheme.onBackground)
             Spacer(modifier = Modifier.height(Theme.dimens.spacing.normal))
-            Text(text = "Dimen zero ${Theme.dimens.zero}", color = Theme.colors.onBackground)
-            Text(text = "Dimen hairline ${Theme.dimens.hairline}", color = Theme.colors.onBackground)
-            Text(text = "Dimen one ${Theme.dimens.one}", color = Theme.colors.onBackground)
-            Text(text = "Dimen elevation ${Theme.dimens.elevation.normal}", color = Theme.colors.onBackground)
-            Text(text = "Dimen elevation high ${Theme.dimens.elevation.high}", color = Theme.colors.onBackground)
-            Text(text = "Dimen elevation highest ${Theme.dimens.elevation.highest}", color = Theme.colors.onBackground)
-            Text(text = "Dimen spacing tiny ${Theme.dimens.spacing.tiny}", color = Theme.colors.onBackground)
-            Text(text = "Dimen spacing small ${Theme.dimens.spacing.small}", color = Theme.colors.onBackground)
-            Text(text = "Dimen spacing normal ${Theme.dimens.spacing.normal}", color = Theme.colors.onBackground)
-            Text(text = "Dimen spacing large ${Theme.dimens.spacing.large}", color = Theme.colors.onBackground)
-            Text(text = "Dimen spacing big ${Theme.dimens.spacing.big}", color = Theme.colors.onBackground)
-            Text(text = "Dimen spacing massive ${Theme.dimens.spacing.massive}", color = Theme.colors.onBackground)
-            Text(text = "Dimen spacing gigantic ${Theme.dimens.spacing.gigantic}", color = Theme.colors.onBackground)
-            Text(text = "Dimen spacing enormous ${Theme.dimens.spacing.enormous}", color = Theme.colors.onBackground)
-            Text(text = "Dimen icon minuscule ${Theme.dimens.icon.minuscule}", color = Theme.colors.onBackground)
-            Text(text = "Dimen icon small ${Theme.dimens.icon.small}", color = Theme.colors.onBackground)
-            Text(text = "Dimen icon notification ${Theme.dimens.icon.notification}", color = Theme.colors.onBackground)
-            Text(text = "Dimen icon normal ${Theme.dimens.icon.normal}", color = Theme.colors.onBackground)
-            Text(text = "Dimen icon large ${Theme.dimens.icon.large}", color = Theme.colors.onBackground)
-            Text(text = "Dimen icon big ${Theme.dimens.icon.big}", color = Theme.colors.onBackground)
-            Text(text = "Dimen icon massive ${Theme.dimens.icon.massive}", color = Theme.colors.onBackground)
-            Text(text = "Dimen icon enormous ${Theme.dimens.icon.enormous}", color = Theme.colors.onBackground)
-            Text(text = "Dimen icon thumbnail ${Theme.dimens.icon.thumbnail}", color = Theme.colors.onBackground)
+            Text(text = "Dimen zero ${Theme.dimens.zero}", color = Theme.colorScheme.onBackground)
+            Text(text = "Dimen hairline ${Theme.dimens.hairline}", color = Theme.colorScheme.onBackground)
+            Text(text = "Dimen one ${Theme.dimens.one}", color = Theme.colorScheme.onBackground)
+            Text(text = "Dimen elevation ${Theme.dimens.elevation.normal}", color = Theme.colorScheme.onBackground)
+            Text(text = "Dimen elevation high ${Theme.dimens.elevation.high}", color = Theme.colorScheme.onBackground)
+            Text(text = "Dimen elevation highest ${Theme.dimens.elevation.highest}", color = Theme.colorScheme.onBackground)
+            Text(text = "Dimen spacing tiny ${Theme.dimens.spacing.tiny}", color = Theme.colorScheme.onBackground)
+            Text(text = "Dimen spacing small ${Theme.dimens.spacing.small}", color = Theme.colorScheme.onBackground)
+            Text(text = "Dimen spacing normal ${Theme.dimens.spacing.normal}", color = Theme.colorScheme.onBackground)
+            Text(text = "Dimen spacing large ${Theme.dimens.spacing.large}", color = Theme.colorScheme.onBackground)
+            Text(text = "Dimen spacing big ${Theme.dimens.spacing.big}", color = Theme.colorScheme.onBackground)
+            Text(text = "Dimen spacing massive ${Theme.dimens.spacing.massive}", color = Theme.colorScheme.onBackground)
+            Text(text = "Dimen spacing gigantic ${Theme.dimens.spacing.gigantic}", color = Theme.colorScheme.onBackground)
+            Text(text = "Dimen spacing enormous ${Theme.dimens.spacing.enormous}", color = Theme.colorScheme.onBackground)
+            Text(text = "Dimen icon minuscule ${Theme.dimens.icon.minuscule}", color = Theme.colorScheme.onBackground)
+            Text(text = "Dimen icon small ${Theme.dimens.icon.small}", color = Theme.colorScheme.onBackground)
+            Text(text = "Dimen icon notification ${Theme.dimens.icon.notification}", color = Theme.colorScheme.onBackground)
+            Text(text = "Dimen icon normal ${Theme.dimens.icon.normal}", color = Theme.colorScheme.onBackground)
+            Text(text = "Dimen icon large ${Theme.dimens.icon.large}", color = Theme.colorScheme.onBackground)
+            Text(text = "Dimen icon big ${Theme.dimens.icon.big}", color = Theme.colorScheme.onBackground)
+            Text(text = "Dimen icon massive ${Theme.dimens.icon.massive}", color = Theme.colorScheme.onBackground)
+            Text(text = "Dimen icon enormous ${Theme.dimens.icon.enormous}", color = Theme.colorScheme.onBackground)
+            Text(text = "Dimen icon thumbnail ${Theme.dimens.icon.thumbnail}", color = Theme.colorScheme.onBackground)
         }
 
         Column(
@@ -230,7 +230,7 @@ fun PreviewContent() {
             Column(
                 modifier = Modifier
                     .wrapContentHeight()
-                    .background(color = Theme.colors.onBackground)
+                    .background(color = Theme.colorScheme.onBackground)
             ) {
 
                 Text(
@@ -345,7 +345,7 @@ fun PreviewContent() {
             Column(
                 modifier = Modifier
                     .wrapContentHeight()
-                    .background(color = Theme.colors.onBackground)
+                    .background(color = Theme.colorScheme.onBackground)
             ) {
 
                 Text(
@@ -395,78 +395,102 @@ fun PreviewContent() {
         ) {
 
             ColorSwatch(
-                baseColor = Theme.colors.primary,
+                baseColor = Theme.colorScheme.primary,
                 name = "Theme Color Primary",
                 textColor = Theme.extendedTypographyColors.primaryInverse
             )
 
             ColorSwatch(
-                baseColor = Theme.colors.primaryVariant,
-                name = "Theme Color PrimaryVariant",
+                baseColor = Theme.colorScheme.onPrimary,
+                name = "Theme Color OnPrimary",
                 textColor = Theme.extendedTypographyColors.primaryInverse
             )
 
             ColorSwatch(
-                baseColor = Theme.colors.secondary,
+                baseColor = Theme.colorScheme.primaryContainer,
+                name = "Theme Color PrimaryContainer",
+                textColor = Theme.extendedTypographyColors.primaryInverse
+            )
+
+            ColorSwatch(
+                baseColor = Theme.colorScheme.onPrimaryContainer,
+                name = "Theme Color OnPrimaryContainer",
+                textColor = Theme.extendedTypographyColors.primaryInverse
+            )
+
+            ColorSwatch(
+                baseColor = Theme.colorScheme.secondary,
                 name = "Theme Color Secondary",
                 textColor = Theme.extendedTypographyColors.primaryInverse
             )
 
             ColorSwatch(
-                baseColor = Theme.colors.secondaryVariant,
-                name = "Theme Color SecondaryVariant",
+                baseColor = Theme.colorScheme.onSecondary,
+                name = "Theme Color On Secondary",
                 textColor = Theme.extendedTypographyColors.primaryInverse
             )
 
             ColorSwatch(
-                baseColor = Theme.colors.background,
+                baseColor = Theme.colorScheme.secondaryContainer,
+                name = "Theme Color SecondaryContainer",
+                textColor = Theme.extendedTypographyColors.primaryInverse
+            )
+
+            ColorSwatch(
+                baseColor = Theme.colorScheme.onSecondaryContainer,
+                name = "Theme Color OnSecondaryContainer",
+                textColor = Theme.extendedTypographyColors.primaryInverse
+            )
+
+            ColorSwatch(
+                baseColor = Theme.colorScheme.background,
                 name = "Theme Color Background",
                 textColor = Theme.extendedTypographyColors.primary
             )
 
             ColorSwatch(
-                baseColor = Theme.colors.surface,
+                baseColor = Theme.colorScheme.surface,
                 name = "Theme Color surface",
                 textColor = Theme.extendedTypographyColors.primary
             )
 
             ColorSwatch(
-                baseColor = Theme.colors.error,
+                baseColor = Theme.colorScheme.error,
                 name = "Theme Color Error",
                 textColor = Theme.extendedTypographyColors.primaryInverse
             )
 
             ColorSwatch(
-                baseColor = Theme.colors.primary,
-                overlayColor = Theme.colors.onPrimary,
+                baseColor = Theme.colorScheme.primary,
+                overlayColor = Theme.colorScheme.onPrimary,
                 name = "Theme Color OnPrimary",
                 textColor = Theme.extendedTypographyColors.primary
             )
 
             ColorSwatch(
-                baseColor = Theme.colors.secondary,
-                overlayColor = Theme.colors.onSecondary,
+                baseColor = Theme.colorScheme.secondary,
+                overlayColor = Theme.colorScheme.onSecondary,
                 name = "Theme Color OnSecondary",
                 textColor = Theme.extendedTypographyColors.secondary
             )
 
             ColorSwatch(
-                baseColor = Theme.colors.background,
-                overlayColor = Theme.colors.onBackground,
+                baseColor = Theme.colorScheme.background,
+                overlayColor = Theme.colorScheme.onBackground,
                 name = "Theme Color OnBackground",
                 textColor = Theme.extendedTypographyColors.primaryInverse
             )
 
             ColorSwatch(
-                baseColor = Theme.colors.surface,
-                overlayColor = Theme.colors.onSurface,
+                baseColor = Theme.colorScheme.surface,
+                overlayColor = Theme.colorScheme.onSurface,
                 name = "Theme Color OnSurface",
                 textColor = Theme.extendedTypographyColors.primaryInverse
             )
 
             ColorSwatch(
-                baseColor = Theme.colors.error,
-                overlayColor = Theme.colors.onError,
+                baseColor = Theme.colorScheme.error,
+                overlayColor = Theme.colorScheme.onError,
                 name = "Theme Color OnError",
                 textColor = Theme.extendedTypographyColors.primary
             )
@@ -488,7 +512,7 @@ private fun ColorSwatch(
             .background(color = baseColor, shape = Theme.shapes.small)
             .height(50.dp)
             .fillMaxWidth()
-            .border(width = Theme.dimens.one, color = Theme.colors.surface)
+            .border(width = Theme.dimens.one, color = Theme.colorScheme.surface)
     ) {
 
         Surface(

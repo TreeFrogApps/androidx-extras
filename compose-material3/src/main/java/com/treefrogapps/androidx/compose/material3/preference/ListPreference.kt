@@ -4,7 +4,7 @@ import android.content.res.Configuration
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.defaultMinSize
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material.Card
+import androidx.compose.material3.Card
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -18,11 +18,11 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
-import com.treefrogapps.androidx.compose.material.R
-import com.treefrogapps.androidx.compose.material.TextRadioButton
-import com.treefrogapps.androidx.compose.material.theme.MaterialThemeExtended
-import com.treefrogapps.androidx.compose.material.theme.Theme
-import com.treefrogapps.androidx.compose.material.theme.windowSizeOf
+import com.treefrogapps.androidx.compose.material3.R
+import com.treefrogapps.androidx.compose.material3.TextRadioButton
+import com.treefrogapps.androidx.compose.material3.theme.MaterialThemeExtended
+import com.treefrogapps.androidx.compose.material3.theme.Theme
+import com.treefrogapps.androidx.compose.material3.theme.windowSizeOf
 import kotlinx.coroutines.delay
 
 @Composable

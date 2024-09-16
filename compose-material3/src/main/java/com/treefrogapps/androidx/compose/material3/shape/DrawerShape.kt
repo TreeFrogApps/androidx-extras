@@ -12,8 +12,8 @@ import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
-import com.treefrogapps.androidx.compose.material.theme.Theme
-import com.treefrogapps.androidx.compose.material.theme.WindowSize.Companion.isLandscape
+import com.treefrogapps.androidx.compose.material3.theme.Theme
+import com.treefrogapps.androidx.compose.material3.theme.WindowSize.Companion.isLandscape
 
 private const val landscapeDrawerWeight = 0.4F
 private const val portraitDrawerWeight = 0.8F

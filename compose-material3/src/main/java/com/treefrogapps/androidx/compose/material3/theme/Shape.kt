@@ -1,7 +1,7 @@
 package com.treefrogapps.androidx.compose.material3.theme
 
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.Shapes
+import androidx.compose.material3.Shapes
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.ReadOnlyComposable
 

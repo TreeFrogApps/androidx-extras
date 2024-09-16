@@ -3,8 +3,8 @@ package com.treefrogapps.androidx.compose.material3.theme
 import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
-import com.treefrogapps.androidx.compose.material.theme.WindowSize.Companion.isMedium
-import com.treefrogapps.androidx.compose.material.theme.WindowSize.Companion.isSmall
+import com.treefrogapps.androidx.compose.material3.theme.WindowSize.Companion.isMedium
+import com.treefrogapps.androidx.compose.material3.theme.WindowSize.Companion.isSmall
 
 /**
  * Reusable Dimensions

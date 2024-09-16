@@ -2,9 +2,9 @@ package com.treefrogapps.androidx.compose.material3.preference
 
 import android.content.res.Configuration
 import androidx.compose.foundation.interaction.MutableInteractionSource
-import androidx.compose.material.Switch
-import androidx.compose.material.SwitchColors
-import androidx.compose.material.SwitchDefaults
+import androidx.compose.material3.Switch
+import androidx.compose.material3.SwitchColors
+import androidx.compose.material3.SwitchDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -14,9 +14,9 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
-import com.treefrogapps.androidx.compose.material.R
-import com.treefrogapps.androidx.compose.material.theme.MaterialThemeExtended
-import com.treefrogapps.androidx.compose.material.theme.windowSizeOf
+import com.treefrogapps.androidx.compose.material3.R
+import com.treefrogapps.androidx.compose.material3.theme.MaterialThemeExtended
+import com.treefrogapps.androidx.compose.material3.theme.windowSizeOf
 import kotlinx.coroutines.delay
 
 @Composable

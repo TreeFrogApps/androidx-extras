@@ -5,11 +5,11 @@ import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material.Card
-import androidx.compose.material.Slider
-import androidx.compose.material.SliderColors
-import androidx.compose.material.SliderDefaults
-import androidx.compose.material.Text
+import androidx.compose.material3.Card
+import androidx.compose.material3.Slider
+import androidx.compose.material3.SliderColors
+import androidx.compose.material3.SliderDefaults
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -25,10 +25,10 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.window.Dialog
-import com.treefrogapps.androidx.compose.material.R
-import com.treefrogapps.androidx.compose.material.theme.MaterialThemeExtended
-import com.treefrogapps.androidx.compose.material.theme.Theme
-import com.treefrogapps.androidx.compose.material.theme.windowSizeOf
+import com.treefrogapps.androidx.compose.material3.R
+import com.treefrogapps.androidx.compose.material3.theme.MaterialThemeExtended
+import com.treefrogapps.androidx.compose.material3.theme.Theme
+import com.treefrogapps.androidx.compose.material3.theme.windowSizeOf
 import kotlinx.coroutines.delay
 import java.text.DecimalFormat
 
@@ -48,8 +48,8 @@ fun RangePreference(
     preferenceColors: PreferenceColors = PreferenceDefaults.preferenceColors(),
     sliderTitle: String,
     sliderColors: SliderColors = SliderDefaults.colors(
-        thumbColor = Theme.colors.secondary,
-        activeTickColor = Theme.colors.secondary
+        thumbColor = Theme.colorScheme.secondary,
+        activeTickColor = Theme.colorScheme.secondary
     ),
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() }
 ) {
@@ -164,8 +164,8 @@ private fun RangePreferenceDialogContent(
                 text = currentFormat.format(current),
                 overflow = TextOverflow.Ellipsis,
                 maxLines = 1,
-                style = Theme.typography.body1,
-                color = sliderColors.thumbColor(enabled = enabled).value
+                style = Theme.typography.bodyMedium,
+                color = if (enabled) sliderColors.thumbColor else sliderColors.disabledThumbColor
             )
         }
     }
