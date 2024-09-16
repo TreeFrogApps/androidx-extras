@@ -64,7 +64,7 @@ publishing {
         register<MavenPublication>(name = "release") {
             groupId = "com.treefrogapps.androidx.compose"
             artifactId = "compose-material"
-            version = "1.15.3"
+            version = "1.15.4"
 
             afterEvaluate {
                 from(components["release"])
@@ -87,6 +87,7 @@ dependencies {
     implementation(libs.androidx.compose.ui.tooling.preview)
     implementation(libs.androidx.compose.foundation)
     implementation(libs.androidx.compose.material)
+    implementation(libs.androidx.compose.material.icons)
 
     debugImplementation(libs.androidx.compose.ui.tooling)
 }

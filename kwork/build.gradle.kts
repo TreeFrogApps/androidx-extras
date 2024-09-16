@@ -57,7 +57,7 @@ publishing {
         register<MavenPublication>(name = "release") {
             groupId = "com.treefrogapps.androidx.kwork"
             artifactId = "kwork"
-            version = "1.4.3"
+            version = "1.4.4"
 
             afterEvaluate {
                 from(components["release"])
