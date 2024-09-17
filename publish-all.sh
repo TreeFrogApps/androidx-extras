@@ -3,6 +3,7 @@
 ./gradlew activity:publishReleasePublicationToGitHubPackagesRepository \
 compose-activity:publishReleasePublicationToGitHubPackagesRepository \
 compose-material:publishReleasePublicationToGitHubPackagesRepository \
+compose-material3:publishReleasePublicationToGitHubPackagesRepository \
 compose-navigation:publishReleasePublicationToGitHubPackagesRepository \
 compose-pager:publishReleasePublicationToGitHubPackagesRepository \
 compose-paging:publishReleasePublicationToGitHubPackagesRepository \
