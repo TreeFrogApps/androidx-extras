@@ -43,4 +43,8 @@ class SheetStateExtended(val sheetState: SheetState) {
         sheetState.hide()
         isShowing = false
     }
+
+    fun dismissed() {
+        isShowing = false
+    }
 }
