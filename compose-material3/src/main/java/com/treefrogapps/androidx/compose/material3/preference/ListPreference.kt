@@ -4,7 +4,6 @@ import android.content.res.Configuration
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.defaultMinSize
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Card
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -17,7 +16,7 @@ import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.window.Dialog
+import com.treefrogapps.androidx.compose.material3.BasicDialog
 import com.treefrogapps.androidx.compose.material3.R
 import com.treefrogapps.androidx.compose.material3.TextRadioButton
 import com.treefrogapps.androidx.compose.material3.theme.MaterialThemeExtended
@@ -69,26 +68,24 @@ private fun <T : Any> ListPreferenceDialog(
     onPreferenceChange: ((T) -> Unit)?,
     onDismiss: () -> Unit
 ) {
-    Dialog(
+    BasicDialog(
         onDismissRequest = onDismiss
     ) {
-        Card {
-            Column(
-                modifier = Modifier
-                    .padding(all = Theme.dimens.spacing.normal)
-                    .defaultMinSize(minWidth = 240.dp)
-            ) {
-                items.forEach { item ->
-                    val name = remember { itemNameProvider(item) }
+        Column(
+            modifier = Modifier
+                .padding(all = Theme.dimens.spacing.normal)
+                .defaultMinSize(minWidth = 240.dp)
+        ) {
+            items.forEach { item ->
+                val name = remember { itemNameProvider(item) }
 
-                    TextRadioButton(
-                        text = name,
-                        selected = item == selectedItem,
-                        onClick = {
-                            onPreferenceChange?.invoke(item)
-                            onDismiss()
-                        })
-                }
+                TextRadioButton(
+                    text = name,
+                    selected = item == selectedItem,
+                    onClick = {
+                        onPreferenceChange?.invoke(item)
+                        onDismiss()
+                    })
             }
         }
     }
