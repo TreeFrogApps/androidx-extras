@@ -79,7 +79,7 @@ fun MaterialThemeExtended(
     typography: Typography = Theme.typography,
     extendedTypography: ExtendedTypography = Theme.extendedTypography,
     extendedTypographyColors: ExtendedTypographyColors = provideDefaultTypographyColors(isDarkMode),
-    shapes: Shapes = DefaultShapes,
+    shapes: Shapes = Theme.shapes,
     content: @Composable () -> Unit
 ) {
     MaterialThemeExtendedInternal(

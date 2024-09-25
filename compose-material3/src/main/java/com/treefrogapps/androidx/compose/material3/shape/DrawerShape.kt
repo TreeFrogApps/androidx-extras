@@ -20,8 +20,8 @@ private const val portraitDrawerWeight = 0.8F
 
 class DrawerShape(
     private val widthPixels: Float,
-    private val topEndRadius: Dp = 8.dp,
-    private val bottomEndRadius: Dp = 8.dp,
+    private val topEndRadius: Dp = 16.dp,
+    private val bottomEndRadius: Dp = 16.dp,
 
     ) : CornerBasedShape(
     topStart = CornerSize(size = 0.dp),
@@ -80,5 +80,4 @@ fun drawerShape(width: Dp): CornerBasedShape =
 fun drawerWidth(
     landscapeWeight: Float = landscapeDrawerWeight,
     portraitWeight: Float = portraitDrawerWeight
-)
-        : Dp = Theme.windowSize.size.width * if (Theme.windowSize.isLandscape()) landscapeWeight else portraitWeight
+): Dp = Theme.windowSize.size.width * if (Theme.windowSize.isLandscape()) landscapeWeight else portraitWeight

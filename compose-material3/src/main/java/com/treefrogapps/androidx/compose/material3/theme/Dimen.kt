@@ -1,5 +1,6 @@
 package com.treefrogapps.androidx.compose.material3.theme
 
+import androidx.compose.runtime.Immutable
 import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
@@ -9,6 +10,7 @@ import com.treefrogapps.androidx.compose.material3.theme.WindowSize.Companion.is
 /**
  * Reusable Dimensions
  */
+@Immutable
 data class Dimens internal constructor(
     val zero: Dp = 0.dp,
     val hairline: Dp = 0.5.dp,
@@ -21,12 +23,14 @@ data class Dimens internal constructor(
     val icon: Icon = Icon()
 )
 
+@Immutable
 data class Elevation internal constructor(
     val normal: Dp = 2.dp,
     val high: Dp = 4.dp,
     val highest: Dp = 8.dp
 )
 
+@Immutable
 data class Spacing internal constructor(
     val tiny: Dp = 4.dp,
     val small: Dp = 8.dp,
@@ -38,6 +42,7 @@ data class Spacing internal constructor(
     val enormous: Dp = 128.dp
 )
 
+@Immutable
 data class Icon internal constructor(
     val minuscule: Dp = 8.dp,
     val small: Dp = 16.dp,

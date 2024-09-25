@@ -5,7 +5,6 @@ import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.Card
 import androidx.compose.material3.Slider
 import androidx.compose.material3.SliderColors
 import androidx.compose.material3.SliderDefaults
@@ -22,9 +21,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.window.Dialog
+import com.treefrogapps.androidx.compose.material3.BasicDialog
 import com.treefrogapps.androidx.compose.material3.R
 import com.treefrogapps.androidx.compose.material3.theme.MaterialThemeExtended
 import com.treefrogapps.androidx.compose.material3.theme.Theme
@@ -98,7 +98,7 @@ private fun RangePreferenceDialog(
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
     onDismiss: () -> Unit
 ) {
-    Dialog(
+    BasicDialog(
         onDismissRequest = onDismiss
     ) {
         RangePreferenceDialogContent(
@@ -131,43 +131,37 @@ private fun RangePreferenceDialogContent(
     sliderColors: SliderColors = SliderDefaults.colors(),
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() },
 ) {
-    Card {
-        Column(
+    Column(
+        modifier = Modifier.padding(all = Theme.dimens.spacing.large),
+        verticalArrangement = Arrangement.spacedBy(space = Theme.dimens.spacing.normal),
+    ) {
+        Text(
+            text = sliderTitle,
+            overflow = TextOverflow.Ellipsis,
+            maxLines = 1,
+            style = Theme.typography.titleLarge,
+            color = sliderTitleColor
+        )
+        Slider(
+            value = current,
+            onValueChange = { value -> onPreferenceChange?.invoke(value) },
+            enabled = enabled,
+            valueRange = min..max,
+            steps = steps,
+            colors = sliderColors,
+            interactionSource = interactionSource
+        )
+        Text(
             modifier = Modifier
-                .padding(all = Theme.dimens.spacing.large),
-            verticalArrangement = Arrangement.Center,
-        ) {
-            Text(
-                modifier = Modifier.padding(
-                    start = Theme.dimens.spacing.small,
-                    bottom = Theme.dimens.spacing.normal
-                ),
-                text = sliderTitle,
-                overflow = TextOverflow.Ellipsis,
-                maxLines = 1,
-                style = Theme.extendedTypography.large,
-                color = sliderTitleColor
-            )
-            Slider(
-                value = current,
-                onValueChange = { value -> onPreferenceChange?.invoke(value) },
-                enabled = enabled,
-                valueRange = min..max,
-                steps = steps,
-                colors = sliderColors,
-                interactionSource = interactionSource
-            )
-            Text(
-                modifier = Modifier
-                    .align(alignment = Alignment.End)
-                    .padding(end = Theme.dimens.spacing.small),
-                text = currentFormat.format(current),
-                overflow = TextOverflow.Ellipsis,
-                maxLines = 1,
-                style = Theme.typography.bodyMedium,
-                color = if (enabled) sliderColors.thumbColor else sliderColors.disabledThumbColor
-            )
-        }
+                .align(alignment = Alignment.End)
+                .padding(end = Theme.dimens.spacing.small),
+            text = currentFormat.format(current),
+            overflow = TextOverflow.Ellipsis,
+            maxLines = 1,
+            fontWeight = FontWeight.Medium,
+            style = Theme.typography.titleMedium,
+            color = if (enabled) sliderColors.thumbColor else sliderColors.disabledThumbColor
+        )
     }
 }
 
