@@ -204,3 +204,9 @@ fun Modifier.shimmerForeground(
         drawRect(brush = shimmerBrush)
     }
 }
+
+inline fun <T : Any?> Modifier.withNotNull(
+    t: T,
+    block: (T & Any).() -> Modifier
+): Modifier =
+    this then (t?.run(block) ?: Modifier)
