@@ -25,12 +25,11 @@ abstract class EdgeToEdgeComposeComponentActivity : ComponentActivity() {
             )
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
         enableEdgeToEdge(
             statusBarStyle = statusBarStyle,
             navigationBarStyle = navigationBarStyle
         )
+        super.onCreate(savedInstanceState)
         setContent(content = content)
     }
 }
