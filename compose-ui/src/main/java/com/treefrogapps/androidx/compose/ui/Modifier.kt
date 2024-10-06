@@ -207,6 +207,6 @@ fun Modifier.shimmerForeground(
 
 inline fun <T : Any?> Modifier.withNotNull(
     t: T,
-    block: (T & Any).() -> Modifier
+    block: Modifier.(T & Any) -> Modifier
 ): Modifier =
-    this then (t?.run(block) ?: Modifier)
+    this then Modifier.run { if(t != null) block(t) else this }
