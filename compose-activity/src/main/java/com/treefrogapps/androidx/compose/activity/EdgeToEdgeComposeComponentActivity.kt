@@ -10,18 +10,19 @@ import androidx.compose.runtime.Composable
 
 abstract class EdgeToEdgeComposeComponentActivity : ComponentActivity() {
 
-    abstract val content: @Composable () -> Unit
-
-    open val statusBarStyle: SystemBarStyle =
-        SystemBarStyle.auto(
-            lightScrim = Color.TRANSPARENT,
-            darkScrim = Color.TRANSPARENT
-        )
-    open val navigationBarStyle: SystemBarStyle =
-        SystemBarStyle.auto(
-            lightScrim = Color.argb(0xe6, 0xFF, 0xFF, 0xFF),
-            darkScrim = Color.argb(0x80, 0x1b, 0x1b, 0x1b)
-        )
+    protected abstract val content: @Composable () -> Unit
+    protected open val statusBarStyle: SystemBarStyle
+        get() =
+            SystemBarStyle.auto(
+                lightScrim = Color.TRANSPARENT,
+                darkScrim = Color.TRANSPARENT
+            )
+    protected open val navigationBarStyle: SystemBarStyle
+        get() =
+            SystemBarStyle.auto(
+                lightScrim = Color.TRANSPARENT,
+                darkScrim = Color.TRANSPARENT
+            )
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
