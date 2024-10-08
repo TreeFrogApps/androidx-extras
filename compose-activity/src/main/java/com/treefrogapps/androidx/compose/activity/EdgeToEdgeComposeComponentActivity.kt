@@ -19,8 +19,8 @@ abstract class EdgeToEdgeComposeComponentActivity : ComponentActivity() {
             )
     protected open val navigationBarStyle: SystemBarStyle
         get() =
-            SystemBarStyle.auto(
-                lightScrim = Color.TRANSPARENT,
+            SystemBarStyle.light(
+                scrim = Color.TRANSPARENT,
                 darkScrim = Color.TRANSPARENT
             )
 
