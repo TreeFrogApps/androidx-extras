@@ -63,7 +63,7 @@ publishing {
         register<MavenPublication>(name = "release") {
             groupId = "com.treefrogapps.androidx.compose"
             artifactId = "compose-ui"
-            version = "1.9.9"
+            version = "1.9.10"
 
             afterEvaluate {
                 from(components["release"])
