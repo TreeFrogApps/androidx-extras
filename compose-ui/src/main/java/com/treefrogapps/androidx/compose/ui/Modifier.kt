@@ -162,7 +162,7 @@ private fun Modifier.verticalScrollBar(
     totalItemsCount: Int,
     visibleItemsSize: Int,
     alpha: Float
-): Modifier = this then drawWithContent {
+): Modifier = this then Modifier.drawWithContent {
     drawContent()
     if (needDrawScrollbar) {
         val elementHeight = size.height / totalItemsCount
@@ -209,4 +209,4 @@ inline fun <T : Any?> Modifier.withNotNull(
     t: T,
     block: Modifier.(T & Any) -> Modifier
 ): Modifier =
-    this then Modifier.run { if(t != null) block(t) else this }
+    this then if(t != null) block(Modifier, t) else Modifier

@@ -330,7 +330,8 @@ private fun LazyListScope.alignedParallaxItems(
         })
 }
 
+
 private fun Modifier.parallaxOffset(isVertical: Boolean, offset: Int): Modifier =
-    this.then(Modifier.run { if (isVertical) offset(y = offset.dp) else offset(x = offset.dp) })
+    this.then(if (isVertical) Modifier.offset(y = offset.dp) else Modifier.offset(x = offset.dp))
 
 
