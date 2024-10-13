@@ -1,7 +1,6 @@
 package com.treefrogapps.androidx.kwork
 
 import androidx.work.Worker
-import org.jetbrains.annotations.Range
 import kotlin.reflect.KClass
 
 /**
@@ -28,7 +27,7 @@ data class KWorkRequest(
 
     companion object {
 
-        private const val MIN_PERIODIC_INTERVAL_MILLIS : Long = 1000 * 60 * 15
+        private const val MIN_PERIODIC_INTERVAL_MILLIS: Long = 1000 * 60 * 15
 
         internal fun KWorkRequest.isValidOrThrow() {
             if (!isOneshot && periodicIntervalMillis < MIN_PERIODIC_INTERVAL_MILLIS) {
