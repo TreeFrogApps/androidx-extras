@@ -17,8 +17,8 @@ test-junit = "1.2.1"
 test-espresso = "3.6.1"
 junit = "4.13.2"
 android-minsdk = "26"
-android-compilesdk = "34"
-android-buildtools = "34.0.0"
+android-compilesdk = "35"
+android-buildtools = "35.0.0"
 
 [libraries]
 

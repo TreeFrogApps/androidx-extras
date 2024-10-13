@@ -3,6 +3,7 @@ package com.treefrogapps.androidx.compose.ui
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.foundation.ScrollState
 import androidx.compose.foundation.background
 import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.ColumnScope
@@ -17,8 +18,10 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.drawWithContent
 import androidx.compose.ui.focus.onFocusChanged
@@ -36,6 +39,7 @@ import com.treefrogapps.androidx.compose.ui.graphics.LocalShimmerTheme
 import com.treefrogapps.androidx.compose.ui.graphics.ShimmerTheme
 import com.treefrogapps.androidx.compose.ui.graphics.linearVerticalGradient
 import com.treefrogapps.androidx.compose.ui.graphics.shimmerBrush
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 
 fun Modifier.maxWeight(rowScope: RowScope): Modifier =
@@ -58,12 +62,12 @@ fun Modifier.heightPercent(percent: Float = 1.0f, height: Dp): Modifier =
     this then Modifier.height(height = height.times(percent))
 
 @Composable
-fun Modifier.verticalScroll(): Modifier =
-    this then Modifier.verticalScroll(state = rememberScrollState())
+fun Modifier.verticalScrolling(state : ScrollState = rememberScrollState()): Modifier =
+    this then Modifier.verticalScroll(state = state)
 
 @Composable
-fun Modifier.horizontalScroll(): Modifier =
-    this then Modifier.horizontalScroll(state = rememberScrollState())
+fun Modifier.horizontalScrolling(state : ScrollState = rememberScrollState()): Modifier =
+    this then Modifier.horizontalScroll(state = state)
 
 fun Modifier.verticalGradientBackground(
     start: Color,
@@ -203,6 +207,26 @@ fun Modifier.shimmerForeground(
         drawContent()
         drawRect(brush = shimmerBrush)
     }
+}
+
+@OptIn(ExperimentalFoundationApi::class)
+@Composable
+fun Modifier.bringIntoViewWhenFocused(onFocused: suspend () -> Unit = {}): Modifier {
+    val bringIntoViewRequester = remember { BringIntoViewRequester() }
+    val coroutineScope = rememberCoroutineScope()
+    var job by remember { mutableStateOf<Job?>(null) }
+
+    return this then Modifier
+        .onFocusChanged { fs ->
+            if (fs.isFocused) {
+                job?.cancel()
+                job = coroutineScope.launch {
+                    bringIntoViewRequester.bringIntoView()
+                    onFocused()
+                }
+            }
+        }
+        .bringIntoViewRequester(bringIntoViewRequester = bringIntoViewRequester)
 }
 
 inline fun <T : Any?> Modifier.withNotNull(
