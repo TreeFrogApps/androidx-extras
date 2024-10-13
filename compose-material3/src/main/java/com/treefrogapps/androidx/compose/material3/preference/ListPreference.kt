@@ -73,7 +73,7 @@ private fun <T : Any> ListPreferenceDialog(
     ) {
         Column(
             modifier = Modifier
-                .padding(all = Theme.dimens.spacing.normal)
+                .padding(all = Theme.dimens.spacing.large)
                 .defaultMinSize(minWidth = 240.dp)
         ) {
             items.forEach { item ->
