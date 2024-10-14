@@ -34,9 +34,8 @@ class SheetStateExtended(val sheetState: SheetState) {
     var isShowing: Boolean by mutableStateOf(sheetState.isVisible)
         private set
 
-    suspend fun show() {
+    fun show() {
         isShowing = true
-        sheetState.show()
     }
 
     suspend fun hide() {
