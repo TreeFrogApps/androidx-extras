@@ -7,15 +7,14 @@ import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
 import androidx.compose.foundation.ScrollState
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.RowScope
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
@@ -98,37 +97,35 @@ fun CorePreference(
                     )
                 }
                 Column(
-                    modifier = Modifier.weight(weight = 1.0F)
+                    modifier = Modifier.weight(weight = 1.0F),
+                    verticalArrangement = Arrangement.spacedBy(space = Theme.dimens.spacing.tiny)
                 ) {
                     Text(
                         text = title,
                         overflow = TextOverflow.Ellipsis,
                         maxLines = 1,
-                        style = Theme.extendedTypography.large,
+                        style = Theme.typography.titleLarge,
                         color = titleColor
                     )
                     summary?.run {
                         Text(
-                            modifier = Modifier.padding(top = Theme.dimens.spacing.tiny),
                             text = this,
                             overflow = TextOverflow.Ellipsis,
                             maxLines = 2,
-                            style = Theme.extendedTypography.small,
+                            style = Theme.typography.bodyMedium,
                             color = summaryColor
                         )
                     }
                     information?.run {
                         Text(
-                            modifier = Modifier.padding(top = Theme.dimens.spacing.tiny),
                             text = this,
                             overflow = TextOverflow.Ellipsis,
                             maxLines = 1,
-                            style = Theme.extendedTypography.medium,
+                            style = Theme.typography.bodySmall,
                             color = iconColor
                         )
                     }
                 }
-                Spacer(modifier = Modifier.width(width = Theme.dimens.spacing.normal))
                 innerContent()
             }
             bottomContent()
@@ -139,22 +136,25 @@ fun CorePreference(
 @Composable
 fun PreferenceGroup(
     title: String,
-    titleColor: Color = Theme.colorScheme.secondary,
+    modifier: Modifier = Modifier,
+    titleColor: Color = Theme.extendedTypographyColors.primary,
     enabledDivider: Boolean = false,
     groupContent: @Composable ColumnScope.() -> Unit
 ) {
     Column(
-        modifier = Modifier.fillMaxWidth()
+        modifier = modifier
+            .fillMaxWidth()
+            .padding(top = Theme.dimens.spacing.massive)
     ) {
         Text(
             modifier = Modifier.padding(
-                top = Theme.dimens.spacing.normal,
-                start = Theme.dimens.spacing.normal + Theme.dimens.icon.big,
-                end = Theme.dimens.spacing.normal
+                start = Theme.dimens.spacing.normal,
+                end = Theme.dimens.spacing.normal,
+                bottom = Theme.dimens.spacing.small
             ),
             text = title,
             color = titleColor,
-            style = Theme.typography.bodyMedium,
+            style = Theme.typography.titleSmall,
             overflow = TextOverflow.Ellipsis,
             maxLines = 1
         )
@@ -304,10 +304,7 @@ private fun CorePreferencePreview() {
     }
 }
 
-@Preview(
-    showBackground = true,
-    uiMode = UI_MODE_NIGHT_YES
-)
+@Preview(uiMode = UI_MODE_NIGHT_YES)
 @Composable
 private fun CorePreferenceDarkPreview() {
     MaterialThemeExtended(windowSize = windowSizeOf()) {
