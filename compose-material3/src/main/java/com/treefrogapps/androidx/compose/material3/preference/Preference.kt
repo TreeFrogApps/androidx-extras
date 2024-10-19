@@ -64,6 +64,7 @@ fun CorePreference(
 ) {
     val titleColor by colors.titleColor(enabled = enabled)
     val summaryColor by colors.summaryColor(enabled = enabled)
+    val informationColor by colors.informationColor(enabled = enabled)
     val iconColor by colors.iconColor(enabled = enabled)
 
     AnimatedVisibility(
@@ -105,7 +106,7 @@ fun CorePreference(
                     Text(
                         text = title,
                         overflow = TextOverflow.Ellipsis,
-                        maxLines = 1,
+                        maxLines = 2,
                         style = Theme.typography.titleLarge,
                         color = titleColor
                     )
@@ -124,7 +125,7 @@ fun CorePreference(
                             overflow = TextOverflow.Ellipsis,
                             maxLines = 1,
                             style = Theme.typography.bodyLarge,
-                            color = iconColor
+                            color = informationColor
                         )
                     }
                 }
@@ -146,7 +147,7 @@ fun PreferenceGroup(
     Column(
         modifier = modifier
             .fillMaxWidth()
-            .padding(top = Theme.dimens.spacing.massive)
+            .padding(vertical = Theme.dimens.spacing.normal)
     ) {
         Text(
             modifier = Modifier.padding(
@@ -195,14 +196,15 @@ object PreferenceDefaults {
 
     @Composable
     fun preferenceColors(
-        titleColor: Color = MaterialThemeExtended.extendedTypographyColors.primary,
-        summaryColor: Color = MaterialThemeExtended.extendedTypographyColors.secondaryVariant,
-        iconColor: Color = MaterialThemeExtended.extendedTypographyColors.primary,
-        disabledColor: Color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.12f)
-            .compositeOver(MaterialTheme.colorScheme.surface)
+        titleColor: Color = Theme.extendedTypographyColors.primary,
+        summaryColor: Color = Theme.extendedTypographyColors.secondaryVariant,
+        informationColor: Color = Theme.colorScheme.secondary,
+        iconColor: Color = Theme.extendedTypographyColors.primary,
+        disabledColor: Color = Theme.colorScheme.onSurface.copy(alpha = 0.12f).compositeOver(Theme.colorScheme.surface)
     ): PreferenceColors = DefaultPreferenceColors(
         titleColor = titleColor,
         summaryColor = summaryColor,
+        informationColor = informationColor,
         iconColor = iconColor,
         disabledColor = disabledColor
     )
@@ -219,6 +221,9 @@ interface PreferenceColors {
 
     @Composable
     fun iconColor(enabled: Boolean): State<Color>
+
+    @Composable
+    fun informationColor(enabled: Boolean): State<Color>
 }
 
 /**
@@ -228,6 +233,7 @@ interface PreferenceColors {
 private class DefaultPreferenceColors(
     private val titleColor: Color,
     private val summaryColor: Color,
+    private val informationColor: Color,
     private val iconColor: Color,
     private val disabledColor: Color
 ) : PreferenceColors {
@@ -241,29 +247,36 @@ private class DefaultPreferenceColors(
         rememberUpdatedState(if (enabled) summaryColor else disabledColor)
 
     @Composable
+    override fun informationColor(enabled: Boolean): State<Color> =
+        rememberUpdatedState(if (enabled) informationColor else disabledColor)
+
+    @Composable
     override fun iconColor(enabled: Boolean): State<Color> =
         rememberUpdatedState(if (enabled) iconColor else disabledColor)
 
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
-        if (other == null || this::class != other::class) return false
-
-        other as DefaultPreferenceColors
+        if (other !is DefaultPreferenceColors) return false
 
         if (titleColor != other.titleColor) return false
         if (summaryColor != other.summaryColor) return false
+        if (informationColor != other.informationColor) return false
         if (iconColor != other.iconColor) return false
-        return disabledColor == other.disabledColor
+        if (disabledColor != other.disabledColor) return false
+
+        return true
     }
 
     override fun hashCode(): Int {
         var result = titleColor.hashCode()
         result = 31 * result + summaryColor.hashCode()
+        result = 31 * result + informationColor.hashCode()
         result = 31 * result + iconColor.hashCode()
         result = 31 * result + disabledColor.hashCode()
         return result
     }
 }
+
 
 
 @Preview(
@@ -289,7 +302,7 @@ private fun CorePreferencePreview() {
             ) {
             }
             CorePreference(
-                title = "Core preference field title",
+                title = "Core preference field title with long text",
                 summary = "Core preference field summary",
                 isVisible = isVisible,
                 enabled = false,
