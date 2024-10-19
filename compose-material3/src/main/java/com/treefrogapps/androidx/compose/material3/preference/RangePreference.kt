@@ -49,7 +49,8 @@ fun RangePreference(
     sliderTitle: String,
     sliderColors: SliderColors = SliderDefaults.colors(
         thumbColor = Theme.colorScheme.secondary,
-        activeTickColor = Theme.colorScheme.secondary
+        activeTrackColor = Theme.colorScheme.secondary,
+        inactiveTrackColor = Theme.colorScheme.primary
     ),
     interactionSource: MutableInteractionSource = remember { MutableInteractionSource() }
 ) {
