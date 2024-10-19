@@ -97,7 +97,9 @@ fun CorePreference(
                     )
                 }
                 Column(
-                    modifier = Modifier.weight(weight = 1.0F),
+                    modifier = Modifier
+                        .weight(weight = 1.0F)
+                        .padding(end = Theme.dimens.spacing.normal),
                     verticalArrangement = Arrangement.spacedBy(space = Theme.dimens.spacing.tiny)
                 ) {
                     Text(
@@ -121,7 +123,7 @@ fun CorePreference(
                             text = this,
                             overflow = TextOverflow.Ellipsis,
                             maxLines = 1,
-                            style = Theme.typography.bodySmall,
+                            style = Theme.typography.bodyLarge,
                             color = iconColor
                         )
                     }
@@ -195,7 +197,7 @@ object PreferenceDefaults {
     fun preferenceColors(
         titleColor: Color = MaterialThemeExtended.extendedTypographyColors.primary,
         summaryColor: Color = MaterialThemeExtended.extendedTypographyColors.secondaryVariant,
-        iconColor: Color = MaterialThemeExtended.colorScheme.secondary,
+        iconColor: Color = MaterialThemeExtended.extendedTypographyColors.primary,
         disabledColor: Color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.12f)
             .compositeOver(MaterialTheme.colorScheme.surface)
     ): PreferenceColors = DefaultPreferenceColors(
