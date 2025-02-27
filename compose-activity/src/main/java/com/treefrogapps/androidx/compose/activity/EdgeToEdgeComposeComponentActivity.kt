@@ -69,7 +69,7 @@ abstract class EdgeToEdgeComposeComponentActivity : ComponentActivity() {
      *
      * Content must be overridden by concrete subtypes.
      */
-    protected abstract val content: @Composable () -> Unit
+    protected abstract val content: @Composable (() -> Unit)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         enableEdgeToEdge(
