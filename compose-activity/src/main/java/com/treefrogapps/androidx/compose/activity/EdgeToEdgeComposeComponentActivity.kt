@@ -69,7 +69,7 @@ abstract class EdgeToEdgeComposeComponentActivity : ComponentActivity() {
      *
      * Content must be overridden by concrete subtypes.
      */
-    protected abstract fun content() : @Composable (() -> Unit)
+    protected abstract val content: @Composable () -> Unit
 
     override fun onCreate(savedInstanceState: Bundle?) {
         enableEdgeToEdge(
@@ -77,7 +77,7 @@ abstract class EdgeToEdgeComposeComponentActivity : ComponentActivity() {
             navigationBarStyle = navigationBarStyle
         )
         super.onCreate(savedInstanceState)
-        setContent(content = content())
+        setContent(content = content)
     }
 
     private fun updateEdgeToEdgeIfCreated(statusBarStyle: SystemBarStyle, navigationBarStyle: SystemBarStyle) {
