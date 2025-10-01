@@ -2,6 +2,7 @@ package com.treefrogapps.androidx.paging
 
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
+import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import kotlin.coroutines.CoroutineContext
@@ -17,7 +18,14 @@ inline fun <Key : Any, Value : Any> pagingSource(
 
     override fun getRefreshKey(state: PagingState<Key, Value>): Key? = refreshKey(state)
 
-    override suspend fun load(params: LoadParams<Key>): LoadResult<Key, Value> = withContext(context = loadContext) { load(params) }
+    override suspend fun load(params: LoadParams<Key>): LoadResult<Key, Value> = withContext(context = loadContext) {
+        try {
+            load(params)
+        } catch (e : Exception) {
+            if(e is CancellationException) throw e
+            LoadResult.Error(throwable = e)
+        }
+    }
 }
 
 
