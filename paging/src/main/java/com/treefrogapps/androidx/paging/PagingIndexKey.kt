@@ -2,8 +2,10 @@ package com.treefrogapps.androidx.paging
 
 import androidx.paging.InvalidatingPagingSourceFactory
 import androidx.paging.PagingSource
+import androidx.paging.PagingSource.LoadResult
 import androidx.paging.PagingSourceFactory
 import androidx.paging.PagingState
+import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.Dispatchers
 import kotlin.coroutines.CoroutineContext
 
@@ -57,7 +59,14 @@ inline fun <Value : Any> indexKeyPagingSourceFactory(
 ): PagingSourceFactory<IndexKey, Value> =
     pagingSourceFactory(
         refreshKey = refreshKey,
-        load = { params -> params.toLoadResult(loaded = loadList(params)) },
+        load = { params ->
+            try {
+                params.toLoadResult(loaded = loadList(params))
+            } catch (e : Exception) {
+                if(e is CancellationException) throw e
+                LoadResult.Error(throwable = e)
+            }
+        },
         loadContext = loadContext
     )
 
