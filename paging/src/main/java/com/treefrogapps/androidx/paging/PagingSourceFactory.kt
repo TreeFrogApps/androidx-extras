@@ -14,7 +14,8 @@ import kotlin.coroutines.CoroutineContext
  * @param Key
  * @param Value
  * @param refreshKey
- * @param load
+ * @param load callback function to load data. This is NOT inlined, otherwise error catching logic would be escaped if it was as
+ * the compiler optimises the callback and moves the code chunk to parent, escaping the try/catch
  * @param loadContext
  * @receiver
  * @receiver
@@ -22,7 +23,7 @@ import kotlin.coroutines.CoroutineContext
  */
 inline fun <Key : Any, Value : Any> pagingSourceFactory(
     crossinline refreshKey: (state: PagingState<Key, Value>) -> Key?,
-    crossinline load: suspend (params: PagingSource.LoadParams<Key>) -> PagingSource.LoadResult<Key, Value>,
+    noinline load: suspend (params: PagingSource.LoadParams<Key>) -> PagingSource.LoadResult<Key, Value>,
     loadContext: CoroutineContext = Dispatchers.IO
 ): PagingSourceFactory<Key, Value> =
     PagingSourceFactory {

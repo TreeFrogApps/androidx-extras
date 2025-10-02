@@ -2,10 +2,8 @@ package com.treefrogapps.androidx.paging
 
 import androidx.paging.InvalidatingPagingSourceFactory
 import androidx.paging.PagingSource
-import androidx.paging.PagingSource.LoadResult
 import androidx.paging.PagingSourceFactory
 import androidx.paging.PagingState
-import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.Dispatchers
 import kotlin.coroutines.CoroutineContext
 
@@ -24,13 +22,15 @@ data class IndexKey(
  * Index key paging source factory delegate convenience function wrapper to create a [InvalidatingPagingSourceFactory]
  *
  * @param Value the generic [PagingSource] value
- * @param loadList the suspending load function to provide a [List] from [PagingSource.LoadParams]
+ * @param loadList the suspending load function to provide a [List] from [PagingSource.LoadParams],
+ * This is NOT inlined, otherwise error catching logic would be escaped if it was as the compiler optimises the callback and
+ * moves the code chunk to parent, escaping the try/catch
  * @param loadContext the [CoroutineContext] to used for [loadList] function
  *
  * @return a [InvalidatingPagingSourceFactory]
  */
 inline fun <Value : Any> invalidatingIndexKeyPagingSourceFactory(
-    crossinline loadList: suspend (params: PagingSource.LoadParams<IndexKey>) -> List<Value>,
+    noinline loadList: suspend (params: PagingSource.LoadParams<IndexKey>) -> List<Value>,
     crossinline refreshKey: (state: PagingState<IndexKey, Value>) -> IndexKey? = { IndexKey() },
     loadContext: CoroutineContext = Dispatchers.IO
 ): InvalidatingPagingSourceFactory<IndexKey, Value> =
@@ -46,27 +46,22 @@ inline fun <Value : Any> invalidatingIndexKeyPagingSourceFactory(
  * Index key paging source factory is a convenience wrapper around [pagingSource] function that implements a refresh key.
  *
  * @param Value the generic [PagingSource] value
- * @param loadList the suspending load function to provide a [List] from [PagingSource.LoadParams]
+ * @param loadList the suspending load function to provide a [List] from [PagingSource.LoadParams].
+ * This is NOT inlined, otherwise error catching logic would be escaped if it was as the compiler optimises the callback and
+ * moves the code chunk to parent, escaping the try/catch
  * @param loadContext the [CoroutineContext] to used for [loadList] function
  *
  * @return a [PagingSource] object that should be used until it is invalidated, at which point a refresh [IndexKey] is provided to the
  * next generation paging source.
  */
 inline fun <Value : Any> indexKeyPagingSourceFactory(
-    crossinline loadList: suspend (params: PagingSource.LoadParams<IndexKey>) -> List<Value>,
+    noinline loadList: suspend (params: PagingSource.LoadParams<IndexKey>) -> List<Value>,
     crossinline refreshKey: (state: PagingState<IndexKey, Value>) -> IndexKey? = { IndexKey() },
     loadContext: CoroutineContext = Dispatchers.IO
 ): PagingSourceFactory<IndexKey, Value> =
     pagingSourceFactory(
         refreshKey = refreshKey,
-        load = { params ->
-            try {
-                params.toLoadResult(loaded = loadList(params))
-            } catch (e : Exception) {
-                if(e is CancellationException) throw e
-                LoadResult.Error(throwable = e)
-            }
-        },
+        load = { params -> params.toLoadResult(loaded = loadList(params)) },
         loadContext = loadContext
     )
 
